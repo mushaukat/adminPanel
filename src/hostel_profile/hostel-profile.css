@@ -1,0 +1,35 @@
+.sides {
+    margin: 100px;
+    color: gray;
+}
+
+.divider {
+    padding: 15px;
+    border-bottom: 5px;
+    border-bottom-color: black;
+}
+
+.info-block {
+    background-color: white;
+    padding: 20px;
+    width: 100%;
+}
+
+.heading {
+    align-content: center;
+    font-size: 28px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.btn-edit {
+    float: right;
+}
+
+.img-block {
+    width: 200px;
+    height: 200px;
+    border: 2px solid black;
+    margin: 20px;
+    padding: 20px;
+}

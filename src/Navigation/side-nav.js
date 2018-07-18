@@ -17,11 +17,15 @@ class SideNav extends Component {
 
                         <div className="imgPreview" id="imagePreview">
                             {$imagePreview}
+                            
                         </div>
+                            
+                        <p id="hostel-name" align="center">Hostel Name</p>
+                        
                     </div>
 
                     <ul className="list-unstyled components">
-                        <p>Hostel Name</p>
+                        
                         <li className="active">
                             <a href="google.com">Dashboard</a>
                         </li>

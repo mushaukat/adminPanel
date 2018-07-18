@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './profile-pic.css';
+
 
 class ImageUpload extends React.Component {
     constructor(props) {
