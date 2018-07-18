@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './side-nav.css';
 
-class App1 extends Component {
+class SideNav extends Component {
     render() {
         let $imagePreview = null;
         let imagePreviewUrl=null;
@@ -66,14 +66,11 @@ class App1 extends Component {
                         </li>
                     </ul>
 
-                    <ul className="list-unstyled CTAs">
-                        <li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" className="download">Download source</a></li>
-                        <li><a href="https://bootstrapious.com/p/bootstrap-sidebar" className="article">Back to article</a></li>
-                    </ul>
+                    
                 </nav>
             </div>
         );
     }
 }
 
-export default App1;
+export default SideNav;
