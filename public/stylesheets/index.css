@@ -1,0 +1,9 @@
+#left-div {
+    width: 20%;
+    position: absolute;
+}
+#right-div {
+    width: 80%;
+    color: blue;
+    float:right;
+}
