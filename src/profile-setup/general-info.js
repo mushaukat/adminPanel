@@ -4,7 +4,7 @@ import '../stylesheets/profile-setup.css'
 class GeneralInfo extends Component {
     render() {
         return (
-            <div className="Container sides info-block">
+            <div className="">
                 <p className="heading">Setup 1 0f 4: Profile Info</p>
 
                 <form action="/">

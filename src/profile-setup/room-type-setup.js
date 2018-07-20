@@ -4,7 +4,7 @@ import '../stylesheets/profile-setup.css'
 class RoomTypeSetup extends Component {
     render() {
         return (
-            <div className="Container sides info-block">
+            <div className="">
                 <p className="heading">Setup 3 of 4: Room Types Details</p>
                 <form action="">
                 <input type="text" name="admissionFee" placeholder="Enter Admission Fee"/>

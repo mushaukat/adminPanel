@@ -4,7 +4,7 @@ import '../stylesheets/profile-setup.css'
 class Facilities extends Component {
     render() {
         return (
-            <div className="Container sides info-block">
+            <div className="">
                 <p className="heading">Setup 2 of 4: Facilities</p>
 
                 <h2>Select Facilities in your Hostel</h2>
