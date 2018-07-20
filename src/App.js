@@ -10,7 +10,7 @@ import './Navigation/top-menu.css';
 //import App from './App';
 import SideNav from './Navigation/side-nav';
 import TopMenu from './Navigation/top-menu';
-import GeneralInfo from './hostel_profile/general-info';
+import GeneralInfo from './profile-setup/general-info';
 import RoomType from './hostel_profile/room-type';
 import MessMenu from './mess-menu';
 import SignUp from './login-signup/signup';
@@ -23,8 +23,8 @@ class App extends Component {
       <Router>
       <div>
         <Route exact path="/" component={LogIn} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/recovery" component={Recovery} />
+        <Route exact path="/signup" component={GeneralInfo} />
+        <Route exact path="/recovery" component={Recovery} />
       </div>
       </Router>
     );
