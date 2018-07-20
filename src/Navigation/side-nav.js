@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import './side-nav.css';
+import '../stylesheets/side-nav.css';
 
 class SideNav extends Component {
     render() {
         let $imagePreview = null;
-        let imagePreviewUrl=null;
+        let imagePreviewUrl="null";
       if (imagePreviewUrl) {
-        $imagePreview = (<img src={imagePreviewUrl} />);
+        $imagePreview = (<img src={imagePreviewUrl}  alt=""/>);
       } else {
         $imagePreview = (<div className="previewText">Update Profile picture from Hostel Profile</div>);
       }
@@ -34,7 +34,7 @@ class SideNav extends Component {
                             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Hostel Profile</a>
                             <ul className="collapse list-unstyled" id="homeSubmenu">
                                 <li><a href="google.com">Profile</a></li>
-                                <li><a href="google.com">Home 2</a></li>
+                                <li><a href="google.com">Room Type</a></li>
                                 <li><a href="google.com">Home 3</a></li>
                             </ul>
                         </li>

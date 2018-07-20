@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './hostel-profile.css'
+import '../stylesheets/hostel-profile.css'
 
 
 class GeneralInfo extends Component {
@@ -60,11 +60,11 @@ class GeneralInfo extends Component {
                     <button className="btn-edit ">Edit</button>
                     <br/>
                     <div>
-                        <span className="img-block"><img href=""/></span>
-                        <span className="img-block"><img href=""/></span>
-                        <span className="img-block"><img href=""/></span>
-                        <span className="img-block"><img href=""/></span>
-                        <span className="img-block"><img href=""/></span>
+                        <span className="img-block"><img href=""  alt=""/></span>
+                        <span className="img-block"><img href="" alt=""/></span>
+                        <span className="img-block"><img href=""  alt=""/></span>
+                        <span className="img-block"><img href=""  alt=""/></span>
+                        <span className="img-block"><img href=""  alt=""/></span>
                     </div>
 
                 </div>
