@@ -16,6 +16,9 @@ import MessMenu from './mess-menu';
 import SignUp from './login-signup/signup';
 import LogIn from './login-signup/login'
 import Recovery from './login-signup/recovery'
+import Facilities from './profile-setup/facilities'
+
+import Roomtype from './profile-setup/room-type-setup'
 
 class App extends Component {
   render() {
@@ -23,8 +26,11 @@ class App extends Component {
       <Router>
       <div>
         <Route exact path="/" component={LogIn} />
-        <Route exact path="/signup" component={GeneralInfo} />
+        <Route exact path="/signup" component={SignUp} />
         <Route exact path="/recovery" component={Recovery} />
+        <Route exact path="/general" component={GeneralInfo} />
+        <Route exact path="/facilities" component={Facilities} />
+        <Route exact path="/roomtype" component={Roomtype} />
       </div>
       </Router>
     );

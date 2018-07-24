@@ -27,7 +27,15 @@
   
   /*//////////////////////////////////////////////////////////////////
   [ RESTYLE TAG ]*/
-  
+  .marginauto{
+  	    margin: auto;
+  }
+  .margint60{
+  	    margin-top: 60px;
+  }
+  .text-paragraph{
+  	    font-size: 15px;
+  }
   * {
 	  margin: 0px; 
 	  padding: 0px; 

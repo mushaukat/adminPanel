@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../stylesheets/login-signup.css'
+import '../stylesheets/index.css'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class LogIn extends Component {

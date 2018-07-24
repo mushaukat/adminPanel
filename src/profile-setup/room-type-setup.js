@@ -1,40 +1,63 @@
 import React, { Component } from 'react';
 import '../stylesheets/profile-setup.css'
+import '../stylesheets/login-signup.css'
+import Demo from './geolocated.js'
+import MapContainer from './googlemap2.js'
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-class RoomTypeSetup extends Component {
+
+class GeneralInfo extends Component {
     render() {
         return (
-            <div className="">
-                <p className="heading">Setup 3 of 4: Room Types Details</p>
-                <form action="">
-                <input type="text" name="admissionFee" placeholder="Enter Admission Fee"/>
-                <input type="text" name="securityFee" placeholder="Enter Security Fee"/>
-
-                <div>
-                    <span><h2>Select Room Type</h2></span><span><input type="button" value="Add" /></span>
-                    <br/> 
-                    
-                    <span>
-                    <select name="roomType">
-                        <option value="volvo">Volvo</option>
-                    </select>
-                    </span>
-                    <span>
-                        <input type="text" name="priceWithOutMess" placeholder="Enter Price without Mess" />
-                    </span>
-                    <span>
-                        <input type="text" name="priceWithMess" placeholder="Enter Price with Mess" />
-                    </span> <br/>
-                    <input type="button" value="save"/>
-                </div>
+             <div className="limiter">
+        <div className="container-login100">
+            <div className="wrap-login100">
                 
-                    <input type="checkbox" name="vehicle" value="Bike" required/> I have a bike<br />
 
-                    <input type="submit" value="Next Step" />
+                <form className="marginauto ">
+                    <h1 className="">
+                        Step 3 of 4: Room Type Details
+                    </h1>
+                      
+                    <div className=" form-group margint60 text-paragraph">
+                      <label >Hostel Admission Fee</label>
+                      <input type="number" className="form-control text-paragraph" id="admfee"/>
+                    </div>
+                     <div className="form-group text-paragraph">
+                      <label>Security Fee</label>
+                      <input type="number" className="form-control text-paragraph" id="securityfee"/>
+                    </div>
+                      <div className="form-group text-paragraph">
+                      <label>Select Room Seating:</label>
+                      <select className="form-control text-paragraph" id="sel1">
+                        <option>Single Seater</option>
+                        <option>Double Seater</option>
+                        <option>Triple Seater</option>
+                        <option>Four Seater</option>
+                        
+                      </select>
+                    </div>
+  
+                   
+
+                    <div className="container-login100-form-btn">
+                        <Link className="txt2" to="/roomtype" >
+                        <button className="login100-form-btn"  value="submit" type="submit" >
+                            Next
+                        </button></Link>
+
+                  
+                  
+                    </div>
+
+                
                 </form>
             </div>
+        </div>
+    </div>
         );
     }
 }
 
-export default RoomTypeSetup;
+export default GeneralInfo;

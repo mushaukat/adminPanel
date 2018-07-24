@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../stylesheets/login-signup.css'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class SignUp extends Component {
   render() {
@@ -63,9 +64,13 @@ class SignUp extends Component {
                 <p id="demo"></p>
 
                 <div className="container-login100-form-btn">
-                  <button className="login100-form-btn" onclick="getLocation()">
+                <Link className="txt2" to="/general" >
+                    <button className="login100-form-btn" onclick="getLocation()">
                     Signup
-						</button>
+            </button>
+                  </Link>
+                  
+                    
                 </div>
 
               </form>
