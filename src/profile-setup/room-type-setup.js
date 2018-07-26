@@ -8,6 +8,13 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 class GeneralInfo extends Component {
+      componentDidMount () {
+         var i = 0;
+var original = document.getElementById('duplicater');
+
+
+
+    }
     render() {
         return (
              <div className="limiter">
@@ -38,11 +45,13 @@ class GeneralInfo extends Component {
                         
                       </select>
                     </div>
-  
-                   
+               <button id="btn" >Click me</button>
+                    <div id="dup"> 
+                        duplicate EVERYTHING INSIDE THIS DIV
+                    </div>
 
                     <div className="container-login100-form-btn">
-                        <Link className="txt2" to="/roomtype" >
+                        <Link className="txt2" to="/profilepic" >
                         <button className="login100-form-btn"  value="submit" type="submit" >
                             Next
                         </button></Link>

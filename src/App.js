@@ -19,6 +19,7 @@ import Recovery from './login-signup/recovery'
 import Facilities from './profile-setup/facilities'
 
 import Roomtype from './profile-setup/room-type-setup'
+import Profilepic from './profile-setup/profilepic'
 
 class App extends Component {
   render() {
@@ -31,6 +32,7 @@ class App extends Component {
         <Route exact path="/general" component={GeneralInfo} />
         <Route exact path="/facilities" component={Facilities} />
         <Route exact path="/roomtype" component={Roomtype} />
+        <Route exact path="/profilepic" component={Profilepic} />
       </div>
       </Router>
     );
