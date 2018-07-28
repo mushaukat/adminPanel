@@ -1,0 +1,128 @@
+import React, { Component,action } from 'react';
+import '../stylesheets/login-signup.css'
+
+class SignUp extends Component {
+submitData(e) {
+  e.preventDefault();
+    console.log("1");
+    this.props.SignUp.add({
+      
+      hostel_name : this.refs.hostelName.value,
+      hostel_email : this.refs.email.value,
+      password : this.refs.password.value,
+      owner_phone : this.refs.ownerPhone.value,
+      owner_mobile : this.refs.OwnerMobile.value
+    });
+    console.log("1.5");
+    this.refs.hostelName.value=null;
+    this.refs.email.value=null;
+    this.refs.password.value=null;
+    this.refs.ownerPhone.value=null;
+    this.refs.OwnerMobile.value=null;
+    console.log("2");
+  };
+  
+  add(data){
+    const headers = new Headers();
+    Headers.append('Content-Type','multipart/form-data');
+    var data1=JSON.stringify(data);
+    console.log("3");
+    const options = {
+      method:'POST',
+      headers,
+      body: data1 
+    };
+
+    // const request = new Request('http:/13.127.43.161:3300/api/hostelSignup', options);
+    // const response =await  fetch(request);
+    // console.log(response);
+    // console.log("4");
+    // const status =   response.status;
+    // console.log(status);
+    console.log("5");
+
+
+
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="limiter">
+          <div className="container-login100">
+            <div className="wrap-login100">
+
+
+              <form className="login100-form validate-form">
+                <span className="login100-form-title">
+                  Hostel Signup
+					</span>
+                <div className="wrap-input100 validate-input" data-validate="valid name is required">
+                  <input className="input100" type="text" ref="hostelName" placeholder="Enter Hostel Name" />
+                  <span className="focus-input100"></span>
+                  <span className="symbol-input100">
+                    <i className="fa fa-adn" aria-hidden="true"></i>
+                  </span>
+                </div>
+
+
+                <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                  <input className="input100" type="text" ref="email" placeholder="Enter your Email" />
+                  <span className="focus-input100"></span>
+                  <span className="symbol-input100">
+                    <i className="fa fa-envelope" aria-hidden="true"></i>
+                  </span>
+                </div>
+
+                <div className="wrap-input100 validate-input" data-validate="Password is required">
+                  <input className="input100" type="password" ref="password" placeholder=" Enter Password" />
+                  <span className="focus-input100"></span>
+                  <span className="symbol-input100">
+                    <i className="fa fa-lock" aria-hidden="true"></i>
+                  </span>
+                </div>
+
+                <div className="wrap-input100 validate-input" data-validate="Password is required">
+                  <input className="input100" type="password" ref="re-password" placeholder="Re-Enter Password" />
+                  <span className="focus-input100"></span>
+                  <span className="symbol-input100">
+                    <i className="fa fa-lock" aria-hidden="true"></i>
+                  </span>
+                </div>
+
+                <div className="wrap-input100 validate-input" data-validate="Mobile is required">
+                  <input className="input100" type="tel" ref="ownerMobile" placeholder="Hostel Owner Mobile Number" />
+                  <span className="focus-input100"></span>
+                  <span className="symbol-input100">
+                    <i className="fa fa-mobile" aria-hidden="true"></i>
+                  </span>
+                </div>
+                <div className="wrap-input100 validate-input" data-validate="Mobile is required">
+                  <input className="input100" type="tel" ref="ownerPhone" placeholder="Hostel Owner Phone Number" />
+                  <span className="focus-input100"></span>
+                  <span className="symbol-input100">
+                    <i className="fa fa-mobile" aria-hidden="true"></i>
+                  </span>
+                </div>
+                
+
+
+                <div className="container-login100-form-btn">
+                  <button type="submit" onClick={this.submitData} className="login100-form-btn">
+                  Hello
+                  </button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    );
+ 
+  }
+}
+
+export default SignUp;
