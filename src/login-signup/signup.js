@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import '../stylesheets/login-signup.css';
 import axios from 'axios';
 import { BrowserRouter as Redirect } from "react-router-dom";
+=======
+import '../stylesheets/login-signup.css'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+>>>>>>> fed475ac8cb5845612178d3b2be7f428befccf9d
 
 class SignUp extends Component {
   state = {
@@ -165,7 +170,17 @@ class SignUp extends Component {
                   </div>
 
                 <div className="container-login100-form-btn">
+<<<<<<< HEAD
                   <input type="submit" value="SignUp" className="login100-form-btn" />
+=======
+                <Link className="txt2" to="/general" >
+                    <button className="login100-form-btn" onclick="getLocation()">
+                    Signup
+            </button>
+                  </Link>
+                  
+                    
+>>>>>>> fed475ac8cb5845612178d3b2be7f428befccf9d
                 </div>
 
               </form>

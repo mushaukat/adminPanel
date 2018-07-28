@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import '../stylesheets/login-signup.css'
+<<<<<<< HEAD
 import { BrowserRouter as Redirect, Link } from "react-router-dom";
 import axios from 'axios';
+=======
+import '../stylesheets/index.css'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+>>>>>>> fed475ac8cb5845612178d3b2be7f428befccf9d
 
 class LogIn extends Component {
   state = {
