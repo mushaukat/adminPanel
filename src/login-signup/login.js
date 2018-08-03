@@ -1,27 +1,28 @@
 import React, { Component } from 'react';
-import '../stylesheets/login-signup.css'
-<<<<<<< HEAD
-import { BrowserRouter as Redirect, Link } from "react-router-dom";
+import '../stylesheets/login-signup.css';
+import { Redirect, Link } from "react-router-dom";
 import axios from 'axios';
-=======
-import '../stylesheets/index.css'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
->>>>>>> fed475ac8cb5845612178d3b2be7f428befccf9d
+//import '../stylesheets/index.css';
 
 class LogIn extends Component {
-  state = {
-    email: '',
-    password: '',
-    redirect: false,
-    loginError: false,
-    errorMsg: '',
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      redirect: false,
+      Error: false,
+      errorMsg: '',
 
-  };
+    };
+    this.onChange = this.onChange.bind(this);
+
+  }
 
 
   errorMsg = () => {
-    if (this.state.loginError) {
-      return  <b> <p className="error-message"> {this.state.errorMsg}  </p> </b>
+    if (this.state.Error) {
+      return <b> <p className="error-message"> {this.state.errorMsg}  </p> </b>
     }
 
   }
@@ -40,33 +41,35 @@ class LogIn extends Component {
           if (response.data.Error) {
             console.log(response.data);
             console.log(response.data.Error);
-            
+
             this.setState({
-              loginError: true,
-              errorMsg: response.data.Message + "Try Again",
+              Error: true,
+              errorMsg: response.data.Message + " Try Again",
             })
             console.log(this.state.errorMsg);
 
           } else {
             console.log(response.data);
             console.log(response.data.Error);
-            sessionStorage.setItem('userData', response.data) 
+            console.log(response.data.Data);
+            let data= response.data
+            localStorage.setItem('userData', JSON.stringify(data.Data[0]))
+            var a=JSON.parse(localStorage.getItem('userData'));
+            console.log(a.admin_id);
 
             this.setState({
               redirect: true
             })
 
           }
-        }).catch(function (e) {
-          this.setState({
-            loginError: true,
-            errorMsg: "Unknow Error! Plese Try Again Later"
-          });
-          
-        }
-        );
+        })
 
   }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
 
 
   render() {
@@ -78,7 +81,7 @@ class LogIn extends Component {
     }
 
     if (this.state.redirect) {
-      return <Redirect to='/dashboard' />
+      return <Redirect to='/ProfileSetup' />
     }
 
     return (
@@ -97,7 +100,7 @@ class LogIn extends Component {
                 </span>
 
                   <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                    <input className="input100" type="email" name="email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} placeholder="Email" required />
+                    <input className="input100" type="email" name="email" onChange={this.onChange} placeholder="Email" required />
                     <span className="focus-input100"></span>
                     <span className="symbol-input100">
                       <i className="fa fa-envelope" aria-hidden="true"></i>
@@ -105,7 +108,7 @@ class LogIn extends Component {
                   </div>
 
                   <div className="wrap-input100 validate-input" data-validate="Password is required">
-                    <input className="input100" type="password" name="pass" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} placeholder="Password" required />
+                    <input className="input100" type="password" name="password" onChange={this.onChange} placeholder="Password" required />
                     <span className="focus-input100"></span>
                     <span className="symbol-input100">
                       <i className="fa fa-lock" aria-hidden="true"></i>
@@ -117,12 +120,12 @@ class LogIn extends Component {
                   </div>
 
                   <div className="container-login100-form-btn">
-
                     <button className="login100-form-btn">
                       Login
                   </button>
                   </div>
                   <br />
+
                   <div className="text-center p-t-12">
                     <span className="txt1">
                       Forgot

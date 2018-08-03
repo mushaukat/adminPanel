@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
-    <link rel="stylesheet" href="./stylesheets/index.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
@@ -17,20 +16,13 @@
     <noscript>
         You need to enable JavaScript to run this app.
     </noscript>
-    <div>
-        <div id="left-div"></div>
-        <div id="right-div">
-            <div id="top-menu"></div>
-            <div id="menu2">
-               
-            </div>
-        </div>
-        <div id="main">
 
-        </div>
-
+    <div id="main">
 
     </div>
+
+
+
 
 
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -41,28 +33,7 @@
 
 
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#sidebar").mCustomScrollbar({
-                theme: "minimal"
-            });
 
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar, #content').toggleClass('active');
-                $('.collapse.in').toggleClass('in');
-                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-            });
-        });
-        
-        $("btn").click(function(){
-    $("dup").clone().appendTo("body");
-});
-       
-    </script>
- 
-
-
-    
 
 
 </body>

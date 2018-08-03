@@ -1,6 +1,4 @@
-h3 {
-    margin-left: 15px
-}
+
  
 
 .fileInput {
@@ -16,9 +14,8 @@ h3 {
   
 .imgPreview {
     text-align: center;
-  margin: 5px 15px;
-  height: 100px;
-  width: 100px;
+  height: 120px;
+  width: 120px;
   border-left: 1px solid gray;
   border-right: 1px solid gray;
   border-top: 5px solid gray;
