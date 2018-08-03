@@ -98,12 +98,12 @@ class RoomTypeSetup extends Component {
 
     appendRoom() {
         this.displayRoom.push(
-            <div className="col-md-12">
-                <td className="col-md-4">{this.state.seaters}</td>
-                <th className="col-md-3">{this.state.priceWithOutMess}</th>
-                <th className="col-md-3">{this.state.priceWithMess}</th>
-                <th className="col-md-2"><button>Remove Room</button></th>
-            </div>
+            <tr >
+                <td >{this.state.seaters}</td>
+                <td >{this.state.priceWithOutMess}</td>
+                <td >{this.state.priceWithMess}</td>
+                <td ><button>Remove Room</button></td>
+            </tr>
         );
         this.setState({
             showRoom: this.displayRoom,
@@ -174,17 +174,19 @@ class RoomTypeSetup extends Component {
                                     <input type="button" value="Add" onClick={this.changeState} />
                                 </div>
                                 <br />
-                                <div className="table table-bordered col-md-12">
-                                    <thead className="col-md-12">
-                                        <th className="col-md-4">Room Type</th>
-                                        <th className="col-md-3">Price Without Mess</th>
-                                        <th className="col-md-3">Price With Mess</th>
-                                        <th className="col-md-2">Remove Room</th>
+                                <table className="table table-bordered col-md-12">
+                                    <thead >
+                                        <tr>
+                                            <th >Room Type</th>
+                                            <th >Price Without Mess</th>
+                                            <th >Price With Mess</th>
+                                            <th >Remove Room</th>
+                                        </tr>
                                     </thead>
-                                    <tbody className="col-md-12">
+                                    <tbody >
                                         {this.displayRoom}
                                     </tbody>
-                                </div>
+                                </table>
 
                                 {this.addRoom()}
                             </table>
