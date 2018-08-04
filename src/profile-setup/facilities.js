@@ -139,47 +139,18 @@ class Facilities extends Component {
     return (
 
       <div>
-        <form className="marginauto " onSubmit={this.submitData}>
-          <h1 className="">
-            Step 2 of 4: Facilities
+
+        <h1 className="">
+          Step 2 of 4: Facilities
                     </h1>
-          <h3 className="margint60">Tick Faclities which are available in Hostels</h3>
-          {facilities}
-
-          {/* <div className="checkbox  text-paragraph">
-                          <label><input type="checkbox" value=""></input>Internet</label>
-                        </div>
-                        <div className="checkbox text-paragraph">
-                          <label><input type="checkbox" value=""></input>Mess</label>
-                        </div> */}
-
-          {/* <div class="form-group text-paragraph">
-                      <label for="sel1">Select Package:</label>
-                      <select class="form-control" id="sel1">
-                        <option>1</option>
-                        <option>2</option>
-                        
-                      </select>
-                    </div>
-                             */}
-          <div>
-            {this.errorMsg()}
-          </div>
-
-          <div className="container-login100-form-btn">
-            <input type="submit" value="Next Step" className="login100-form-btn" />
-          </div>
+        <h3 className="margint60">Tick Faclities which are available in Hostels</h3>
+        {facilities}
 
 
-          {/* <div className="container-login100-form-btn">
-                <Link className="txt2" to="/roomtype" >
-                  <button className="login100-form-btn" value="submit" type="submit" >
-                    Next
-                        </button></Link>
-              </div> */}
+        <div>
+          {this.errorMsg()}
+        </div>
 
-
-        </form>
       </div>
 
     );

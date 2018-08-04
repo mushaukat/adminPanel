@@ -19,37 +19,38 @@ class ProfileSetup extends Component {
 
     }
 
-    showSetupScreen(){
-        console.log("inside"+this.state.facilities);
-        if(this.state.generalInfo){
+    showSetupScreen() {
+        console.log("inside" + this.state.facilities);
+        if (this.state.generalInfo) {
             return <GeneralInfo />
         }
-        if(this.state.facilities){
+        if (this.state.facilities) {
             return <Facilities />
         }
-        if(this.state.roomTypes){
+        if (this.state.roomTypes) {
             return <RoomTypeSetup />
         }
-        if(this.state.pictures){
+        if (this.state.pictures) {
             return <HostelPicturesSetup />
         }
     }
 
-     
+
     setGeneralInfo = () => {
-        this.setState({generalInfo: true, facilities:false, roomTypes:false, pictures:false});
-    ;}
-    
-    setFacilities=()=>{
-        this.setState({generalInfo: false, facilities:true, roomTypes:false, pictures:false});
+        this.setState({ generalInfo: true, facilities: false, roomTypes: false, pictures: false });
+        ;
     }
 
-    setRoomTypes=()=>{
-        this.setState({generalInfo: false, facilities:false, roomTypes:true, pictures:false});
+    setFacilities = () => {
+        this.setState({ generalInfo: false, facilities: true, roomTypes: false, pictures: false });
     }
 
-    setPictures=()=>{
-        this.setState({generalInfo: false, facilities:false, roomTypes:false, pictures:true});
+    setRoomTypes = () => {
+        this.setState({ generalInfo: false, facilities: false, roomTypes: true, pictures: false });
+    }
+
+    setPictures = () => {
+        this.setState({ generalInfo: false, facilities: false, roomTypes: false, pictures: true });
     }
 
 
@@ -83,7 +84,7 @@ class ProfileSetup extends Component {
                         <div className="marginauto">
 
 
-                            
+
                             <div className="breadcrumb-body">
                                 <div className="breadcrumb">
                                     <a className="breadcrumb__step breadcrumb__step--active" onClick={this.setGeneralInfo} >General Information</a>
@@ -94,12 +95,16 @@ class ProfileSetup extends Component {
                             </div>
 
                             <div>
-                                {this.showSetupScreen()}
-                            {/* {this.generalInfo()}
-                            {this.facilities()}
-                            {this.roomTypes()}
-                            {this.pictures()} */}
+                                <form onSubmit={this.submitData}>
+                                    {this.showSetupScreen()}
+
+
+                                    <div className="container-login100-form-btn">
+                                        <input type="submit" value="Next Step" className="login100-form-btn" />
+                                    </div>
+                                </form>
                             </div>
+
 
                         </div>
                     </div>

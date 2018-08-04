@@ -93,10 +93,10 @@ class GeneralInfo extends Component {
         return (
             <div className="marginauto">
 
-                <form onSubmit={this.submitData}>
-                    <h1 className="">
+               
+                    <h1>
                         Step 1 of 4: General info
-                            </h1>
+                    </h1>
 
 
                     <div className="margint60  text-paragraph">
@@ -138,20 +138,8 @@ class GeneralInfo extends Component {
                         <textarea className="form-control" rows="5" id="comment" name="hostelDescription" onChange={this.onChange} ></textarea>
                     </div>
 
-                    <div className="container-login100-form-btn">
-                        <input type="submit" value="Next Step" className="login100-form-btn" />
-                    </div>
 
-                    {/* <div className="container-login100-form-btn">
-                                <Link className="txt2" to="/facilities" >
-                                    <button className="login100-form-btn" value="submit" type="submit" >
-                                        Next
-                            </button></Link>
-                            </div> */}
-
-
-                </form>
-            </div>
+                </div>
 
         );
     }
