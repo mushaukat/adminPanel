@@ -93,35 +93,46 @@ class GeneralInfo extends Component {
         return (
             <div className="limiter">
                 <div className="container-login100">
-                    <div className="wrap-login100">
+                    <div className="wrap-signup">
 
-                        <form className="marginauto " onSubmit={this.submitData}>
+                    <div className="marginauto">
+            
+                        
+            
+                        <form onSubmit={this.submitData}>
                             <h1 className="">
                                 Step 1 of 4: General info
                             </h1>
-
+            
+             
                             <div className="margint60  text-paragraph">
                                 <label>Hostel Type :</label>
-                                <div className="radio text-paragraph">
+                                <div  className="radio text-paragraph">
                                     <label><input type="radio" name="hostelType" value="Boys" onChange={this.onChange} required />Boys</label>
                                 </div>
                                 <div className="radio text-paragraph">
-                                    <label><input type="radio" name="hostelType" value="Girls" onChange={this.onChange} />Girls</label>
+                                    <label><input type="radio" className="radio text-paragraph" name="hostelType" value="Girls" onChange={this.onChange} />Girls</label>
                                 </div>
                             </div>
-                            <br />
-
+                            
+                    <div class="row margint20">
+                        <div class="col-xs-6 col-md-6">
+                  
                             <div className="form-group text-paragraph">
                                 <label >Hostel Mobile :</label>
-                                <input type="tel" className="form-control" name="hostelMobile" onChange={this.onChange} placeholder="Enter Hostel Mobile Number" required></input>
+                                <input type="tel" name="hostelMobile" onChange={this.onChange} placeholder="Hostel Mobile #"  className="form-control text-paragraph" />
+        
                             </div>
-                            <br />
-
+                        </div>
+                        <div class="col-xs-6 col-md-6">
+        
                             <div className="form-group text-paragraph">
                                 <label >Hostel Phone :</label>
-                                <input type="tel" className="form-control" name="hostelPhone" onChange={this.onChange} placeholder="Enter Hostel Phone Number"></input>
+                                <input type="tel" name="hostelPhone" onChange={this.onChange} placeholder="Hostel Phone #"  className="form-control text-paragraph" />
+                            
                             </div>
-                            <br />
+                        </div>
+                    </div>
 
 
                             {/*<div id="demo"><MapContainer /></div>
@@ -145,7 +156,8 @@ class GeneralInfo extends Component {
                             </div> */}
 
 
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

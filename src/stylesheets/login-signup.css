@@ -32,10 +32,13 @@
   /*//////////////////////////////////////////////////////////////////
   [ RESTYLE TAG ]*/
   .marginauto{
-  	    margin: auto;
+  	   width: 100%;
   }
   .margint60{
   	    margin-top: 60px;
+  }
+.margint20{
+  	    margin-top: 20px;
   }
   .text-paragraph{
   	    font-size: 15px;
@@ -168,6 +171,11 @@
 	margin: 0 auto;
   }
   
+.cselect {
+
+    height:35px;
+    width:inherit;
+}
   .container-login100 {
 	width: 100%;  
 	min-height: 100vh;
@@ -180,15 +188,29 @@
 	justify-content: center;
 	align-items: center;
 	padding: 15px;
-	background: #7386D5;
+	background: linear-gradient(180deg,#448239 , #57b846);;
   }
   
   .wrap-login100 {
-	width: 960px;
+	width: 400px;
 	background: #fff;
 	border-radius: 10px;
 	overflow: hidden;
   
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 50px;
+  }
+.wrap-signup {
+	width: 800px;
+	background: #fff;
+	border-radius: 10px;
+	overflow: hidden;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -moz-box;
@@ -222,6 +244,9 @@
 		  padding-top: 10px;
   
   }
+.headings{
+    margin-left: 15px;
+}
   /*------------------------------------------------------------------
   [  ]*/
   .login100-form {
@@ -247,7 +272,7 @@
 	position: relative;
 	width: 100%;
 	z-index: 1;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
   }
   
   .input100 {
@@ -372,6 +397,9 @@
 	background: #333333;
   }
   
+#myTable{
+    display: none;
+}
   
   
   /*------------------------------------------------------------------

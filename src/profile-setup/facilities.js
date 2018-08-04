@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../stylesheets/profile-setup.css'
 import '../stylesheets/login-signup.css'
 import axios from 'axios';
 import { Redirect } from "react-router-dom";
@@ -124,6 +123,7 @@ class Facilities extends Component {
     const facilities = this.state.facilities.map((facility, index) => {
 
       return (
+          
         <div key={index}>
           <div className="checkbox  text-paragraph">
             <label><input type="checkbox" name={facility.facility_id} onChange={this.onChange}></input>{facility.facility_name}</label>
@@ -139,7 +139,7 @@ class Facilities extends Component {
     return (
       <div className="limiter" >
         <div className="container-login100">
-          <div className="wrap-login100">
+          <div className="wrap-signup">
 
 
             <form className="marginauto " onSubmit={this.submitData}>

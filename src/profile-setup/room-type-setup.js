@@ -15,7 +15,7 @@ class RoomTypeSetup extends Component {
             securityFee: '',
             addmissionFee: '',
             addedRoom: [],
-            setRoom: false,
+            setRoom: true,
             seaters: '',
             priceWithMess: '',
             priceWithOutMess: '',
@@ -86,11 +86,14 @@ class RoomTypeSetup extends Component {
 
                     } else {
                         console.log(response.data);
-                        var room = this.state.addedRoom
-                        room.push(parseInt(this.state.seaters))
+                        var room = this.state.addedRoom;
+                        room.push(parseInt(this.state.seaters));
                         this.setState({ addedRoom: room })
                         console.log(this.state.addedRoom)
                         this.appendRoom();
+                        
+                        this.setState({ setRoom: true });
+                        document.getElementById('myTable').style.display = 'block';
                     }
                 })
     }
@@ -102,7 +105,8 @@ class RoomTypeSetup extends Component {
                 <td >{this.state.seaters}</td>
                 <td >{this.state.priceWithOutMess}</td>
                 <td >{this.state.priceWithMess}</td>
-                <td ><button>Remove Room</button></td>
+                <td ><center><input class="alignCenter"type="image" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI4IDI4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyOCAyODsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjI0cHgiPgo8Zz4KCTxwYXRoIGQ9Ik0wLDI0bDQsNGwxMC0xMGwxMCwxMGw0LTRMMTgsMTRMMjgsNGwtNC00TDE0LDEwTDQsMEwwLDRsMTAsMTBMMCwyNHoiIGZpbGw9IiNEODAwMjciLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />
+                </center></td>
             </tr>
         );
         this.setState({
@@ -127,14 +131,25 @@ class RoomTypeSetup extends Component {
     addRoom = () => {
         if (this.state.setRoom) {
             return (
-                <div>
-                    <select name="seaters" className="form-control text-paragraph col-md-4" onChange={this.onChangeRoomPrice} >
+                 <div class="row">
+                <div class="col-xs-5 col-md-5">
+                <select name="seaters" className="text-paragraph cselect " onChange={this.onChangeRoomPrice} >
                         {this.getOptions()}
                     </select>
-                    <input className="col-md-3" type="text" name="priceWithMess" onChange={this.onChangeRoomPrice} placeholder="Room Charges With Mess" />
-                    <input className="col-md-3" type="text" name="priceWithOutMess" onChange={this.onChangeRoomPrice} placeholder="Room Charges With Out Mess" />
-                    <button className="col-md-2" onClick={this.saveRoom}>Save</button>
                 </div>
+                <div class="col-xs-3 col-md-3">
+                    <input type="number" name="priceWithMess" onChange={this.onChangeRoomPrice} placeholder="Charges With Mess"  className="form-control text-paragraph" />
+                   
+                </div>
+                <div class="col-xs-3 col-md-3">
+                    <input type="number" name="priceWithOutMess" onChange={this.onChangeRoomPrice} placeholder="Charges With Out Mess"  className="form-control text-paragraph"  />
+                </div>
+    
+                <div class="col-xs-1 col-md-1">
+                    <center><input class="alignCenter"type="image" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDEwMC4wMjEgMTAwLjAyMSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTAwLjAyMSAxMDAuMDIxOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCI+CjxnPgoJPHBhdGggZD0iTTUxLjQ0OSwwLjAyMUMyMy44NDUtMC43NzMsMC44MjUsMjAuOTYsMC4wMzIsNDguNTYzYy0wLjAxNCwwLjQ4Ni0wLjAyMSwwLjk3Mi0wLjAyMSwxLjQ1OCAgIGMwLDI3LjYxNCwyMi4zODYsNTAsNTAsNTBzNTAtMjIuMzg2LDUwLTUwQzEwMC4wMjMsMjIuOTU5LDc4LjQ5OSwwLjc5OSw1MS40NDksMC4wMjF6IE03OC4wMTEsNTcuMDIxaC0yMXYyMWgtMTR2LTIxaC0yMXYtMTRoMjEgICB2LTIxaDE0djIxaDIxVjU3LjAyMXoiIGZpbGw9IiM1N2I4NDYiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" onClick={this.saveRoom} />
+                </center>
+                </div>
+             </div>
             )
         }
     }
@@ -149,7 +164,7 @@ class RoomTypeSetup extends Component {
         return (
             <div className="limiter">
                 <div className="container-login100">
-                    <div className="wrap-login100">
+                    <div className="wrap-signup">
 
                         <div className="marginauto ">
                             <h1 className="">
@@ -168,19 +183,21 @@ class RoomTypeSetup extends Component {
                             </div>
                             <br />
 
-                            <table className="form-group text-paragraph">
+                            <div className="form-group text-paragraph">
                                 <div>
-                                    <label>Select Room Seating:</label>
-                                    <input type="button" value="Add" onClick={this.changeState} />
+                                    <label>Add Room Types</label>
                                 </div>
+            
+            
+                                {this.addRoom()}
                                 <br />
-                                <table className="table table-bordered col-md-12">
+                                <table id="myTable" className="table table-bordered col-md-12">
                                     <thead >
                                         <tr>
-                                            <th >Room Type</th>
-                                            <th >Price Without Mess</th>
-                                            <th >Price With Mess</th>
-                                            <th >Remove Room</th>
+                                            <th width="28%">Room Type</th>
+                                            <th width="20%">Price Without Mess</th>
+                                            <th width="20%">Price With Mess</th>
+                                            <th width="20%">Remove Room</th>
                                         </tr>
                                     </thead>
                                     <tbody >
@@ -188,8 +205,7 @@ class RoomTypeSetup extends Component {
                                     </tbody>
                                 </table>
 
-                                {this.addRoom()}
-                            </table>
+                            </div>
 
 
 

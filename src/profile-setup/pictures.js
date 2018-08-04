@@ -173,7 +173,7 @@ class GeneralInfo extends Component {
         return (
             <div className="limiter">
                 <div className="container-login100">
-                    <div className="wrap-login100">
+                    <div className="wrap-signup">
 
 
                         <form className="marginauto ">

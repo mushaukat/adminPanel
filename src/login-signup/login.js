@@ -89,10 +89,6 @@ class LogIn extends Component {
         <div className="limiter" style={style1}>
           <div className="container-login100">
             <div className="wrap-login100">
-              <div className="login100-pic js-tilt" data-tilt>
-                <img src="images/img-01.png" alt="IMG" />
-              </div>
-
               <form onSubmit={this.submitData}>
                 <div className="login100-form validate-form">
                   <span className="login100-form-title">
