@@ -54,39 +54,39 @@ class Facilities extends Component {
     const userData = JSON.parse(localStorage.getItem('userData'));
 
     const data = {
-        block_id: userData.block_id,
-        hostel_id: userData.hostel_id,
-        hostel_facilities: this.state.selected_facilities,
+      block_id: userData.block_id,
+      hostel_id: userData.hostel_id,
+      hostel_facilities: this.state.selected_facilities,
 
     };
 
 
     console.log(data);
     axios.post('/insertBlockFacilities', data)
-        .then(
+      .then(
 
-            response => {
-                if (response.data.Error) {
-                    console.log(response.data);
-                    console.log(response.data.Error);
+        response => {
+          if (response.data.Error) {
+            console.log(response.data);
+            console.log(response.data.Error);
 
-                    this.setState({
-                        Error: true,
-                        errorMsg: response.data.Message
-                    })
-
-                } else {
-                    console.log(response.data);
-                    console.log(response.data.Error);
-                    this.setState({
-                        redirect: true
-                    })
-
-                }
+            this.setState({
+              Error: true,
+              errorMsg: response.data.Message
             })
 
+          } else {
+            console.log(response.data);
+            console.log(response.data.Error);
+            this.setState({
+              redirect: true
+            })
 
-}
+          }
+        })
+
+
+  }
 
 
 
@@ -123,7 +123,7 @@ class Facilities extends Component {
     const facilities = this.state.facilities.map((facility, index) => {
 
       return (
-          
+
         <div key={index}>
           <div className="checkbox  text-paragraph">
             <label><input type="checkbox" name={facility.facility_id} onChange={this.onChange}></input>{facility.facility_name}</label>
@@ -137,26 +137,23 @@ class Facilities extends Component {
 
 
     return (
-      <div className="limiter" >
-        <div className="container-login100">
-          <div className="wrap-signup">
 
-
-            <form className="marginauto " onSubmit={this.submitData}>
-              <h1 className="">
-                Step 2 of 4: Facilities
+      <div>
+        <form className="marginauto " onSubmit={this.submitData}>
+          <h1 className="">
+            Step 2 of 4: Facilities
                     </h1>
-              <h3 className="margint60">Tick Faclities which are available in Hostels</h3>
-              {facilities}
+          <h3 className="margint60">Tick Faclities which are available in Hostels</h3>
+          {facilities}
 
-              {/* <div className="checkbox  text-paragraph">
+          {/* <div className="checkbox  text-paragraph">
                           <label><input type="checkbox" value=""></input>Internet</label>
                         </div>
                         <div className="checkbox text-paragraph">
                           <label><input type="checkbox" value=""></input>Mess</label>
                         </div> */}
 
-              {/* <div class="form-group text-paragraph">
+          {/* <div class="form-group text-paragraph">
                       <label for="sel1">Select Package:</label>
                       <select class="form-control" id="sel1">
                         <option>1</option>
@@ -165,16 +162,16 @@ class Facilities extends Component {
                       </select>
                     </div>
                              */}
-              <div>
-                {this.errorMsg()}
-              </div>
+          <div>
+            {this.errorMsg()}
+          </div>
 
-              <div className="container-login100-form-btn">
-                <input type="submit" value="Next Step" className="login100-form-btn" />
-              </div>
+          <div className="container-login100-form-btn">
+            <input type="submit" value="Next Step" className="login100-form-btn" />
+          </div>
 
 
-              {/* <div className="container-login100-form-btn">
+          {/* <div className="container-login100-form-btn">
                 <Link className="txt2" to="/roomtype" >
                   <button className="login100-form-btn" value="submit" type="submit" >
                     Next
@@ -182,10 +179,9 @@ class Facilities extends Component {
               </div> */}
 
 
-            </form>
-          </div>
-        </div>
+        </form>
       </div>
+
     );
   }
 }

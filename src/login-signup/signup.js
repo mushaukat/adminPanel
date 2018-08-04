@@ -85,8 +85,7 @@ class SignUp extends Component {
       <div>
         <div className="limiter">
           <div className="container-login100">
-            <div className="wrap-signup">
-
+            <div className="wrap-login100">
 
               <form onSubmit={this.submitData}>
 
@@ -94,75 +93,58 @@ class SignUp extends Component {
                   Hostel Signup
   					    </span>
 
-                <div class="row">
-                <div class="col-xs-6 col-md-6">
                 <div className="wrap-input100 validate-input" data-validate="valid name is required">
-                  <span ><p class="headings">Hostel Name: </p> </span>
+                  <span><p>Hostel Name: </p> </span>
                   <input className="input100" type="text" value={this.state.hostelName} onChange={(event) => this.setState({ hostelName: event.target.value })} ref="hostelName" placeholder="Enter Hostel Name" required />
                   <span className="focus-input100"></span>
                   <span className="symbol-input100">
                     <i className="fa fa-adn" aria-hidden="true"></i>
                   </span>
                 </div>
-            </div>
-                <div class="col-xs-6 col-md-6">
+
                 <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                  <span><p class="headings">Email: </p> </span>
+                  <span><p>Email: </p> </span>
                   <input className="input100" type="email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} ref="email" placeholder="Enter your Email" required />
                   <span className="focus-input100"></span>
                   <span className="symbol-input100">
                     <i className="fa fa-envelope" aria-hidden="true"></i>
                   </span>
                 </div>
-             </div>
-            </div>
-                
-                <div class="row">
-                <div class="col-xs-6 col-md-6">
+
                 <div className="wrap-input100 validate-input" data-validate="Password is required">
-                  <span><p class="headings">Password: </p> </span>
+                  <span><p>Password: </p> </span>
                   <input className="input100" type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} ref="password" placeholder=" Enter Password" required />
                   <span className="focus-input100"></span>
                   <span className="symbol-input100">
                     <i className="fa fa-lock" aria-hidden="true"></i>
                   </span>
                 </div>
-                </div>
 
-                <div class="col-xs-6 col-md-6">
                 <div className="wrap-input100 validate-input" data-validate="Password is required">
-                  <span><p class="headings">Confirm Password: </p> </span>
+                  <span><p>Confirm Password: </p> </span>
                   <input className="input100" type="password" value={this.state.rePassword} onChange={(event) => this.setState({ rePassword: event.target.value })} ref="re-password" placeholder="Re-Enter Password" required />
                   <span className="focus-input100"></span>
                   <span className="symbol-input100">
                     <i className="fa fa-lock" aria-hidden="true"></i>
                   </span>
                 </div>
-              </div>
-            </div>
 
-              <div class="row">
-               <div class="col-xs-6 col-md-6">
                 <div className="wrap-input100 validate-input" data-validate="Mobile is required">
-                  <span><p class="headings">Owner Mobile No: </p> </span>
-                  <input className="input100" type="text" value={this.state.ownerMobile} onChange={(event) => this.setState({ ownerMobile: event.target.value })} ref="ownerMobile" placeholder="Owner Mobile Number" required />
+                  <span><p>Owner Mobile No: </p> </span>
+                  <input className="input100" type="text" value={this.state.ownerMobile} onChange={(event) => this.setState({ ownerMobile: event.target.value })} ref="ownerMobile" placeholder="Hostel Owner Mobile Number" required />
                   <span className="focus-input100"></span>
                   <span className="symbol-input100">
                     <i className="fa fa-mobile" aria-hidden="true"></i>
                   </span>
                 </div>
-                </div>
 
-                <div class="col-xs-6 col-md-6">
                 <div className="wrap-input100 validate-input" data-validate="Mobile is required">
-                  <span><p class="headings">Owner Phone No: </p> </span>
-                  <input className="input100" type="text" value={this.state.ownerPhone} onChange={(event) => this.setState({ ownerPhone: event.target.value })} ref="ownerPhone" placeholder="Owner Phone Number" />
+                  <span><p>Owner Phone No: </p> </span>
+                  <input className="input100" type="text" value={this.state.ownerPhone} onChange={(event) => this.setState({ ownerPhone: event.target.value })} ref="ownerPhone" placeholder="Hostel Owner Phone Number" />
                   <span className="focus-input100"></span>
                   <span className="symbol-input100">
                     <i className="fa fa-mobile" aria-hidden="true"></i>
                   </span>
-                </div>
-                </div>
                 </div>
                 <br />
 

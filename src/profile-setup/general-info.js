@@ -91,64 +91,58 @@ class GeneralInfo extends Component {
         }
 
         return (
-            <div className="limiter">
-                <div className="container-login100">
-                    <div className="wrap-signup">
+            <div className="marginauto">
 
-                    <div className="marginauto">
-            
-                        
-            
-                        <form onSubmit={this.submitData}>
-                            <h1 className="">
-                                Step 1 of 4: General info
+                <form onSubmit={this.submitData}>
+                    <h1 className="">
+                        Step 1 of 4: General info
                             </h1>
-            
-             
-                            <div className="margint60  text-paragraph">
-                                <label>Hostel Type :</label>
-                                <div  className="radio text-paragraph">
-                                    <label><input type="radio" name="hostelType" value="Boys" onChange={this.onChange} required />Boys</label>
-                                </div>
-                                <div className="radio text-paragraph">
-                                    <label><input type="radio" className="radio text-paragraph" name="hostelType" value="Girls" onChange={this.onChange} />Girls</label>
-                                </div>
-                            </div>
-                            
-                    <div class="row margint20">
-                        <div class="col-xs-6 col-md-6">
-                  
+
+
+                    <div className="margint60  text-paragraph">
+                        <label>Hostel Type :</label>
+                        <div className="radio text-paragraph">
+                            <label><input type="radio" name="hostelType" value="Boys" onChange={this.onChange} required />Boys</label>
+                        </div>
+                        <div className="radio text-paragraph">
+                            <label><input type="radio" className="radio text-paragraph" name="hostelType" value="Girls" onChange={this.onChange} />Girls</label>
+                        </div>
+                    </div>
+
+                    <div className="row margint20">
+                        <div className="col-xs-6 col-md-6">
+
                             <div className="form-group text-paragraph">
                                 <label >Hostel Mobile :</label>
-                                <input type="tel" name="hostelMobile" onChange={this.onChange} placeholder="Hostel Mobile #"  className="form-control text-paragraph" />
-        
+                                <input type="tel" name="hostelMobile" onChange={this.onChange} placeholder="Hostel Mobile #" className="form-control text-paragraph" />
+
                             </div>
                         </div>
-                        <div class="col-xs-6 col-md-6">
-        
+                        <div className="col-xs-6 col-md-6">
+
                             <div className="form-group text-paragraph">
                                 <label >Hostel Phone :</label>
-                                <input type="tel" name="hostelPhone" onChange={this.onChange} placeholder="Hostel Phone #"  className="form-control text-paragraph" />
-                            
+                                <input type="tel" name="hostelPhone" onChange={this.onChange} placeholder="Hostel Phone #" className="form-control text-paragraph" />
+
                             </div>
                         </div>
                     </div>
 
 
-                            {/*<div id="demo"><MapContainer /></div>
+                    {/*<div id="demo"><MapContainer /></div>
                     <div> <Demo /> </div>*/}
 
 
-                            <div className="form-group text-paragraph">
-                                <label >Hostel Desctiption :</label>
-                                <textarea className="form-control" rows="5" id="comment" name="hostelDescription" onChange={this.onChange} ></textarea>
-                            </div>
+                    <div className="form-group text-paragraph">
+                        <label >Hostel Desctiption :</label>
+                        <textarea className="form-control" rows="5" id="comment" name="hostelDescription" onChange={this.onChange} ></textarea>
+                    </div>
 
-                            <div className="container-login100-form-btn">
-                                <input type="submit" value="Next Step" className="login100-form-btn" />
-                            </div>
+                    <div className="container-login100-form-btn">
+                        <input type="submit" value="Next Step" className="login100-form-btn" />
+                    </div>
 
-                            {/* <div className="container-login100-form-btn">
+                    {/* <div className="container-login100-form-btn">
                                 <Link className="txt2" to="/facilities" >
                                     <button className="login100-form-btn" value="submit" type="submit" >
                                         Next
@@ -156,11 +150,9 @@ class GeneralInfo extends Component {
                             </div> */}
 
 
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
+
         );
     }
 }

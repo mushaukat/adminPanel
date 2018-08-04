@@ -17,7 +17,7 @@ class GeneralInfo extends Component {
             pic4: '',
             count: '',
             image: '',
-            address:'',
+            address: '',
             file: ''
         };
     }
@@ -29,7 +29,7 @@ class GeneralInfo extends Component {
 
     }
 
-    submitData = (e,url) => {
+    submitData = (e, url) => {
         e.preventDefault();
         const userData = JSON.parse(localStorage.getItem('userData'));
 
@@ -39,16 +39,16 @@ class GeneralInfo extends Component {
             image: this.state.file,
         };
         console.log(this.state.dp)
-        if(url=='dp'){
-            this.setState({ address: '/uploadBlockProfileImage'})
+        if (url == 'dp') {
+            this.setState({ address: '/uploadBlockProfileImage' })
         }
-        else{
-            this.setState({ address: '/uploadBlockGeneralImage'})
+        else {
+            this.setState({ address: '/uploadBlockGeneralImage' })
         }
 
 
         console.log(data);
-        axios.post(this.state.address, data,{ headers: { 'Content-Type': 'multipart/form-data',}})
+        axios.post(this.state.address, data, { headers: { 'Content-Type': 'multipart/form-data', } })
             .then(
 
                 response => {
@@ -71,7 +71,7 @@ class GeneralInfo extends Component {
                     }
                 }).catch(function (error) {
                     console.log(error.response);
-               });
+                });
 
     }
 
@@ -90,32 +90,32 @@ class GeneralInfo extends Component {
                 const pic = { file: file, imagePreviewUrlDp: reader.result }
                 this.setState({ dp: pic, });
                 console.log(pic)
-                const url="dp"
-                this.submitData(e,url)
+                const url = "dp"
+                this.submitData(e, url)
             }
             else if (count == '1') {
                 const pic = { file: file, imagePreviewUrl1: reader.result }
                 this.setState({ pic1: pic, });
-                const url="1"
-                this.submitData(e,url)
+                const url = "1"
+                this.submitData(e, url)
             }
             else if (count == '2') {
                 const pic = { file: file, imagePreviewUrl2: reader.result }
                 this.setState({ pic2: pic, });
-                const url="2"
-                this.submitData(e,url)
+                const url = "2"
+                this.submitData(e, url)
             }
             else if (count == '3') {
                 const pic = { file: file, imagePreviewUrl3: reader.result }
                 this.setState({ pic3: pic, });
-                const url="3"
-                this.submitData(e,url)
+                const url = "3"
+                this.submitData(e, url)
             }
             else if (count == '4') {
                 const pic = { file: file, imagePreviewUrl4: reader.result }
                 this.setState({ pic4: pic, });
-                const url="4"
-                this.submitData(e,url)
+                const url = "4"
+                this.submitData(e, url)
             }
             // console.log(pic)
 
@@ -171,89 +171,85 @@ class GeneralInfo extends Component {
 
 
         return (
-            <div className="limiter">
-                <div className="container-login100">
-                    <div className="wrap-signup">
+            <div >
 
 
-                        <form className="marginauto ">
-                            <h1 className="">
-                                Step 4 of 4: Upload Profile Picture
+                <form className="marginauto ">
+                    <h1 className="">
+                        Step 4 of 4: Upload Profile Picture
                             </h1>
-                            <br /><br />
+                    <br /><br />
 
-                            <h3>Hostel Profile Picture:</h3>
+                    <h3>Hostel Profile Picture:</h3>
 
-                            <div className="previewComponent">
-                                <div className="imgPreview">
-                                    {$imagePreviewDp}
-                                </div>
-                                <input type="file" onChange={(e) => this.ImageChange(e, "dp")} />
-                                {/* <p>{imagePreviewUrlDp}</p> */}
-                            </div>
-                            <br />
-                            <br /><br />
-
-                            <h3>Hostel Pictures:</h3>
-
-                            <div className=" col-md-3">
-                                <div className="previewComponent">
-                                    <div className="imgPreview">
-                                        {$imagePreview1}
-                                    </div>
-                                    <input type="file" onChange={(e) => this.ImageChange(e, 1)} />
-                                    {/* <p>{imagePreviewUrl1}</p> */}
-                                </div>
-                                <br />
-                            </div>
-
-                            <div className=" col-md-3">
-                                <div className="previewComponent">
-                                    <div className="imgPreview">
-                                        {$imagePreview2}
-                                    </div>
-                                    <input type="file" onChange={(e) => this.ImageChange(e, 2)} />
-                                    {/* <p>{imagePreviewUrl2}</p> */}
-                                </div>
-                                <br />
-                            </div>
-
-                            <div className=" col-md-3">
-                                <div className="previewComponent">
-                                    <div className="imgPreview">
-                                        {$imagePreview3}
-                                    </div>
-                                    <input type="file" onChange={(e) => this.ImageChange(e, 3)} />
-                                    {/* <p>{imagePreviewUrl3}</p> */}
-                                </div>
-                                <br />
-                            </div>
-
-                            <div className=" col-md-3">
-                                <div className="previewComponent">
-                                    <div className="imgPreview">
-                                        {$imagePreview4}
-                                    </div>
-                                    <input type="file" onChange={(e) => this.ImageChange(e, 4)} />
-                                    {/* <p>{imagePreviewUrl4}</p> */}
-                                </div>
-                                <br />
-                            </div>
-
-                            <div>
-                                {this.errorMsg()}
-                            </div>
-
-                            <div className="container-login100-form-btn">
-                                <input type="submit" value="SignUp" className="login100-form-btn" />
-                            </div>
-
-
-
-
-                        </form>
+                    <div className="previewComponent">
+                        <div className="imgPreview">
+                            {$imagePreviewDp}
+                        </div>
+                        <input type="file" onChange={(e) => this.ImageChange(e, "dp")} />
+                        {/* <p>{imagePreviewUrlDp}</p> */}
                     </div>
-                </div>
+                    <br />
+                    <br /><br />
+
+                    <h3>Hostel Pictures:</h3>
+
+                    <div className=" col-md-3">
+                        <div className="previewComponent">
+                            <div className="imgPreview">
+                                {$imagePreview1}
+                            </div>
+                            <input type="file" onChange={(e) => this.ImageChange(e, 1)} />
+                            {/* <p>{imagePreviewUrl1}</p> */}
+                        </div>
+                        <br />
+                    </div>
+
+                    <div className=" col-md-3">
+                        <div className="previewComponent">
+                            <div className="imgPreview">
+                                {$imagePreview2}
+                            </div>
+                            <input type="file" onChange={(e) => this.ImageChange(e, 2)} />
+                            {/* <p>{imagePreviewUrl2}</p> */}
+                        </div>
+                        <br />
+                    </div>
+
+                    <div className=" col-md-3">
+                        <div className="previewComponent">
+                            <div className="imgPreview">
+                                {$imagePreview3}
+                            </div>
+                            <input type="file" onChange={(e) => this.ImageChange(e, 3)} />
+                            {/* <p>{imagePreviewUrl3}</p> */}
+                        </div>
+                        <br />
+                    </div>
+
+                    <div className=" col-md-3">
+                        <div className="previewComponent">
+                            <div className="imgPreview">
+                                {$imagePreview4}
+                            </div>
+                            <input type="file" onChange={(e) => this.ImageChange(e, 4)} />
+                            {/* <p>{imagePreviewUrl4}</p> */}
+                        </div>
+                        <br />
+                    </div>
+
+                    <div>
+                        {this.errorMsg()}
+                    </div>
+
+                    <div className="container-login100-form-btn">
+                        <input type="submit" value="SignUp" className="login100-form-btn" />
+                    </div>
+
+
+
+
+                </form>
             </div>
         );
     }

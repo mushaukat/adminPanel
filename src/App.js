@@ -14,6 +14,7 @@ import DashBoardTemplate from './hostel-dashboard';
 import Facilities from './profile-setup/facilities'
 import RoomTypeSetup from './profile-setup/room-type-setup'
 import HostelPicturesSetup from './profile-setup/pictures'
+import ProfileSetup from './profile-setup/profile-setup'
 
 //import Roomtype from './profile-setup/room-type-setup'
 //import Profilepic from './profile-setup/profilepic'
@@ -27,7 +28,7 @@ class App extends Component {
           <Route exact path="/dashboard" component={DashBoardTemplate} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/recovery" component={Recovery} />
-          <Route exact path="/ProfileSetup" component={RoomTypeSetup} />
+          <Route exact path="/ProfileSetup" component={ProfileSetup} />
           {/* <Route exact path="/facilities" component={Facilities} />
         <Route exact path="/roomtype" component={Roomtype} />
         <Route exact path="/profilepic" component={Profilepic} /> */}
