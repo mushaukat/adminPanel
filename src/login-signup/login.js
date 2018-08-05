@@ -88,6 +88,7 @@ class LogIn extends Component {
       <div style={style1}>
         <div className="limiter" style={style1}>
           <div className="container-login100">
+        <center>
             <div className="wrap-login100">
               <form onSubmit={this.submitData}>
                 <div className="login100-form validate-form">
@@ -143,6 +144,7 @@ class LogIn extends Component {
               </form>
 
             </div>
+                    </center>
           </div>
         </div>
       </div>

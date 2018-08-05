@@ -85,6 +85,7 @@ class SignUp extends Component {
       <div>
         <div className="limiter">
           <div className="container-login100">
+           <center>
             <div className="wrap-signup">
 
               <form onSubmit={this.submitData}>
@@ -182,6 +183,7 @@ class SignUp extends Component {
               </form>
 
             </div>
+   </center>
           </div>
         </div>
       </div>

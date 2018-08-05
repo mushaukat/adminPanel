@@ -99,14 +99,29 @@ class GeneralInfo extends Component {
                        General info
                     </h1>
             </center>
-
+            
                     <div className="margint60  text-paragraph">
                         <label>Hostel Type :</label>
                         
-                        <label className="leftmargin30"><input type="radio" name="hostelType" value="Boys" onChange={this.onChange} required />Boys</label>
-                        <label className="leftmargin30"><input type="radio" name="hostelType" value="Girls" onChange={this.onChange} />Girls</label>
+        
                     </div>
 
+
+            <section>
+            <div>
+                <input type="radio" id="control_01"  name="hostelType" value="Boys" onChange={this.onChange} required/>
+                  <label className="label1" for="control_01">
+                    <h2>Boys</h2>
+                    </label>
+            
+            </div>
+            <div>
+                <input type="radio" id="control_02" name="hostelType" value="Girls" onChange={this.onChange} required/>
+                <label className="label1"  for="control_02">
+                <h2>Girls</h2>
+                </label>
+            </div>
+            </section>
                     <div className="row margint20">
                         <div className="col-xs-6 col-md-6">
 
