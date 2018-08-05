@@ -168,7 +168,7 @@ class RoomTypeSetup extends Component {
                     Step 3 of 4: Room Type Details
                             </h1>
 
-                <div className=" form-group margint60 text-paragraph">
+                <div className=" form-group margint20 text-paragraph">
                     <label >Hostel Admission Fee:</label>
                     <input type="number" name="addmissionFee" onChange={this.onChangeBasePrice} className="form-control text-paragraph" />
                 </div>

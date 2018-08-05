@@ -80,11 +80,9 @@ class ProfileSetup extends Component {
         return (
             <div className="limiter">
                 <div className="container-login100">
-                    <div className="wrap-signup">
+                    <div className="wrap-setup">
                         <div className="marginauto">
-
-
-
+                    <div className="wrap-breadcrumb">
                             <div className="breadcrumb-body">
                                 <div className="breadcrumb">
                                     <a className="breadcrumb__step breadcrumb__step--active" onClick={this.setGeneralInfo} >General Information</a>
@@ -93,19 +91,18 @@ class ProfileSetup extends Component {
                                     <a className="breadcrumb__step" onClick={this.setPictures} >Hostel Pictures</a>
                                 </div>
                             </div>
-
-                            <div>
+                        </div>
+                            <div class="wrap-div">
                                 <form onSubmit={this.submitData}>
                                     {this.showSetupScreen()}
 
 
-                                    <div className="container-login100-form-btn">
-                                        <input type="submit" value="Next Step" className="login100-form-btn" />
-                                    </div>
+                                   
                                 </form>
                             </div>
-
-
+                            <div className="container-login100-form-btn">
+                                        <input type="submit" value="Next Step" className="login100-form-btn" />
+                            </div>
                         </div>
                     </div>
                 </div>
