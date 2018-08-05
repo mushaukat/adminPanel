@@ -101,7 +101,7 @@ class ProfileSetup extends Component {
                                 </form>
                             </div>
                             <div className="container-login100-form-btn">
-                                        <input type="submit" value="Next Step" className="login100-form-btn" />
+                                    <input type="submit" value="Next Step" className="login100-form-btn" />
                             </div>
                         </div>
                     </div>

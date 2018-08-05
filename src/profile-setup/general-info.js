@@ -94,19 +94,17 @@ class GeneralInfo extends Component {
             <div className="marginauto">
 
                
+                    <center>
                     <h1>
-                        Step 1 of 4: General info
+                       General info
                     </h1>
-
+            </center>
 
                     <div className="margint60  text-paragraph">
                         <label>Hostel Type :</label>
-                        <div className="radio text-paragraph">
-                            <label><input type="radio" name="hostelType" value="Boys" onChange={this.onChange} required />Boys</label>
-                        </div>
-                        <div className="radio text-paragraph">
-                            <label><input type="radio" className="radio text-paragraph" name="hostelType" value="Girls" onChange={this.onChange} />Girls</label>
-                        </div>
+                        
+                        <label className="leftmargin30"><input type="radio" name="hostelType" value="Boys" onChange={this.onChange} required />Boys</label>
+                        <label className="leftmargin30"><input type="radio" name="hostelType" value="Girls" onChange={this.onChange} />Girls</label>
                     </div>
 
                     <div className="row margint20">
