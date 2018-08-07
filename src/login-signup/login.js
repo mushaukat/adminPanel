@@ -85,6 +85,7 @@ class LogIn extends Component {
     }
 
     return (
+
       <div style={style1}>
         <div className="limiter" style={style1}>
           <div className="container-login100">
@@ -147,6 +148,7 @@ class LogIn extends Component {
                     </center>
           </div>
         </div>
+        
       </div>
     );
   }

@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import '../stylesheets/hostel-profile.css'
+import SideNav from '../Navigation/side-nav';
+import TopMenu from '../Navigation/top-menu';
+import '../stylesheets/side-nav.css';
+import '../stylesheets/top-menu.css';
+
 
 
 class ImageUpload extends React.Component {
@@ -41,7 +47,19 @@ class ImageUpload extends React.Component {
       }
   
       return (
-        <div className="previewComponent">
+        <div>
+        <div id="left-div">
+        <SideNav/>
+        </div>
+
+        <div id="right-div">
+
+            <div id="top-menu">
+            <TopMenu/>
+            </div>
+
+            <div id="menu2">
+            <div className="previewComponent">
           <form onSubmit={(e)=>this._handleSubmit(e)}>
             <input className="fileInput" 
               type="file" 
@@ -56,6 +74,13 @@ class ImageUpload extends React.Component {
           </div>
           <p>{imagePreviewUrl}</p>
         </div>
+            </div>
+
+        </div>
+
+
+    </div>
+        
       )
     }
   }

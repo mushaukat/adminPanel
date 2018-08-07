@@ -172,12 +172,6 @@ class GeneralInfo extends Component {
 
         return (
             <div className="marginauto ">
-
-                <h1 className="">
-                    Step 4 of 4: Upload Profile Picture
-                            </h1>
-                <br /><br />
-
                 <h3>Hostel Profile Picture:</h3>
 
                 <div className="previewComponent">

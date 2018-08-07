@@ -32,6 +32,9 @@ class RoomTypeSetup extends Component {
 
     componentDidMount() {
 
+        document.getElementById("b3").className += "active"
+        document.getElementById("back-btn").style.display = "block";
+
         axios.post('/getAllRoomTypes')
             .then(
                 response => {
@@ -43,10 +46,48 @@ class RoomTypeSetup extends Component {
                             errorMsg: response.data.Message + " Try Again",
                         })
                     } else {
-                        console.log(response.data.Data);
                         this.setState({ roomTypes: response.data.Data, })
                     }
                 })
+
+
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        console.log(userData);
+        const data = {
+            block_id: userData.block_id,
+            hostel_id: userData.hostel_id,
+        };
+
+        axios.post('/getHostelRoomTypes', data)
+            .then(
+                response => {
+                    if (response.data.Error) {
+                        console.log(response.data);
+                        console.log(response.data.Error);
+
+                        this.setState({
+                            Error: true,
+                            errorMsg: response.data.Message + " Try Again",
+                        })
+                    } else {
+                        const data = response.data.Data
+                        console.log(data)
+                        data.map((data, index) => {
+                            var room = this.state.addedRoom;
+                            room.push(parseInt(data.seaters));
+                            this.setState({ addedRoom: room })
+                            this.setState({
+                                seaters: data.seaters,
+                                priceWithMess: data.price_with_mess,
+                                priceWithOutMess: data.base_price,
+                            })
+                            this.appendRoom(data.seaters);
+                        })
+                        this.setState({ setRoom: true });
+                        document.getElementById('myTable').style.display = 'block';
+                    }
+                })
+
     }
 
 
@@ -89,9 +130,7 @@ class RoomTypeSetup extends Component {
                         var room = this.state.addedRoom;
                         room.push(parseInt(this.state.seaters));
                         this.setState({ addedRoom: room })
-                        console.log(this.state.addedRoom)
-                        this.appendRoom();
-
+                        this.appendRoom(this.state.seaters);
                         this.setState({ setRoom: true });
                         document.getElementById('myTable').style.display = 'block';
                     }
@@ -99,13 +138,47 @@ class RoomTypeSetup extends Component {
     }
 
 
-    appendRoom() {
+    deleteRow(r,seaters){
+       // e.preventDefault();
+        const userData = JSON.parse(localStorage.getItem('userData'));
+
+        document.getElementById(seaters).remove();
+        //document.getElementById("myTable").deleteRow(i);
+        console.log("sss "+ seaters)
+
+        const data = {
+            block_id: userData.block_id,
+            hostel_id: userData.hostel_id,
+            seaters: seaters
+        }
+
+        axios.post('/DeleteHostelRoomType', data)
+            .then(
+
+                response => {
+                    if (response.data.Error) {
+                        console.log(response.data);
+
+                        this.setState({
+                            Error: true,
+                            errorMsg: response.data.Message
+                        })
+
+                    } else {
+                        console.log(response.data);
+                    }
+                })
+    }
+
+
+    appendRoom(seaters) {
+        
         this.displayRoom.push(
-            <tr >
+            <tr id={seaters}>
                 <td >{this.state.seaters}</td>
                 <td >{this.state.priceWithOutMess}</td>
                 <td >{this.state.priceWithMess}</td>
-                <td ><center><input class="alignCenter" type="image" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI4IDI4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyOCAyODsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjI0cHgiPgo8Zz4KCTxwYXRoIGQ9Ik0wLDI0bDQsNGwxMC0xMGwxMCwxMGw0LTRMMTgsMTRMMjgsNGwtNC00TDE0LDEwTDQsMEwwLDRsMTAsMTBMMCwyNHoiIGZpbGw9IiNEODAwMjciLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />
+                <td ><center><input class="alignCenter" id={this.state.seaters} value={this.state.seaters} onClick={(e)=>this.deleteRow(e,seaters)} type="image" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI4IDI4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyOCAyODsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjI0cHgiPgo8Zz4KCTxwYXRoIGQ9Ik0wLDI0bDQsNGwxMC0xMGwxMCwxMGw0LTRMMTgsMTRMMjgsNGwtNC00TDE0LDEwTDQsMEwwLDRsMTAsMTBMMCwyNHoiIGZpbGw9IiNEODAwMjciLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />
                 </center></td>
             </tr>
         );
@@ -164,9 +237,6 @@ class RoomTypeSetup extends Component {
         return (
 
             <div className="marginauto ">
-                <h1 className="">
-                    Step 3 of 4: Room Type Details
-                            </h1>
 
                 <div className=" form-group margint20 text-paragraph">
                     <label >Hostel Admission Fee:</label>

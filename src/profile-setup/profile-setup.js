@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../stylesheets/breadcrumb.css'
+import '../stylesheets/breadcrumb.css';
 import '../stylesheets/profile-setup.css'
 import GeneralInfo from './general-info'
 import Facilities from './facilities'
@@ -14,94 +14,75 @@ class ProfileSetup extends Component {
             facilities: false,
             roomTypes: false,
             pictures: false,
+            screenNumber: 1,
 
         };
-
+        this.setNextScreen=this.setNextScreen.bind(this)
+        this.setBackScreen=this.setBackScreen.bind(this)
+        this.child = React.createRef();
     }
+
 
     showSetupScreen() {
-        console.log("inside" + this.state.facilities);
-        if (this.state.generalInfo) {
-            return <GeneralInfo />
+        if (this.state.screenNumber===1) {
+            return <GeneralInfo ref={this.child} />
         }
-        if (this.state.facilities) {
-            return <Facilities />
+        if (this.state.screenNumber===2) {
+            return <Facilities ref={this.child}/>
         }
-        if (this.state.roomTypes) {
-            return <RoomTypeSetup />
+        if (this.state.screenNumber===3) {
+            return <RoomTypeSetup ref={this.child}/>
         }
-        if (this.state.pictures) {
-            return <HostelPicturesSetup />
+        if (this.state.screenNumber===4) {
+            return <HostelPicturesSetup ref={this.child}/>
+        }
+        if (this.state.screenNumber===4) {
+            return 
         }
     }
 
-
-    setGeneralInfo = () => {
-        this.setState({ generalInfo: true, facilities: false, roomTypes: false, pictures: false });
-        ;
+    onClick = () => {
+        var valid=this.child.current.validate();
+        this.child.current.submitData();
+        this.setNextScreen();
+      };
+    setNextScreen(){
+        console.log(this.state.screenNumber)
+        this.setState({screenNumber: this.state.screenNumber+1 })
     }
 
-    setFacilities = () => {
-        this.setState({ generalInfo: false, facilities: true, roomTypes: false, pictures: false });
+    setBackScreen(){
+        console.log(this.state.screenNumber)
+        this.setState({screenNumber: this.state.screenNumber-1 })
     }
-
-    setRoomTypes = () => {
-        this.setState({ generalInfo: false, facilities: false, roomTypes: true, pictures: false });
-    }
-
-    setPictures = () => {
-        this.setState({ generalInfo: false, facilities: false, roomTypes: false, pictures: true });
-    }
-
-
 
     render() {
-        var $ = (selector) => {
-            return document.querySelector(selector);
-        };
-        var $$ = function (selector) {
-            return document.querySelectorAll(selector);
-        };
-        var breadcrumb = $('.breadcrumb');
-        var breadcrumbSteps = $$('.breadcrumb__step');
-        [].forEach.call(breadcrumbSteps, function (item, index, array) {
-            item.onclick = function () {
-                for (var i = 0, l = array.length; i < l; i++) {
-                    if (index >= i) {
-                        array[i].classList.add('breadcrumb__step--active');
-                    }
-                    else {
-                        array[i].classList.remove('breadcrumb__step--active');
-                    }
-                }
-            };
-        });
 
         return (
             <div className="limiter">
                 <div className="container-login100">
                     <div className="wrap-setup">
                         <div className="marginauto">
-                    <div className="wrap-breadcrumb">
-                            <div className="breadcrumb-body">
-                                <div className="breadcrumb">
-                                    <a className="breadcrumb__step breadcrumb__step--active" onClick={this.setGeneralInfo} >General Information</a>
-                                    <a className="breadcrumb__step" onClick={this.setFacilities}>Facilities</a>
-                                    <a className="breadcrumb__step" onClick={this.setRoomTypes} >Charges Details</a>
-                                    <a className="breadcrumb__step" onClick={this.setPictures} >Hostel Pictures</a>
-                                </div>
+                            <div class="breadcrumb flat">
+                                <a id="b1">General Information</a>
+                                <a id="b2" >Facilities</a>
+                                <a id="b3">Charges Details</a>
+                                <a id="b4">Hostel Pictures</a>
                             </div>
-                        </div>
-                            <div class="wrap-div">
-                                <form onSubmit={this.submitData}>
+                           
+                            <div className="wrap-div">
+                                <form onSubmit={this.submitData} id="form1">
+
                                     {this.showSetupScreen()}
 
+                                    <div className="container-login100-form-btn">
+                                        <input type="button" id="back-btn" onClick={this.setBackScreen} value="Back" className="login100-form-btn " />
+                                    </div>
 
-                                   
+                                    <div className="container-login100-form-btn">
+                                        <input type="button" onClick={this.onClick} value="Next Step" className="login100-form-btn " />
+                                    </div>
                                 </form>
-                            </div>
-                            <div className="container-login100-form-btn">
-                                    <input type="submit" value="Next Step" className="login100-form-btn" />
                             </div>
                         </div>
                     </div>

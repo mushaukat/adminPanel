@@ -20,7 +20,7 @@ class DashBoardTemplate extends Component {
                         </div>
 
                         <div id="menu2">
-                            
+                            <h1>basjhfkj</h1>
                         </div>
 
                     </div>

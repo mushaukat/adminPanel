@@ -15,6 +15,9 @@ import Facilities from './profile-setup/facilities'
 import RoomTypeSetup from './profile-setup/room-type-setup'
 import HostelPicturesSetup from './profile-setup/pictures'
 import ProfileSetup from './profile-setup/profile-setup'
+import HostelProfile from './hostel_profile/hostel-profile'
+import ImageUpload from './hostel_profile/profile-pic'
+import RoomType from './hostel_profile/room-type'
 
 //import Roomtype from './profile-setup/room-type-setup'
 //import Profilepic from './profile-setup/profilepic'
@@ -29,6 +32,9 @@ class App extends Component {
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/recovery" component={Recovery} />
           <Route exact path="/ProfileSetup" component={ProfileSetup} />
+          <Route exact path="/profile" component={HostelProfile} />
+          <Route exact path="/picture" component={ImageUpload} />
+          <Route exact path="/rooms" component={RoomType} />
           {/* <Route exact path="/facilities" component={Facilities} />
         <Route exact path="/roomtype" component={Roomtype} />
         <Route exact path="/profilepic" component={Profilepic} /> */}

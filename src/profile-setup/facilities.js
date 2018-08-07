@@ -10,6 +10,7 @@ class Facilities extends Component {
     this.state = {
       facilities: [],
       selected_facilities: [],
+      blockFacilities: [],
       redirect: false,
       Error: false,
       errorMsg: '',
@@ -29,6 +30,9 @@ class Facilities extends Component {
 
   componentDidMount() {
 
+    document.getElementById("b2").className+= "active"
+    document.getElementById("back-btn").style.display = "block";
+
     axios.post('/getFacilities')
       .then(
         response => {
@@ -43,28 +47,19 @@ class Facilities extends Component {
           } else {
             console.log(response.data.Data);
             this.setState({ facilities: response.data.Data, })
-            console.log(this.state.facilities[0].facility_name)
           }
         })
-  }
 
 
-  submitData = (e) => {
-    e.preventDefault();
     const userData = JSON.parse(localStorage.getItem('userData'));
-
+    console.log(userData);
     const data = {
       block_id: userData.block_id,
       hostel_id: userData.hostel_id,
-      hostel_facilities: this.state.selected_facilities,
-
     };
 
-
-    console.log(data);
-    axios.post('/insertBlockFacilities', data)
+    axios.post('/getBlockFacilities', data)
       .then(
-
         response => {
           if (response.data.Error) {
             console.log(response.data);
@@ -72,89 +67,130 @@ class Facilities extends Component {
 
             this.setState({
               Error: true,
-              errorMsg: response.data.Message
+              errorMsg: response.data.Message + " Try Again",
             })
-
           } else {
-            console.log(response.data);
-            console.log(response.data.Error);
-            this.setState({
-              redirect: true
-            })
-
+            console.log(response.data.Data)
+            this.setState({ blockFacilities: response.data.Data, })
           }
         })
 
+  }
 
+
+  submitData = (e) => {
+    console.log("fac");
   }
 
 
 
-  onChange(event) {
+  onChange(event,facility_id) {
 
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+
+    // const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = parseInt(target.name);
+
+    const userData = JSON.parse(localStorage.getItem('userData'));
+
+    const data = {
+      block_id: userData.block_id,
+      hostel_id: userData.hostel_id,
+      facility_id: name
+    };
+
+    console.log("State "+target.checked)
     if (target.checked) {
-      this.setState({
-        selected_facilities: [...this.state.selected_facilities, name]
-      });
+
+      axios.post('/insertBlockFacilities', data)
+        .then(
+          response => {
+            if (response.data.Error) {
+              console.log(response.data);
+              console.log(response.data.Error);
+
+              this.setState({
+                Error: true,
+                errorMsg: response.data.Message + " Try Again",
+              })
+            } else {
+              console.log(response.data);
+              this.refs[facility_id].checked = true;
+            }
+          })
+          
     }
     else {
-      var array = this.state.selected_facilities
-      var index = array.indexOf(name);
-      if (index > -1) {
-        array.splice(index, 1);
-      }
-      this.setState({
-        selected_facilities: array
-      });
-    }
 
-    console.log(this.state.selected_facilities)
+      axios.post('/removeBlockFacility', data)
+        .then(
+          response => {
+            if (response.data.Error) {
+              console.log(response.data);
+              console.log(response.data.Error);
+
+              this.setState({
+                Error: true,
+                errorMsg: response.data.Message + " Try Again",
+              })
+              
+            } else {
+              console.log(response.data)
+              this.refs[facility_id].checked = false;
+            }
+          })
+    }
   }
+    isChecked(facility_id) {
+      console.log("inside1");
+      var id = facility_id
+      var checked = false
+      this.state.blockFacilities.map((facilities) => {
+        if (id === facilities.facility_id) {
+          checked = true
+        }
+      }
+      )
+      return checked;
 
-
-  render() {
-    if (this.state.redirect) {
-      return <Redirect to="/" />
     }
+  
 
-    const facilities = this.state.facilities.map((facility, index) => {
+    render() {
+      if (this.state.redirect) {
+        return <Redirect to="/" />
+      }
+      const facilities = this.state.facilities.map((facility, index) => {
+
+        return (
+
+          <div key={index}>
+            <div className="checkbox  text-paragraph">
+              <label><input type="checkbox" name={facility.facility_id} ref={facility.facility_id} checked={this.isChecked(facility.facility_id)} onChange={(e)=>{this.onChange(e,facility.facility_id)}}></input>{facility.facility_name}</label>
+            </div>
+          </div>
+        )
+      }
+
+      );
+
+
 
       return (
 
-        <div key={index}>
-          <div className="checkbox  text-paragraph">
-            <label><input type="checkbox" name={facility.facility_id} onChange={this.onChange}></input>{facility.facility_name}</label>
-          </div>
-        </div>
-      )
-    }
-
-    );
-
-
-
-    return (
-
-      <div>
-
-        <h1 className="">
-          Step 2 of 4: Facilities
-                    </h1>
-        <h3 className="margint60">Tick Faclities which are available in Hostels</h3>
-        {facilities}
-
-
         <div>
-          {this.errorMsg()}
+
+          <h3 className="margint60">Tick Faclities which are available in Hostels</h3>
+          {facilities}
+
+          <div>
+            {this.errorMsg()}
+          </div>
+
         </div>
 
-      </div>
-
-    );
+      );
+    }
   }
-}
 
-export default Facilities;
+  export default Facilities;
