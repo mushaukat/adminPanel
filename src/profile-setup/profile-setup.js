@@ -42,7 +42,6 @@ class ProfileSetup extends Component {
     }
 
     onClick = () => {
-        var valid=this.child.current.validate();
         this.child.current.submitData();
         this.setNextScreen();
       };

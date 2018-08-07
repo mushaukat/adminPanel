@@ -231,6 +231,10 @@ class RoomTypeSetup extends Component {
     changeState = () => {
         this.setState({ setRoom: true });
     }
+    submitData()
+        {
+            
+        }
 
 
     render() {

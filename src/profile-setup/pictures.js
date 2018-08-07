@@ -21,6 +21,42 @@ class GeneralInfo extends Component {
             file: ''
         };
     }
+    
+     componentDidMount() {
+
+          const userData = JSON.parse(localStorage.getItem('userData'));
+    console.log(userData);
+    const data = {
+      block_id: userData.block_id,
+      hostel_id: userData.hostel_id,
+    };
+
+    axios.get('/blockProfileImage/'+data.block_id+'/'+data.hostel_id)
+      .then(
+        response => {
+              this.setState({ dp: response.data });
+            
+        });
+         
+    axios.get('/getAllGeneralImages/'+data.block_id+'/'+data.hostel_id)
+      .then(
+        response => {
+            for(var i = 0; i < response.data.Data.length; i++) {
+                    var obj = response.data.Data[i];
+
+                    console.log(obj.image);
+                    var count=i;
+                axios.get('/blockGeneralImage/'+obj.image+'/'+data.block_id+'/'+data.hostel_id)
+                        .then(
+                    response => {
+                        console.log(count);
+                    });
+                }
+    
+            
+        });
+         
+  }
 
     errorMsg = () => {
         if (this.state.Error) {
@@ -33,11 +69,15 @@ class GeneralInfo extends Component {
         e.preventDefault();
         const userData = JSON.parse(localStorage.getItem('userData'));
 
-        const data = {
-            block_id: userData.block_id,
-            hostel_id: userData.hostel_id,
-            image: this.state.file,
-        };
+        var formData = new FormData();
+        formData.append("image", this.state.file);
+        formData.append("block_id", userData.block_id);
+        formData.append("hostel_id", userData.hostel_id);
+//        const data = {
+//            block_id: userData.block_id,
+//            hostel_id: userData.hostel_id,
+//            image: this.state.file,
+//        };
         console.log(this.state.dp)
         if (url == 'dp') {
             this.setState({ address: '/uploadBlockProfileImage' })
@@ -47,8 +87,8 @@ class GeneralInfo extends Component {
         }
 
 
-        console.log(data);
-        axios.post(this.state.address, data, { headers: { 'Content-Type': 'multipart/form-data', } })
+        console.log(formData);
+        axios.post(this.state.address, formData, { headers: {  } })
             .then(
 
                 response => {
