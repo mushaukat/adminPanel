@@ -14,7 +14,8 @@ class Facilities extends Component {
       redirect: false,
       Error: false,
       errorMsg: '',
-
+      facilityCount: 0,
+      facilityError: '',
     };
     this.onChange = this.onChange.bind(this);
 
@@ -30,7 +31,7 @@ class Facilities extends Component {
 
   componentDidMount() {
 
-    document.getElementById("b2").className+= "active"
+    document.getElementById("b2").className += "active"
     document.getElementById("back-btn").style.display = "block";
 
     axios.post('/getFacilities')
@@ -70,7 +71,10 @@ class Facilities extends Component {
               errorMsg: response.data.Message + " Try Again",
             })
           } else {
-            console.log(response.data.Data)
+            console.log("okkkkk "+response.data.Data)
+            for (var i = 1; i <= response.data.Data.length; i++) {
+              this.setState({ facilityCount: this.state.facilityCount + 1 })
+            }
             this.setState({ blockFacilities: response.data.Data, })
           }
         })
@@ -79,12 +83,21 @@ class Facilities extends Component {
 
 
   submitData = (e) => {
-    console.log("fac");
+    console.log("count" + this.state.facilityCount);
+    if (this.state.facilityCount < 3) {
+      this.setState({ facilityError: "Please Select atleat 3 facilities" })
+      return false
+    }
+    else {
+      this.setState({ facilityError: "" })
+      return true
+    }
+
   }
 
 
 
-  onChange(event,facility_id) {
+  onChange(event, facility_id) {
 
     const target = event.target;
 
@@ -99,7 +112,7 @@ class Facilities extends Component {
       facility_id: name
     };
 
-    console.log("State "+target.checked)
+    console.log("State " + target.checked)
     if (target.checked) {
 
       axios.post('/insertBlockFacilities', data)
@@ -115,10 +128,12 @@ class Facilities extends Component {
               })
             } else {
               console.log(response.data);
+              this.setState({ facilityCount: this.state.facilityCount + 1 })
               this.refs[facility_id].checked = true;
+              
             }
           })
-          
+
     }
     else {
 
@@ -133,64 +148,69 @@ class Facilities extends Component {
                 Error: true,
                 errorMsg: response.data.Message + " Try Again",
               })
-              
+
             } else {
               console.log(response.data)
+              this.setState({ facilityCount: this.state.facilityCount - 1 })
               this.refs[facility_id].checked = false;
+              
             }
           })
     }
   }
-    isChecked(facility_id) {
-      console.log("inside1");
-      var id = facility_id
-      var checked = false
-      this.state.blockFacilities.map((facilities) => {
-        if (id === facilities.facility_id) {
-          checked = true
-        }
+  isChecked(facility_id) {
+    console.log("inside11 id checked");
+    var id = facility_id
+    var checked = false
+    this.state.blockFacilities.map((facilities) => {
+      if (id === facilities.facility_id) {
+        checked = true
       }
-      )
-      return checked;
-
     }
-  
+    )
+    return checked;
 
-    render() {
-      if (this.state.redirect) {
-        return <Redirect to="/" />
-      }
-      const facilities = this.state.facilities.map((facility, index) => {
-
-        return (
-
-          <div key={index}>
-            <div className="checkbox  text-paragraph">
-              <label><input type="checkbox" name={facility.facility_id} ref={facility.facility_id} checked={this.isChecked(facility.facility_id)} onChange={(e)=>{this.onChange(e,facility.facility_id)}}></input>{facility.facility_name}</label>
-            </div>
-          </div>
-        )
-      }
-
-      );
+  }
 
 
+  render() {
+    if (this.state.redirect) {
+      return <Redirect to="/" />
+    }
+    const facilities = this.state.facilities.map((facility, index) => {
 
       return (
 
-        <div>
-
-          <h3 className="margint60">Tick Faclities which are available in Hostels</h3>
-          {facilities}
-
-          <div>
-            {this.errorMsg()}
+        <div key={index}>
+          <div className="checkbox  text-paragraph">
+            <label><input type="checkbox" name={facility.facility_id} ref={facility.facility_id} checked={this.isChecked(facility.facility_id)} onChange={(e) => { this.onChange(e, facility.facility_id) }}></input>{facility.facility_name}</label>
           </div>
-
         </div>
-
-      );
+      )
     }
-  }
 
-  export default Facilities;
+    );
+
+
+
+    return (
+
+      <div>
+
+        <h3 className="margint60">Tick Facilities which are available in Hostels</h3>
+        <p>Please Select atleast 3 facilities</p>
+
+        {facilities}
+
+        <div>
+          {this.errorMsg()}
+        </div>
+        <br /> <b> <p className="error-message">{this.state.facilityError} </p> </b>
+
+      </div>
+
+    );
+  }
+}
+
+export default Facilities;

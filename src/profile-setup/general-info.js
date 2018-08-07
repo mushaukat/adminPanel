@@ -19,6 +19,8 @@ class GeneralInfo extends Component {
             Error: false,
             errorMsg: '',
             selectedOption: '',
+            hostelTypeError: '',
+            mobileNumberError:'',
 
         };
         this.onChange = this.onChange.bind(this);
@@ -92,11 +94,31 @@ class GeneralInfo extends Component {
     }
     submitData = (e) => {
 
-        // var f=this.validateForm();
-        // if (!f){
-        //     alert("Please Select Hostel Type")
-        //     }else{
-        const userData = JSON.parse(localStorage.getItem('userData'));
+        var Boys= document.getElementById("control_01").checked
+        var Girls = document.getElementById("control_02").checked
+        var mobileNo = document.getElementById("hostelMobile").value
+        var complete=true
+        if((Boys === true || Girls === true)){
+            this.setState({hostelTypeError: "" })
+        }
+        else{
+            complete=false;
+            this.setState({hostelTypeError: "Please Select Hostel Type" })
+           
+        }
+        if(!mobileNo){
+            complete=false;
+            this.setState({mobileNumberError: "Please Enter Hostel Mobile Number" }) 
+        }
+        else{
+            this.setState({mobileNumberError: "" }) 
+        }
+
+        if(complete=== false){
+            return false
+        }
+        else{
+            const userData = JSON.parse(localStorage.getItem('userData'));
                 const data = {
             block_id: userData.block_id,
             hostel_id: userData.hostel_id,
@@ -122,6 +144,7 @@ class GeneralInfo extends Component {
                             Error: true,
                             errorMsg: response.data.Message
                         })
+                        return false
 
                     } else {
                         console.log(response.data);
@@ -132,6 +155,15 @@ class GeneralInfo extends Component {
 
                     }
                 })
+                return true
+        }
+
+
+        // var f=this.validateForm();
+        // if (!f){
+        //     alert("Please Select Hostel Type")
+        //     }else{
+        
         
             
     }
@@ -149,7 +181,7 @@ class GeneralInfo extends Component {
             <div className="marginauto">
 
                 <div className="margint60  text-paragraph">
-                    <label>Hostel Type :</label>
+                    <label>Hostel Type :</label> <br/> <b> <p className="error-message">{this.state.hostelTypeError} </p> </b>
                 </div>
 
                 <section>
@@ -171,9 +203,9 @@ class GeneralInfo extends Component {
                     <div className="col-xs-6 col-md-6">
 
                         <div className="form-group text-paragraph">
-                            <label >Hostel Mobile :</label>
-                            <input type="tel" name="hostelMobile" value={this.state.hostelMobile} onChange={this.onChange} placeholder="Hostel Mobile #" className="form-control text-paragraph" required />
-
+                            <label >Hostel Mobile :</label>  
+                            <input type="tel" name="hostelMobile" id="hostelMobile" value={this.state.hostelMobile} onChange={this.onChange} placeholder="Hostel Mobile #" className="form-control text-paragraph" required />
+                            <br/> <b> <p className="error-message">{this.state.mobileNumberError} </p> </b>
                         </div>
                     </div>
                     <div className="col-xs-6 col-md-6">

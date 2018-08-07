@@ -42,8 +42,11 @@ class ProfileSetup extends Component {
     }
 
     onClick = () => {
-        this.child.current.submitData();
-        this.setNextScreen();
+        var complete= this.child.current.submitData();
+        console.log("comp "+complete)
+        if(complete===true){
+            this.setNextScreen();
+        }
       };
     setNextScreen(){
         console.log(this.state.screenNumber)

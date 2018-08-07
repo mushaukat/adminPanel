@@ -20,6 +20,8 @@ class RoomTypeSetup extends Component {
             priceWithMess: '',
             priceWithOutMess: '',
             append: false,
+            roomCount: 0,
+            roomError: '',
 
         };
         this.onChangeRoomPrice = this.onChangeRoomPrice.bind(this);
@@ -34,6 +36,38 @@ class RoomTypeSetup extends Component {
 
         document.getElementById("b3").className += "active"
         document.getElementById("back-btn").style.display = "block";
+
+        const userData = JSON.parse(localStorage.getItem('userData'));
+
+        const data1 = {
+            block_id: userData.block_id,
+            hostel_id: userData.hostel_id,
+        };
+
+        axios.post('/getBlockFees', data1)
+            .then(
+                response => {
+                    if (response.data.Error) {
+                        console.log(response.data);
+                        console.log(response.data.Error);
+
+                        this.setState({
+                            Error: true,
+                            errorMsg: response.data.Message + " Try Again",
+                        })
+                    } else {
+                        const data = response.data.Data[0]
+                        console.log(data)
+
+                        this.setState({
+                            addmissionFee: data.admission_fee,
+                            securityFee: data.security_fee,
+                        })
+
+                    }
+                })
+
+
 
         axios.post('/getAllRoomTypes')
             .then(
@@ -51,14 +85,12 @@ class RoomTypeSetup extends Component {
                 })
 
 
-        const userData = JSON.parse(localStorage.getItem('userData'));
-        console.log(userData);
-        const data = {
+        const data2 = {
             block_id: userData.block_id,
             hostel_id: userData.hostel_id,
         };
 
-        axios.post('/getHostelRoomTypes', data)
+        axios.post('/getHostelRoomTypes', data2)
             .then(
                 response => {
                     if (response.data.Error) {
@@ -75,7 +107,9 @@ class RoomTypeSetup extends Component {
                         data.map((data, index) => {
                             var room = this.state.addedRoom;
                             room.push(parseInt(data.seaters));
-                            this.setState({ addedRoom: room })
+                            console.log("before load "+this.state.roomCount)
+                            this.setState({ addedRoom: room, roomCount: this.state.roomCount + 1 })
+                            console.log("after load "+this.state.roomCount)
                             this.setState({
                                 seaters: data.seaters,
                                 priceWithMess: data.price_with_mess,
@@ -129,7 +163,9 @@ class RoomTypeSetup extends Component {
                         console.log(response.data);
                         var room = this.state.addedRoom;
                         room.push(parseInt(this.state.seaters));
-                        this.setState({ addedRoom: room })
+                        console.log("before add "+this.state.roomCount)
+                        this.setState({ roomCount: this.state.roomCount + 1 })
+                        console.log("after add "+this.state.roomCount)
                         this.appendRoom(this.state.seaters);
                         this.setState({ setRoom: true });
                         document.getElementById('myTable').style.display = 'block';
@@ -138,13 +174,13 @@ class RoomTypeSetup extends Component {
     }
 
 
-    deleteRow(r,seaters){
-       // e.preventDefault();
+    deleteRow(r, seaters) {
+        // e.preventDefault();
         const userData = JSON.parse(localStorage.getItem('userData'));
 
         document.getElementById(seaters).remove();
         //document.getElementById("myTable").deleteRow(i);
-        console.log("sss "+ seaters)
+        console.log("sss " + seaters)
 
         const data = {
             block_id: userData.block_id,
@@ -166,19 +202,22 @@ class RoomTypeSetup extends Component {
 
                     } else {
                         console.log(response.data);
+                        console.log("before remove "+this.state.roomCount)
+                        this.setState({ roomCount: this.state.roomCount - 1 })
+                        console.log("after remove "+this.state.roomCount)
                     }
                 })
     }
 
 
     appendRoom(seaters) {
-        
+
         this.displayRoom.push(
             <tr id={seaters}>
                 <td >{this.state.seaters}</td>
                 <td >{this.state.priceWithOutMess}</td>
                 <td >{this.state.priceWithMess}</td>
-                <td ><center><input class="alignCenter" id={this.state.seaters} value={this.state.seaters} onClick={(e)=>this.deleteRow(e,seaters)} type="image" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI4IDI4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyOCAyODsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjI0cHgiPgo8Zz4KCTxwYXRoIGQ9Ik0wLDI0bDQsNGwxMC0xMGwxMCwxMGw0LTRMMTgsMTRMMjgsNGwtNC00TDE0LDEwTDQsMEwwLDRsMTAsMTBMMCwyNHoiIGZpbGw9IiNEODAwMjciLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />
+                <td ><center><input class="alignCenter" id={this.state.seaters} value={this.state.seaters} onClick={(e) => this.deleteRow(e, seaters)} type="image" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI4IDI4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyOCAyODsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjI0cHgiPgo8Zz4KCTxwYXRoIGQ9Ik0wLDI0bDQsNGwxMC0xMGwxMCwxMGw0LTRMMTgsMTRMMjgsNGwtNC00TDE0LDEwTDQsMEwwLDRsMTAsMTBMMCwyNHoiIGZpbGw9IiNEODAwMjciLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />
                 </center></td>
             </tr>
         );
@@ -231,10 +270,48 @@ class RoomTypeSetup extends Component {
     changeState = () => {
         this.setState({ setRoom: true });
     }
-    submitData()
-        {
-            
+
+    submitData = () => {
+        console.log("count" + this.state.roomCount);
+        if (this.state.roomCount < 1) {
+            this.setState({ roomError: "Please Select Room Types" })
+            return false
         }
+        else {
+            this.setState({ roomError: "" })
+
+            const userData = JSON.parse(localStorage.getItem('userData'));
+            const data = {
+                block_id: userData.block_id,
+                hostel_id: userData.hostel_id,
+                admission_fee: this.state.addmissionFee,
+                security_fee: this.state.securityFee,
+            };
+
+
+            axios.post('/updateBlockFees', data)
+                .then(
+
+                    response => {
+                        if (response.data.Error) {
+                            console.log(response.data);
+                            console.log(response.data.Error);
+
+                            this.setState({
+                                Error: true,
+                                errorMsg: response.data.Message
+                            })
+                            return false
+
+                        } else {
+                            console.log(response.data);
+                            console.log(response.data.Error);
+
+                        }
+                    })
+            return true
+        }
+    }
 
 
     render() {
@@ -244,13 +321,13 @@ class RoomTypeSetup extends Component {
 
                 <div className=" form-group margint20 text-paragraph">
                     <label >Hostel Admission Fee:</label>
-                    <input type="number" name="addmissionFee" onChange={this.onChangeBasePrice} className="form-control text-paragraph" />
+                    <input type="number" name="addmissionFee" value={this.state.addmissionFee} onChange={this.onChangeBasePrice} className="form-control text-paragraph" />
                 </div>
                 <br />
 
                 <div className="form-group text-paragraph">
                     <label>Security Fee:</label>
-                    <input type="number" name="securityFee" onChange={this.onChangeBasePrice} className="form-control text-paragraph" />
+                    <input type="number" name="securityFee" value={this.state.securityFee} onChange={this.onChangeBasePrice} className="form-control text-paragraph" />
                 </div>
                 <br />
 
@@ -258,6 +335,7 @@ class RoomTypeSetup extends Component {
                     <div>
                         <label>Add Room Types</label>
                     </div>
+                    <br /> <b> <p className="error-message">{this.state.roomError} </p> </b>
 
 
                     {this.addRoom()}

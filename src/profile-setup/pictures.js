@@ -10,7 +10,8 @@ class GeneralInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dp: '',
+            dp2: null,
+            dp:'',
             pic1: '',
             pic2: '',
             pic3: '',
@@ -20,43 +21,42 @@ class GeneralInfo extends Component {
             address: '',
             file: ''
         };
+        
     }
-    
-     componentDidMount() {
 
-          const userData = JSON.parse(localStorage.getItem('userData'));
-    console.log(userData);
-    const data = {
-      block_id: userData.block_id,
-      hostel_id: userData.hostel_id,
-    };
+    componentDidMount() {
 
-    axios.get('/blockProfileImage/'+data.block_id+'/'+data.hostel_id)
-      .then(
-        response => {
-              this.setState({ dp: response.data });
-            
-        });
-         
-    axios.get('/getAllGeneralImages/'+data.block_id+'/'+data.hostel_id)
-      .then(
-        response => {
-            for(var i = 0; i < response.data.Data.length; i++) {
-                    var obj = response.data.Data[i];
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        console.log(userData);
+        const data = {
+            block_id: userData.block_id,
+            hostel_id: userData.hostel_id,
+        };
 
-                    console.log(obj.image);
-                    var count=i;
-                axios.get('/blockGeneralImage/'+obj.image+'/'+data.block_id+'/'+data.hostel_id)
-                        .then(
-                    response => {
-                        console.log(count);
-                    });
-                }
-    
-            
-        });
-         
-  }
+        var a = 'http://www.hostinn.pk:3300/api/blockProfileImage/' + data.block_id + '/' + data.hostel_id;
+        console.log(a)
+       
+        axios.get('/getAllGeneralImages/' + data.block_id + '/' + data.hostel_id)
+            .then(
+                response => {
+                    this.setState({
+                        dp: a
+                    })
+                    for (var i = 0; i < response.data.Data.length; i++) {
+                        var obj = response.data.Data[i];
+
+                        console.log("ok " + obj.image);
+                        this.setState({
+                            pic1: "http://www.hostinn.pk:3300/api/blockGeneralImage/" + obj.image + "/" + data.block_id + "/" + data.hostel_id
+                        })
+                        
+                        console.log("pic1"+this.state.dp);
+                    }
+
+
+                });
+
+    }
 
     errorMsg = () => {
         if (this.state.Error) {
@@ -73,12 +73,8 @@ class GeneralInfo extends Component {
         formData.append("image", this.state.file);
         formData.append("block_id", userData.block_id);
         formData.append("hostel_id", userData.hostel_id);
-//        const data = {
-//            block_id: userData.block_id,
-//            hostel_id: userData.hostel_id,
-//            image: this.state.file,
-//        };
-        console.log(this.state.dp)
+
+        console.log("okk" + this.state.dp)
         if (url == 'dp') {
             this.setState({ address: '/uploadBlockProfileImage' })
         }
@@ -88,7 +84,7 @@ class GeneralInfo extends Component {
 
 
         console.log(formData);
-        axios.post(this.state.address, formData, { headers: {  } })
+        axios.post(this.state.address, formData, { headers: {} })
             .then(
 
                 response => {
@@ -129,7 +125,7 @@ class GeneralInfo extends Component {
             if (count == 'dp') {
                 const pic = { file: file, imagePreviewUrlDp: reader.result }
                 this.setState({ dp: pic, });
-                console.log(pic)
+                console.log("b" + pic)
                 const url = "dp"
                 this.submitData(e, url)
             }
@@ -166,16 +162,18 @@ class GeneralInfo extends Component {
 
     render() {
 
-        let { imagePreviewUrlDp } = this.state.dp;
+        let  imagePreviewUrlDp  = this.state.dp;
+        console.log("1" + imagePreviewUrlDp)
         let $imagePreviewDp = null;
         if (imagePreviewUrlDp) {
+            console.log("2" + imagePreviewUrlDp)
             $imagePreviewDp = (<img src={imagePreviewUrlDp} />);
         } else {
             $imagePreviewDp = (<div className="previewText">Please select an Image for Preview</div>);
         }
 
 
-        let { imagePreviewUrl1 } = this.state.pic1;
+        let  imagePreviewUrl1  = this.state.pic1;
         let $imagePreview1 = null;
         if (imagePreviewUrl1) {
             $imagePreview1 = (<img src={imagePreviewUrl1} />);
@@ -183,7 +181,7 @@ class GeneralInfo extends Component {
             $imagePreview1 = (<div className="previewText">Please select an Image for Preview</div>);
         }
 
-        let { imagePreviewUrl2 } = this.state.pic2;
+        let  imagePreviewUrl2  = this.state.pic2;
         let $imagePreview2 = null;
         if (imagePreviewUrl2) {
             $imagePreview2 = (<img src={imagePreviewUrl2} />);
@@ -191,7 +189,7 @@ class GeneralInfo extends Component {
             $imagePreview2 = (<div className="previewText">Please select an Image for Preview</div>);
         }
 
-        let { imagePreviewUrl3 } = this.state.pic3;
+        let  imagePreviewUrl3  = this.state.pic3;
         let $imagePreview3 = null;
         if (imagePreviewUrl3) {
             $imagePreview3 = (<img src={imagePreviewUrl3} />);
@@ -199,7 +197,7 @@ class GeneralInfo extends Component {
             $imagePreview3 = (<div className="previewText">Please select an Image for Preview</div>);
         }
 
-        let { imagePreviewUrl4 } = this.state.pic4;
+        let  imagePreviewUrl4  = this.state.pic4;
         let $imagePreview4 = null;
         if (imagePreviewUrl4) {
             $imagePreview4 = (<img src={imagePreviewUrl4} />);
@@ -217,6 +215,7 @@ class GeneralInfo extends Component {
                 <div className="previewComponent">
                     <div className="imgPreview">
                         {$imagePreviewDp}
+
                     </div>
                     <input type="file" onChange={(e) => this.ImageChange(e, "dp")} />
                 </div>
