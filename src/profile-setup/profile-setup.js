@@ -63,27 +63,30 @@ class ProfileSetup extends Component {
         return (
             <div className="limiter">
                 <div className="container-login100">
-                    <div className="wrap-setup">
-                        <div className="marginauto">
-                            <div class="breadcrumb flat">
+             <div className="wrap-breadcrumb">
+            <div class="breadcrumb flat">
                                 <a id="b1">General Information</a>
                                 <a id="b2" >Facilities</a>
                                 <a id="b3">Charges Details</a>
                                 <a id="b4">Hostel Pictures</a>
                             </div>
-                           
+                           </div>
+                    <div className="wrap-setup">
+                        <div className="marginauto">
+                            
                             <div className="wrap-div">
                                 <form onSubmit={this.submitData} id="form1">
 
                                     {this.showSetupScreen()}
 
                                     <div className="container-login100-form-btn">
-                                        <input type="button" id="back-btn" onClick={this.setBackScreen} value="Back" className="login100-form-btn " />
+                                       
                                     </div>
 
                                     <div className="container-login100-form-btn">
                                         <input type="button" onClick={this.onClick} value="Next Step" className="login100-form-btn " />
-                                    </div>
+                                    <input type="button" id="back-btn" onClick={this.setBackScreen} value="Back" className="login100-form-btn-back" />
+                                            </div>
                                 </form>
                             </div>
                         </div>
