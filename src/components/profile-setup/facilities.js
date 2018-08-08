@@ -31,7 +31,7 @@ class Facilities extends Component {
 
   componentDidMount() {
 
-    document.getElementById("b2").className += "active"
+    document.getElementById("b2").className += " active "
     document.getElementById("back-btn").style.display = "block";
 
     axios.post('/getFacilities')
@@ -39,7 +39,6 @@ class Facilities extends Component {
         response => {
           if (response.data.Error) {
             console.log(response.data);
-            console.log(response.data.Error);
 
             this.setState({
               Error: true,
@@ -53,7 +52,6 @@ class Facilities extends Component {
 
 
     const userData = JSON.parse(localStorage.getItem('userData'));
-    console.log(userData);
     const data = {
       block_id: userData.block_id,
       hostel_id: userData.hostel_id,
@@ -64,18 +62,19 @@ class Facilities extends Component {
         response => {
           if (response.data.Error) {
             console.log(response.data);
-            console.log(response.data.Error);
 
-            this.setState({
-              Error: true,
-              errorMsg: response.data.Message + " Try Again",
-            })
-          } else {
-            console.log("okkkkk "+response.data.Data)
+          }
+          else {
+            console.log("okkkkk " + response.data.Data)
             for (var i = 1; i <= response.data.Data.length; i++) {
               this.setState({ facilityCount: this.state.facilityCount + 1 })
             }
             this.setState({ blockFacilities: response.data.Data, })
+            this.state.blockFacilities.map((facilities) => {
+              this.refs[facilities.facility_id].checked = true;
+            }
+            )
+
           }
         })
 
@@ -83,7 +82,6 @@ class Facilities extends Component {
 
 
   submitData = (e) => {
-    console.log("count" + this.state.facilityCount);
     if (this.state.facilityCount < 3) {
       this.setState({ facilityError: "Please Select atleat 3 facilities" })
       return false
@@ -100,19 +98,15 @@ class Facilities extends Component {
   onChange(event, facility_id) {
 
     const target = event.target;
-
-    // const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = parseInt(target.name);
 
     const userData = JSON.parse(localStorage.getItem('userData'));
-
     const data = {
       block_id: userData.block_id,
       hostel_id: userData.hostel_id,
       facility_id: name
     };
 
-    console.log("State " + target.checked)
     if (target.checked) {
 
       axios.post('/insertBlockFacilities', data)
@@ -120,7 +114,6 @@ class Facilities extends Component {
           response => {
             if (response.data.Error) {
               console.log(response.data);
-              console.log(response.data.Error);
 
               this.setState({
                 Error: true,
@@ -130,7 +123,7 @@ class Facilities extends Component {
               console.log(response.data);
               this.setState({ facilityCount: this.state.facilityCount + 1 })
               this.refs[facility_id].checked = true;
-              
+
             }
           })
 
@@ -142,7 +135,6 @@ class Facilities extends Component {
           response => {
             if (response.data.Error) {
               console.log(response.data);
-              console.log(response.data.Error);
 
               this.setState({
                 Error: true,
@@ -153,25 +145,11 @@ class Facilities extends Component {
               console.log(response.data)
               this.setState({ facilityCount: this.state.facilityCount - 1 })
               this.refs[facility_id].checked = false;
-              
+
             }
           })
     }
   }
-  isChecked(facility_id) {
-    console.log("inside11 id checked");
-    var id = facility_id
-    var checked = false
-    this.state.blockFacilities.map((facilities) => {
-      if (id === facilities.facility_id) {
-        checked = true
-      }
-    }
-    )
-    return checked;
-
-  }
-
 
   render() {
     if (this.state.redirect) {
@@ -183,7 +161,7 @@ class Facilities extends Component {
 
         <div key={index}>
           <div className="checkbox  text-paragraph">
-            <label><input type="checkbox" name={facility.facility_id} ref={facility.facility_id} checked={this.isChecked(facility.facility_id)} onChange={(e) => { this.onChange(e, facility.facility_id) }}></input>{facility.facility_name}</label>
+            <label><input type="checkbox" name={facility.facility_id} ref={facility.facility_id} onChange={(e) => { this.onChange(e, facility.facility_id) }}></input>{facility.facility_name}</label>
           </div>
         </div>
       )

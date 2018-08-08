@@ -5,13 +5,8 @@ import App from './App'
 import axios from 'axios';
 
 
-
-
 axios.defaults.baseURL="http://www.hostinn.pk:3300/api"
 
-
-//ReactDOM.render(<SideNav />, document.getElementById('left-div'));
-//ReactDOM.render(<TopMenu />, document.getElementById('top-menu'));
 ReactDOM.render(<App />,document.getElementById('main'))
 
 

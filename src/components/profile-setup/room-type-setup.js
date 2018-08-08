@@ -34,7 +34,7 @@ class RoomTypeSetup extends Component {
 
     componentDidMount() {
 
-        document.getElementById("b3").className += "active"
+        document.getElementById("b3").className += " active "
         document.getElementById("back-btn").style.display = "block";
 
         const userData = JSON.parse(localStorage.getItem('userData'));
@@ -49,24 +49,29 @@ class RoomTypeSetup extends Component {
                 response => {
                     if (response.data.Error) {
                         console.log(response.data);
-                        console.log(response.data.Error);
 
                         this.setState({
                             Error: true,
                             errorMsg: response.data.Message + " Try Again",
                         })
-                    } else {
+                    }
+                    else {
                         const data = response.data.Data[0]
                         console.log(data)
-
-                        this.setState({
-                            addmissionFee: data.admission_fee,
-                            securityFee: data.security_fee,
-                        })
-
+                        if (data.admission_fee === 0) {
+                            this.setState({ addmissionFee: '', })
+                        }
+                        else if (data.addmissionFee === 0) {
+                            this.setState({ securityFee: '', })
+                        }
+                        else {
+                            this.setState({
+                                addmissionFee: data.admission_fee,
+                                securityFee: data.security_fee,
+                            })
+                        }
                     }
                 })
-
 
 
         axios.post('/getAllRoomTypes')
@@ -95,21 +100,19 @@ class RoomTypeSetup extends Component {
                 response => {
                     if (response.data.Error) {
                         console.log(response.data);
-                        console.log(response.data.Error);
 
                         this.setState({
                             Error: true,
                             errorMsg: response.data.Message + " Try Again",
                         })
-                    } else {
+                    }
+                    else {
                         const data = response.data.Data
                         console.log(data)
                         data.map((data, index) => {
                             var room = this.state.addedRoom;
                             room.push(parseInt(data.seaters));
-                            console.log("before load "+this.state.roomCount)
                             this.setState({ addedRoom: room, roomCount: this.state.roomCount + 1 })
-                            console.log("after load "+this.state.roomCount)
                             this.setState({
                                 seaters: data.seaters,
                                 priceWithMess: data.price_with_mess,
@@ -119,6 +122,11 @@ class RoomTypeSetup extends Component {
                         })
                         this.setState({ setRoom: true });
                         document.getElementById('myTable').style.display = 'block';
+                        this.setState({
+                            seaters: '',
+                            priceWithOutMess: '',
+                            priceWithMess: '',
+                        })
                     }
                 })
 
@@ -163,12 +171,15 @@ class RoomTypeSetup extends Component {
                         console.log(response.data);
                         var room = this.state.addedRoom;
                         room.push(parseInt(this.state.seaters));
-                        console.log("before add "+this.state.roomCount)
                         this.setState({ roomCount: this.state.roomCount + 1 })
-                        console.log("after add "+this.state.roomCount)
                         this.appendRoom(this.state.seaters);
                         this.setState({ setRoom: true });
                         document.getElementById('myTable').style.display = 'block';
+                        this.setState({
+                            seaters: '',
+                            priceWithOutMess: '',
+                            priceWithMess: '',
+                        })
                     }
                 })
     }
@@ -179,8 +190,6 @@ class RoomTypeSetup extends Component {
         const userData = JSON.parse(localStorage.getItem('userData'));
 
         document.getElementById(seaters).remove();
-        //document.getElementById("myTable").deleteRow(i);
-        console.log("sss " + seaters)
 
         const data = {
             block_id: userData.block_id,
@@ -200,11 +209,14 @@ class RoomTypeSetup extends Component {
                             errorMsg: response.data.Message
                         })
 
-                    } else {
+                    }
+                    else {
                         console.log(response.data);
-                        console.log("before remove "+this.state.roomCount)
                         this.setState({ roomCount: this.state.roomCount - 1 })
-                        console.log("after remove "+this.state.roomCount)
+                        var array = [...this.state.addedRoom];
+                        var index = array.indexOf(parseInt(data.seaters))
+                        array.splice(index, 1)
+                        this.setState({ addedRoom: array });
                     }
                 })
     }
@@ -272,7 +284,6 @@ class RoomTypeSetup extends Component {
     }
 
     submitData = () => {
-        console.log("count" + this.state.roomCount);
         if (this.state.roomCount < 1) {
             this.setState({ roomError: "Please Select Room Types" })
             return false
@@ -295,7 +306,6 @@ class RoomTypeSetup extends Component {
                     response => {
                         if (response.data.Error) {
                             console.log(response.data);
-                            console.log(response.data.Error);
 
                             this.setState({
                                 Error: true,
@@ -303,9 +313,9 @@ class RoomTypeSetup extends Component {
                             })
                             return false
 
-                        } else {
+                        }
+                        else {
                             console.log(response.data);
-                            console.log(response.data.Error);
 
                         }
                     })
@@ -341,7 +351,7 @@ class RoomTypeSetup extends Component {
                     {this.addRoom()}
                     <br />
                     <table id="myTable" className="table table-bordered">
-                         
+
                         <thead >
                             <tr>
                                 <th class="one">Room Type</th>
