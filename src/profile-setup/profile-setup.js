@@ -65,7 +65,7 @@ class ProfileSetup extends Component {
                 <div className="container-login100">
                     <div className="wrap-setup">
                         <div className="marginauto">
-                            <div class="breadcrumb flat">
+                            <div className="breadcrumb flat">
                                 <a id="b1">General Information</a>
                                 <a id="b2" >Facilities</a>
                                 <a id="b3">Charges Details</a>
