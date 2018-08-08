@@ -65,15 +65,15 @@ class ProfileSetup extends Component {
                 <div className="container-login100">
              <div className="wrap-breadcrumb">
             <div className="breadcrumb flat">
-                    <div className="wrap-setup">
-                        <div className="marginauto">
+                    
                             <div className="breadcrumb flat">
                                 <a id="b1">General Information</a>
                                 <a id="b2" >Facilities</a>
                                 <a id="b3">Charges Details</a>
                                 <a id="b4">Hostel Pictures</a>
                             </div>
-                           </div>
+                    </div>
+        </div>
                     <div className="wrap-setup">
                         <div className="marginauto">
                             
@@ -96,6 +96,7 @@ class ProfileSetup extends Component {
                     </div>
                 </div>
             </div>
+                  
         );
     }
 }
