@@ -134,6 +134,7 @@ class GeneralInfo extends Component {
 
         axios.post('/updateBlockGeneralInfo', data)
             .then(
+                
 
                 response => {
                     if (response.data.Error) {
@@ -187,14 +188,14 @@ class GeneralInfo extends Component {
                 <section>
                     <div>
                         <input type="radio" id="control_01" name="hostelType" value="Boys"   onChange={this.onChange} required />
-                        <label className="label1" for="control_01">
+                        <label className="label1" htmlFor="control_01">
                             <h2>Boys</h2>
                         </label>
 
                     </div>
                     <div>
                         <input type="radio" id="control_02" name="hostelType" value="Girls"   onChange={this.onChange} required />
-                        <label className="label1" for="control_02">
+                        <label className="label1" htmlFor="control_02">
                             <h2>Girls</h2>
                         </label>
                     </div>
