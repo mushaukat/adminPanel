@@ -149,9 +149,10 @@ class GeneralInfo extends Component {
                         } else {
                             console.log(response.data);
                             console.log(response.data.Error);
+                            return true
                         }
                     })
-            return true
+            
         }
 
     }
@@ -195,7 +196,7 @@ class GeneralInfo extends Component {
 
                         <div className="form-group text-paragraph">
                             <label >Hostel Mobile :</label>
-                            <input type="number" name="hostelMobile" id="hostelMobile" value={this.state.hostelMobile} onChange={this.onChange} placeholder="Hostel Mobile #" className="form-control text-paragraph" required />
+                            <input type="number" name="hostelMobile" id="hostelMobile" value={this.state.hostelMobile} onChange={this.onChange} placeholder="Hostel Mobile #" className="form-control text-paragraph" maxlength="11" required />
                             <br /> <b> <p className="error-message">{this.state.mobileNumberError} </p> </b>
                         </div>
                     </div>
@@ -203,7 +204,7 @@ class GeneralInfo extends Component {
 
                         <div className="form-group text-paragraph">
                             <label >Hostel Phone :</label>
-                            <input type="number" name="hostelPhone" value={this.state.hostelPhone} onChange={this.onChange} placeholder="Hostel Phone #" className="form-control text-paragraph" />
+                            <input type="number" name="hostelPhone" value={this.state.hostelPhone} onChange={this.onChange} placeholder="Hostel Phone #" className="form-control text-paragraph" maxlength="11" />
 
                         </div>
                     </div>

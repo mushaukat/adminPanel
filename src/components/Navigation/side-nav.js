@@ -1,94 +1,127 @@
 import React, { Component } from 'react';
+import $ from 'jquery'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import '../stylesheets/side-nav.css';
 import HostelProfile from '../hostel_profile/hostel-profile'
-import ImageUpload from '../hostel_profile/profile-pic'
-import RoomType from '../hostel_profile/room-type'
 
 class SideNav extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            profilePic: true,
+            hostelName: '',
+
+        };
+    }
+
+    componentDidMount() {
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        console.log(userData);
+        const data = {
+            block_id: userData.block_id,
+            hostel_id: userData.hostel_id,
+        }
+
+        var dp = 'http://www.hostinn.pk:3300/api/blockProfileImage/' + data.block_id + '/' + data.hostel_id
+        this.setState({
+            profilePic: dp,
+            hostelName: userData.hostel_name
+        })
+    };
+
+    dropdown(){
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+    }
+
+
     render() {
-        let $imagePreview = null;
-        let imagePreviewUrl="null";
-      if (imagePreviewUrl) {
-        $imagePreview = (<img src={imagePreviewUrl}  alt=""/>);
-      } else {
-        $imagePreview = (<div className="previewText">Update Profile picture from Hostel Profile</div>);
-      }
+        // $(document).ready(function () {
+        //     $("#sidebar").mCustomScrollbar({
+        //         theme: "minimal"
+        //     });
+
+        //     $('#sidebarCollapse').on('click', function () {
+        //         $('#sidebar, #content').toggleClass('active');
+        //         $('.collapse.in').toggleClass('in');
+        //         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        //     });
+        // });
+
         return (
-            <div className="wrapper">
-                <nav id="sidebar">
-                    <div className="sidebar-header">
+            <Router>
+                <div>
+                    <div className="wrapper">
 
-                        <div className="imgPreview" id="imagePreview">
-                            {$imagePreview}
-                            
+                        <nav id="sidebar">
+
+
+                            <div class="sidebar-header">
+                                <div >
+                                    <img src={this.state.profilePic} />
+                                </div>
+                                <br />
+                                <h3>{this.state.hostelName}</h3>
+                            </div>
+
+                            <ul class="list-unstyled components">
+
+                                <li class="active">
+                                    <Link to="">DashBoard</Link>
+                                </li>
+
+                                <li >
+                                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
+                                    <ul class="collapse list-unstyled dropdown-btn" id="homeSubmenu">
+                                        <li><a href="#">Home 1</a></li>
+                                        <li><a href="#">Home 2</a></li>
+                                        <li><a href="#">Home 3</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="#">About</a>
+                                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
+                                    <ul class="collapse list-unstyled dropdown-btn" id="pageSubmenu">
+                                        <li><a href="#">Page 1</a></li>
+                                        <li><a href="#">Page 2</a></li>
+                                        <li><a href="#">Page 3</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="#">Portfolio</a>
+                                </li>
+                                <li>
+                                    <a href="#">Contact</a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <div id="content">
+                            <div class="navbar-header">
+                                <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                                    <i class="glyphicon glyphicon-align-left"></i>
+                                    <span>Toggle Sidebar</span>
+                                </button>
+                            </div>
                         </div>
-                            
-                        <p id="hostel-name" align="center">Hostel Name</p>
-                        
+
                     </div>
-
-                    <ul className="list-unstyled components">
-                        
-                        <li className="active">
-                            <a href="google.com">Dashboard</a>
-                        </li>
-
-                        <li>
-                            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Hostel Profile</a>
-                            <ul className="collapse list-unstyled" id="homeSubmenu">
-                                <li><Link to="profile">Profile</Link></li>
-                                <li><Link to="picture">Room Type</Link></li>
-                                <li><Link to="rooms">Home 3</Link></li>
-                            </ul>
-                        </li>
-                        <li><Link to="profile">Profile</Link></li>
-                                <li><Link to="picture">Room Type</Link></li>
-                                <li><Link to="rooms">Home 3</Link></li>
-                        <li>
-                            <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false">Room Mangement</a>
-                            <ul className="collapse list-unstyled" id="homeSubmenu1">
-                                <li><a href="google.com">Home 5</a></li>
-                                <li><a href="google.com">Home 25</a></li>
-                                <li><a href="google.com">Home 3</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="google.com">Mess Menu</a>
-                        </li>
-
-                        <li>
-                            <a href="google.com">Notifications</a>
-                        </li>
-                        <li>
-                            <a href="google.com">About</a>
-                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
-                            <ul className="collapse list-unstyled" id="pageSubmenu">
-                                <li><a href="google.com">Page 1</a></li>
-                                <li><a href="google.com">Page 2</a></li>
-                                <li><a href="google.com">Page 3</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="google.com">Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="google.com">Log Out</a>
-                        </li>
-                    </ul>
-
-                    
-                </nav>
-                <Router>
-        <div>
-          <Route exact path="/profile" component={HostelProfile} />
-          <Route exact path="/picture" component={ImageUpload} />
-          <Route exact path="/rooms" component={RoomType} />
-          {/* <Route exact path="/facilities" component={Facilities} />
-        <Route exact path="/roomtype" component={Roomtype} />
-        <Route exact path="/profilepic" component={Profilepic} /> */}
-        </div>
-      </Router>            </div>
+                </div>
+            </Router>
         );
     }
 }

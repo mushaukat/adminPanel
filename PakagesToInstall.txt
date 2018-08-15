@@ -1,4 +1,7 @@
 
+
+install react-popup
+
 npm install axios --save
 
 npm install --save react-redux-loading-bar

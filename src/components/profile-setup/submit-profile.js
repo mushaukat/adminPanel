@@ -66,7 +66,7 @@ class SubmitProfile extends Component {
             return <Redirect exact to="/profileSetup" />
         }
         if (this.state.submitProfileRedirect) {
-            return <Redirect exact to="/dashboard" />
+            return <Redirect exact to="/hostel" />
         }
         if (this.state.redirect) {
             return <Redirect exact to="/" />

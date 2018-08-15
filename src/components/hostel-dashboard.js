@@ -3,34 +3,33 @@ import SideNav from './Navigation/side-nav';
 import TopMenu from './Navigation/top-menu';
 import './stylesheets/side-nav.css';
 import './stylesheets/top-menu.css';
+import HostelProfile from './hostel_profile/hostel-profile'
 
-class DashBoardTemplate extends Component {
-    render() {
-        return (
-            <div>
+import { BrowserRouter as Router, HashRouter, Route, Link, IndexRoute, Switch } from "react-router-dom";
+
+
+const DashBoardTemplate = ({ match }) => (
+
+    <div>
+        <div className="col-md-3" >
+            <SideNav />
+        </div>
+
+        <div className="col-md-9">
+            <Router >
                 <div>
-                    <div id="left-div">
-                    <SideNav/>
-                    </div>
-
-                    <div id="right-div">
-
-                        <div id="top-menu">
-                        <TopMenu/>
-                        </div>
-
-                        <div id="menu2">
-                            <h1>basjhfkj</h1>
-                        </div>
-
-                    </div>
-
-
+                    <Switch>
+                        <Route exact path={`${match.url}/`} component={HostelProfile} />
+                        <Route exact path={`${match.url}/roomtype`} component={RoomType} />
+                        <Route exact path={`${match.url}/dashboard`} component={ImageUpload} />
+                    </Switch>
                 </div>
-            </div>
+            </Router>
+        </div>
+    </div>
 
-                );
-              }
-            }
-            
+);
+
+
+
 export default DashBoardTemplate;

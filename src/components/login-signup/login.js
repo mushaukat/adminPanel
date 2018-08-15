@@ -37,7 +37,7 @@ class LogIn extends Component {
       }
       else if (status === 2) {
         console.log("2")
-        this.setState({ redirectURL: '/dashboard' })
+        this.setState({ redirectURL: '/hostel' })
       }
 
       this.setState({ redirect: true })
@@ -71,6 +71,7 @@ class LogIn extends Component {
             })
           }
           else {
+            console.log(response.data)
             let data = response.data.Data[0]
             console.log(data)
             localStorage.setItem('userData', JSON.stringify(data))
@@ -87,7 +88,7 @@ class LogIn extends Component {
             }
             else if (status === 2) {
               console.log("2")
-              this.setState({ redirectURL: '/dashboard' })
+              this.setState({ redirectURL: '/hostel' })
             }
 
             this.setState({ redirect: true })

@@ -5,7 +5,7 @@ import '../stylesheets/profile-pic.css'
 import axios from 'axios';
 
 
-class HostelPicturesSetup extends Component {
+class EditHostelPicturesSetup extends Component {
 
     constructor(props) {
         super(props);
@@ -32,9 +32,6 @@ class HostelPicturesSetup extends Component {
     }
 
     componentDidMount() {
-        console.log("pic start")
-        document.getElementById("b4").className += " active "
-        document.getElementById("back-btn").style.display = "block";
 
         const userData = JSON.parse(localStorage.getItem('userData'));
         console.log(userData);
@@ -383,4 +380,4 @@ class HostelPicturesSetup extends Component {
     }
 }
 
-export default HostelPicturesSetup;
+export default EditHostelPicturesSetup;
