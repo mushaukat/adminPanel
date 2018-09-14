@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
-import '../stylesheets/top-menu.css';
+import './top-menu.css';
 
 
 
@@ -26,7 +26,7 @@ class TopMenu extends Component {
       <div>
         <div id='cssmenu'>
           <ul>
-          <li><a onClick={this.signout}>Signout</a></li>
+          <li><a onClick={this.signOut}>Signout</a></li>
             <li id="last-menu"><a href='google.com'>Contact Us</a></li>
             <li><a href='google.com'>Services</a></li>
             <li><a href='google.com'>About Us</a></li>

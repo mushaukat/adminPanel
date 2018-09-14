@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery'
-import '../stylesheets/hostel-profile.css'
-import '../stylesheets/popup.css'
+import './hostel-profile.css'
+import './popup.css'
 import HostelProfile from './hostel-profile'
 
 class AccountSettings extends Component {

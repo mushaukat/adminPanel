@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../stylesheets/login-signup.css'
+// import '../stylesheets/login-signup.css'
 import axios from 'axios';
 import { Redirect } from "react-router-dom";
 
@@ -48,10 +48,10 @@ class EditFacilities extends Component {
         })
 
 
-    const userData = JSON.parse(localStorage.getItem('userData'));
+    const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
     const data = {
-      block_id: userData.block_id,
-      hostel_id: userData.hostel_id,
+      block_id: hostelAdmin.block_id,
+      hostel_id: hostelAdmin.hostel_id,
     };
 
     axios.post('/getBlockFacilities', data)
@@ -97,10 +97,10 @@ class EditFacilities extends Component {
     const target = event.target;
     const name = parseInt(target.name);
 
-    const userData = JSON.parse(localStorage.getItem('userData'));
+    const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
     const data = {
-      block_id: userData.block_id,
-      hostel_id: userData.hostel_id,
+      block_id: hostelAdmin.block_id,
+      hostel_id: hostelAdmin.hostel_id,
       facility_id: name
     };
 

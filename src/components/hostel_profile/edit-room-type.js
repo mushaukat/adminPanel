@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../stylesheets/profile-setup.css'
-import '../stylesheets/login-signup.css'
+//import './profile-setup.css'
+// import '../stylesheets/login-signup.css'
 import axios from 'axios';
 import { Redirect } from "react-router-dom";
 
@@ -34,11 +34,11 @@ class EditRoomTypeSetup extends Component {
 
     componentDidMount() {
 
-        const userData = JSON.parse(localStorage.getItem('userData'));
+        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
 
         const data1 = {
-            block_id: userData.block_id,
-            hostel_id: userData.hostel_id,
+            block_id: hostelAdmin.block_id,
+            hostel_id: hostelAdmin.hostel_id,
         };
 
         axios.post('/getBlockFees', data1)
@@ -88,8 +88,8 @@ class EditRoomTypeSetup extends Component {
 
 
         const data2 = {
-            block_id: userData.block_id,
-            hostel_id: userData.hostel_id,
+            block_id: hostelAdmin.block_id,
+            hostel_id: hostelAdmin.hostel_id,
         };
 
         axios.post('/getHostelRoomTypes', data2)
@@ -142,11 +142,11 @@ class EditRoomTypeSetup extends Component {
 
     saveRoom(e) {
         e.preventDefault();
-        const userData = JSON.parse(localStorage.getItem('userData'));
+        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
 
         const data = {
-            block_id: userData.block_id,
-            hostel_id: userData.hostel_id,
+            block_id: hostelAdmin.block_id,
+            hostel_id: hostelAdmin.hostel_id,
             seaters: this.state.seaters,
             base_price: this.state.priceWithOutMess,
             price_with_mess: this.state.priceWithMess
@@ -184,13 +184,13 @@ class EditRoomTypeSetup extends Component {
 
     deleteRow(r, seaters) {
         // e.preventDefault();
-        const userData = JSON.parse(localStorage.getItem('userData'));
+        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
 
         document.getElementById(seaters).remove();
 
         const data = {
-            block_id: userData.block_id,
-            hostel_id: userData.hostel_id,
+            block_id: hostelAdmin.block_id,
+            hostel_id: hostelAdmin.hostel_id,
             seaters: seaters
         }
 
@@ -288,10 +288,10 @@ class EditRoomTypeSetup extends Component {
         else {
             this.setState({ roomError: "" })
 
-            const userData = JSON.parse(localStorage.getItem('userData'));
+            const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
             const data = {
-                block_id: userData.block_id,
-                hostel_id: userData.hostel_id,
+                block_id: hostelAdmin.block_id,
+                hostel_id: hostelAdmin.hostel_id,
                 admission_fee: this.state.addmissionFee,
                 security_fee: this.state.securityFee,
             };

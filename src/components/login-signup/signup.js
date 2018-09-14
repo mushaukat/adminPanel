@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../stylesheets/login-signup.css';
+import './login-signup.css';
 import axios from 'axios';
 import { Redirect } from "react-router-dom";
 
@@ -7,6 +7,7 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      ownerName: '',
       hostelName: '',
       email: '',
       password: '',
@@ -22,10 +23,10 @@ class SignUp extends Component {
   }
 
   componentDidMount() {
-    const userData = JSON.parse(localStorage.getItem('userData'));
-    if (userData) {
+    const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+    if (hostelAdmin) {
 
-      var status = parseInt(userData.status)
+      var status = parseInt(hostelAdmin.status)
       console.log(status)
 
       if (status === 0) {
@@ -52,6 +53,7 @@ class SignUp extends Component {
   submitData = (e) => {
     e.preventDefault();
     const data = {
+      owner_name: this.state.ownerName,
       hostel_name: this.state.hostelName,
       hostel_email: this.state.email,
       password: this.state.password,
@@ -63,7 +65,13 @@ class SignUp extends Component {
     const password = this.state.password;
     const rePassword = this.state.rePassword;
 
-    if (password === rePassword) {
+    if(this.state.city===""){
+      this.setState({
+        Error: true,
+        errorMsg: 'Please select City',
+      });
+    }
+    else if (password === rePassword) {
       axios.post('/hostelSignup', data)
         .then(
           response => {
@@ -113,104 +121,90 @@ class SignUp extends Component {
                     Hostel Signup
   					    </span>
 
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div className="wrap-input100 validate-input" data-validate="valid name is required">
-                        <span><p>Hostel Name: </p> </span>
+                  <div className="row">
+
+                    <div className="col-md-6">
+                      <div className="wrap-input100">
+                        <span className="input-label"><p>Owner Name: </p> </span>
+                        <input className="input100" type="text" onChange={this.onChange} name="ownerName" placeholder="Enter Hostel Name" required />
+                      </div>
+                    </div>
+
+                    <div className="col-md-6">
+                      <div className="wrap-input100">
+                        <span className="input-label"><p>Hostel Name: </p> </span>
                         <input className="input100" type="text" onChange={this.onChange} name="hostelName" placeholder="Enter Hostel Name" required />
-                        <span className="focus-input100"></span>
-                        <span className="symbol-input100">
-                          <i className="fa fa-adn" aria-hidden="true"></i>
-                        </span>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <span><p>Email: </p> </span>
+
+                  </div>
+
+                  <div className="row" >
+
+                  <div className="col-md-6">
+                      <div className="wrap-input100">
+                        <span className="input-label"><p>Email: </p> </span>
                         <input className="input100" type="email" onChange={this.onChange} name="email" placeholder="Enter your Email" required />
-                        <span className="focus-input100"></span>
-                        <span className="symbol-input100">
-                          <i className="fa fa-envelope" aria-hidden="true"></i>
-                        </span>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
 
-                      <div className="wrap-input100 validate-input" data-validate="Password is required">
-                        <span><p>Password: </p> </span>
+                    <div className="col-md-6">
+                      <div className="wrap-input100">
+                        <span className="input-label"><p>Hostel Location: </p> </span>
+                        <select className="input100" onChange={this.onChange} name="city">
+                          <option value="">Select City</option>
+                          <option value="Islamabad">Islamabad</option>
+                          <option value="Lahore">Lahore</option>
+                        </select>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div className="row">
+
+                    <div className="col-md-6">
+                      <div className="wrap-input100">
+                        <span className="input-label"><p>Password: </p> </span>
                         <input className="input100" type="password" onChange={this.onChange} name="password" placeholder=" Enter Password" required />
-                        <span className="focus-input100"></span>
-                        <span className="symbol-input100">
-                          <i className="fa fa-lock" aria-hidden="true"></i>
-                        </span>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div className="wrap-input100 validate-input" data-validate="Password is required">
-                        <span><p>Confirm Password: </p> </span>
+
+                    <div className="col-md-6">
+                      <div className="wrap-input100">
+                        <span className="input-label"><p>Confirm Password: </p> </span>
                         <input className="input100" type="password" onChange={this.onChange} name="rePassword" placeholder="Re-Enter Password" required />
-                        <span className="focus-input100"></span>
-                        <span className="symbol-input100">
-                          <i className="fa fa-lock" aria-hidden="true"></i>
-                        </span>
                       </div>
                     </div>
+
                   </div>
 
+                  <div className="row">
 
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div className="wrap-input100 validate-input" data-validate="Mobile is required">
-                        <span><p>Owner Mobile No: </p> </span>
+                    <div className="col-md-6">
+                      <div className="wrap-input100 ">
+                        <span className="input-label"><p>Owner Mobile No: </p> </span>
                         <input className="input100" type="text" onChange={this.onChange} name="ownerMobile" placeholder="Hostel Owner Mobile Number" required />
-                        <span className="focus-input100"></span>
-                        <span className="symbol-input100">
-                          <i className="fa fa-mobile" aria-hidden="true"></i>
-                        </span>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div className="wrap-input100 validate-input" data-validate="Mobile is required">
-                        <span><p>Owner Phone No: </p> </span>
+
+                    <div className="col-md-6">
+                      <div className="wrap-input100">
+                        <span className="input-label"><p>Owner Phone No: </p> </span>
                         <input className="input100" type="text" onChange={this.onChange} name="ownerPhone" placeholder="Hostel Owner Phone Number" />
-                        <span className="focus-input100"></span>
-                        <span className="symbol-input100">
-                          <i className="fa fa-mobile" aria-hidden="true"></i>
-                        </span>
                       </div>
                     </div>
+
                   </div>
 
-                  <div class="col-md-6">
-                    <div className="wrap-input100 validate-input" data-validate="Mobile is required">
-                      <span><p>Hostel Location: </p> </span>
-                      <select className="input100" onChange={this.onChange} name="city">
-                        <option value="">Select City</option>
-                        <option value="Islamabad">Islamabad</option>
-                      </select>
-                      <span className="focus-input100"></span>
-                      <span className="symbol-input100">
-                        <i className="fa fa-mobile" aria-hidden="true"></i>
-                      </span>
-                    </div>
-                  </div>
+
 
                   <div>
                     {this.errorMsg()}
                   </div>
 
                   <div className="container-login100-form-btn col-md-12">
-
                     <input type="submit" value="SignUp" className="login100-form-btn" />
-
-                    {/* <Link className="txt2" to="/general" >
-                    <button className="login100-form-btn" onclick="getLocation()">
-                    Signup
-            </button>
-                  </Link> */}
-
                   </div>
 
                 </form>

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import '../stylesheets/login-signup.css'
 import axios from 'axios';
 import { Redirect } from "react-router-dom";
+import { loadProgressBar } from 'axios-progress-bar'
+import 'axios-progress-bar/dist/nprogress.css'
+import '../stylesheets/spinner.css'
 
 
 class Facilities extends Component {
@@ -11,11 +13,14 @@ class Facilities extends Component {
       facilities: [],
       selected_facilities: [],
       blockFacilities: [],
+      otherFacilities: '',
       redirect: false,
       Error: false,
       errorMsg: '',
       facilityCount: 0,
       facilityError: '',
+      spinner1: true,
+      spinner2:true,
     };
     this.onChange = this.onChange.bind(this);
 
@@ -46,15 +51,18 @@ class Facilities extends Component {
             })
           } else {
             console.log(response.data.Data);
-            this.setState({ facilities: response.data.Data, })
+            this.setState({
+              facilities: response.data.Data,
+            })
           }
+          this.setState({spinner1:true})
         })
 
 
-    const userData = JSON.parse(localStorage.getItem('userData'));
+    const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
     const data = {
-      block_id: userData.block_id,
-      hostel_id: userData.hostel_id,
+      block_id: hostelAdmin.block_id,
+      hostel_id: hostelAdmin.hostel_id,
     };
 
     axios.post('/getBlockFacilities', data)
@@ -65,7 +73,14 @@ class Facilities extends Component {
 
           }
           else {
-            console.log("okkkkk " + response.data.Data)
+            console.log(response.data)
+            if(response.data.other_facilities==null){
+              this.setState({ otherFacilities: '' })
+            }
+            else{
+              this.setState({ otherFacilities: response.data.other_facilities })
+            }
+            
             for (var i = 1; i <= response.data.Data.length; i++) {
               this.setState({ facilityCount: this.state.facilityCount + 1 })
             }
@@ -76,19 +91,46 @@ class Facilities extends Component {
             )
 
           }
+          this.setState({spinner2:true})
         })
 
   }
 
 
-  submitData = (e) => {
+  async submitData(e) {
     if (this.state.facilityCount < 3) {
       this.setState({ facilityError: "Please Select atleat 3 facilities" })
       return false
     }
     else {
       this.setState({ facilityError: "" })
-      return true
+      const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+      const data = {
+        hostel_id: hostelAdmin.hostel_id,
+        block_id: hostelAdmin.block_id,
+        other_facilities: this.state.otherFacilities,
+      };
+      console.log(data)
+      var temp
+      await axios.post('/insertOtherFacilities', data)
+        .then(
+          response => {
+            if (response.data.Error) {
+              console.log(response.data);
+
+              this.setState({
+                Error: true,
+                errorMsg: response.data.Message + " Try Again",
+              })
+              temp = false
+
+            } else {
+              const data = response.data
+              console.log(data)
+              temp = true
+            }
+          })
+      return temp
     }
 
   }
@@ -100,10 +142,10 @@ class Facilities extends Component {
     const target = event.target;
     const name = parseInt(target.name);
 
-    const userData = JSON.parse(localStorage.getItem('userData'));
+    const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
     const data = {
-      block_id: userData.block_id,
-      hostel_id: userData.hostel_id,
+      block_id: hostelAdmin.block_id,
+      hostel_id: hostelAdmin.hostel_id,
       facility_id: name
     };
 
@@ -151,10 +193,17 @@ class Facilities extends Component {
     }
   }
 
+  onChangeOtherFacilities = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
   render() {
+    loadProgressBar()
+
     if (this.state.redirect) {
       return <Redirect to="/" />
     }
+
     const facilities = this.state.facilities.map((facility, index) => {
 
       return (
@@ -172,6 +221,7 @@ class Facilities extends Component {
 
 
     return (
+      
 
       <div>
 
@@ -179,6 +229,14 @@ class Facilities extends Component {
         <p>Please Select atleast 3 facilities</p>
 
         {facilities}
+
+
+        <div>
+          <h4 className="margint60"> Other Facilities: </h4>
+
+          <textarea className="form-control" value={this.state.otherFacilities} name="otherFacilities" onChange={this.onChangeOtherFacilities}></textarea>
+
+        </div>
 
         <div>
           {this.errorMsg()}

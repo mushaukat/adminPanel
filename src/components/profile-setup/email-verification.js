@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
-import '../stylesheets/breadcrumb.css';
-import '../stylesheets/profile-setup.css'
+import './breadcrumb.css';
+import './profile-setup.css'
 import axios from 'axios';
 
 class EmailVerification extends Component {
@@ -20,9 +20,9 @@ class EmailVerification extends Component {
     }
 
     componentDidMount() {
-        const userData = JSON.parse(localStorage.getItem('userData'));
-        console.log(userData)
-        if(!userData){
+        const userEmailData = JSON.parse(localStorage.getItem('hostelEmailVarification'));
+        console.log(userEmailData)
+        if(!userEmailData){
             this.setState({redirect:true})
         }
     }
@@ -35,9 +35,9 @@ class EmailVerification extends Component {
     reSendEmail = (e) => {
         e.preventDefault();
 
-        const userData = JSON.parse(localStorage.getItem('userData'));
+        const userEmailData = JSON.parse(localStorage.getItem('hostelEmailVarification'));
         const data = {
-            hostel_id: userData.hostel_id,
+            hostel_id: userEmailData,
         };
 
         axios.post('/sendHostelVerificationEmail', data)

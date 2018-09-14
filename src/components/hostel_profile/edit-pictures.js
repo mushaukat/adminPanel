@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../stylesheets/profile-setup.css'
-import '../stylesheets/login-signup.css'
-import '../stylesheets/profile-pic.css'
+// import './profile-setup.css'
+// import '../stylesheets/login-signup.css'
+// import '../stylesheets/profile-pic.css'
 import axios from 'axios';
 
 
@@ -33,11 +33,11 @@ class EditHostelPicturesSetup extends Component {
 
     componentDidMount() {
 
-        const userData = JSON.parse(localStorage.getItem('userData'));
-        console.log(userData);
+        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+        console.log(hostelAdmin);
         const data = {
-            block_id: userData.block_id,
-            hostel_id: userData.hostel_id,
+            block_id: hostelAdmin.block_id,
+            hostel_id: hostelAdmin.hostel_id,
         };
 
         var dp = 'http://www.hostinn.pk:3300/api/blockProfileImage/' + data.block_id + '/' + data.hostel_id
@@ -103,12 +103,12 @@ class EditHostelPicturesSetup extends Component {
 
     submitPicture = (e, url, image_id) => {
         e.preventDefault();
-        const userData = JSON.parse(localStorage.getItem('userData'));
+        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
 
         var formData = new FormData();
         formData.append("image", this.state.file);
-        formData.append("block_id", userData.block_id);
-        formData.append("hostel_id", userData.hostel_id);
+        formData.append("block_id", hostelAdmin.block_id);
+        formData.append("hostel_id", hostelAdmin.hostel_id);
 
         console.log("okk" + this.state.dp)
         if (url == 0) {
@@ -142,27 +142,27 @@ class EditHostelPicturesSetup extends Component {
                         this.setState({ generealPicError: true, })
                         if (url == 0) {
                             this.setState({
-                                dp: "http://www.hostinn.pk:3300/api/blockGeneralImage/" + response.data.Image + "/" + userData.block_id + "/" + userData.hostel_id
+                                dp: "http://www.hostinn.pk:3300/api/blockGeneralImage/" + response.data.Image + "/" + hostelAdmin.block_id + "/" + hostelAdmin.hostel_id
                             })
                             console.log("pic1_id" + this.state.pic1_id);
                         } else if (url == 1) {
                             this.setState({
-                                pic1: "http://www.hostinn.pk:3300/api/blockGeneralImage/" + response.data.Image + "/" + userData.block_id + "/" + userData.hostel_id
+                                pic1: "http://www.hostinn.pk:3300/api/blockGeneralImage/" + response.data.Image + "/" + hostelAdmin.block_id + "/" + hostelAdmin.hostel_id
                             })
                             console.log("pic1_id" + this.state.pic2_id);
                         } else if (url == 2) {
                             this.setState({
-                                pic2: "http://www.hostinn.pk:3300/api/blockGeneralImage/" + response.data.Image + "/" + userData.block_id + "/" + userData.hostel_id
+                                pic2: "http://www.hostinn.pk:3300/api/blockGeneralImage/" + response.data.Image + "/" + hostelAdmin.block_id + "/" + hostelAdmin.hostel_id
                             })
                             console.log("pic1_id" + this.state.pic3_id);
                         } else if (url == 3) {
                             this.setState({
-                                pic3: "http://www.hostinn.pk:3300/api/blockGeneralImage/" + response.data.Image + "/" + userData.block_id + "/" + userData.hostel_id
+                                pic3: "http://www.hostinn.pk:3300/api/blockGeneralImage/" + response.data.Image + "/" + hostelAdmin.block_id + "/" + hostelAdmin.hostel_id
                             })
                             console.log("pic3" + this.state.pic3);
                         } else if (url == 4) {
                             this.setState({
-                                pic4: "http://www.hostinn.pk:3300/api/blockGeneralImage/" + response.data.Image + "/" + userData.block_id + "/" + userData.hostel_id
+                                pic4: "http://www.hostinn.pk:3300/api/blockGeneralImage/" + response.data.Image + "/" + hostelAdmin.block_id + "/" + hostelAdmin.hostel_id
                             })
                             console.log("pic1_id" + this.state.pic4_id);
                         }

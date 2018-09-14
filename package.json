@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "axios-progress-bar": "^1.2.0",
     "bootstrap": "^4.1.2",
     "google-map-react": "^1.0.5",
     "google-maps-react": "^2.0.2",
@@ -15,10 +16,13 @@
     "react-geolocated": "^2.4.0",
     "react-geolocation": "^1.0.3",
     "react-images-upload": "^1.2.0",
+    "react-loader-spinner": "^2.1.0",
+    "react-md-spinner": "^0.3.0",
     "react-popup": "^0.9.3",
     "react-redux-loading-bar": "^4.0.5",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "react-spinners": "^0.4.4"
   },
   "scripts": {
     "start": "react-scripts start",

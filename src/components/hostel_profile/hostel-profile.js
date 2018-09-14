@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../stylesheets/hostel-profile.css'
+import './hostel-profile.css'
 import axios from 'axios';
 import $ from 'jquery'
 import RoomTypeSetup from '../profile-setup/room-type-setup'
@@ -54,14 +54,14 @@ class HostelProfile extends Component {
 
 
     componentDidMount() {
-        const userData = JSON.parse(localStorage.getItem('userData'));
+        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
 
         const data = {
-            block_id: userData.block_id,
-            hostel_id: userData.hostel_id,
+            block_id: hostelAdmin.block_id,
+            hostel_id: hostelAdmin.hostel_id,
         };
 
-        //this.setState({ blockName: userData.hostel_name })
+        //this.setState({ blockName: hostelAdmin.hostel_name })
 
         axios.post('/getBlockGeneralInfo', data)
             .then(
@@ -75,7 +75,7 @@ class HostelProfile extends Component {
                     } else {
                         var data = response.data.Data[0]
                         this.setState({
-                            blockName: userData.hostel_name,
+                            blockName: hostelAdmin.hostel_name,
                             hostelType: data.block_type,
                             hostelMobile: data.block_mobile,
                             hostelPhone: data.block_phone,
@@ -325,7 +325,7 @@ class HostelProfile extends Component {
             <div className="" >
 
 
-                <div className="info-block" id="hostel-info">
+                <div id="hostel-info">
                     <p className="heading md-col-12" >Hostel Information</p>
                     <div id="popup" onClick={() => this.popupForm("generalInfo")}>Edit</div>
 

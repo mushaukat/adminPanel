@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
-import '../stylesheets/breadcrumb.css';
-import '../stylesheets/profile-setup.css'
+import { Redirect } from "react-router-dom";
+import './breadcrumb.css';
+import './profile-setup.css'
 import GeneralInfo from './general-info'
 import Facilities from './facilities'
 import RoomTypeSetup from './room-type-setup'
@@ -21,13 +21,16 @@ class ProfileSetup extends Component {
         };
         this.setNextScreen = this.setNextScreen.bind(this)
         this.setBackScreen = this.setBackScreen.bind(this)
+        this.onClick = this.onClick.bind(this)
         this.child = React.createRef();
     }
 
     componentDidMount() {
-        const userData = JSON.parse(localStorage.getItem('userData'));
-        console.log(userData)
-        if (!userData) {
+        console.log("profile")
+        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+        console.log(11)
+        console.log(hostelAdmin)
+        if (!hostelAdmin) {
             this.setState({ redirect: true })
         }
     }
@@ -51,8 +54,9 @@ class ProfileSetup extends Component {
         }
     }
 
-    onClick = () => {
-        var complete = this.child.current.submitData();
+    async onClick () {
+        var complete = await this.child.current.submitData();
+        console.log("abc "+complete)
         if (complete === true) {
             this.setNextScreen();
         }
@@ -95,6 +99,7 @@ class ProfileSetup extends Component {
                 </div>
                 <div className="limiter">
                     <div className="container-login100">
+
                         <div className="wrap-breadcrumb">
                             <div className="breadcrumb flat">
 
@@ -106,9 +111,9 @@ class ProfileSetup extends Component {
                                 </div>
                             </div>
                         </div>
+
                         <div className="wrap-setup">
                             <div className="marginauto">
-
                                 <div className="wrap-div">
                                     <form onSubmit={this.submitData} id="form1">
 
@@ -126,6 +131,7 @@ class ProfileSetup extends Component {
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import '../stylesheets/login-signup.css';
 import { Redirect, Link } from "react-router-dom";
 import axios from 'axios';
-//import '../stylesheets/index.css';
+import './login-signup.css'
 
 class LogIn extends Component {
   constructor(props) {
@@ -17,14 +16,13 @@ class LogIn extends Component {
 
     };
     this.onChange = this.onChange.bind(this);
-
   }
 
   componentDidMount() {
-    const userData = JSON.parse(localStorage.getItem('userData'));
-    if (userData) {
+    const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+    if (hostelAdmin) {
 
-      var status = parseInt(userData.status)
+      var status = parseInt(hostelAdmin.status)
       console.log(status)
 
       if (status === 0) {
@@ -50,7 +48,6 @@ class LogIn extends Component {
     if (this.state.Error) {
       return <b> <p className="error-message"> {this.state.errorMsg}  </p> </b>
     }
-
   }
 
   submitData = (e) => {
@@ -74,20 +71,29 @@ class LogIn extends Component {
             console.log(response.data)
             let data = response.data.Data[0]
             console.log(data)
-            localStorage.setItem('userData', JSON.stringify(data))
+
             var status = parseInt(data.status)
             console.log(status)
 
             if (status === 0) {
               console.log("0")
+              localStorage.setItem('hostelEmailVarification', JSON.stringify(data.hostel_id))
               this.setState({ redirectURL: '/emailVerification' })
             }
             else if (status === 1) {
               console.log("1")
+              localStorage.clear();
+              localStorage.setItem('hostelAdmin', JSON.stringify(data))
               this.setState({ redirectURL: '/profileSetup' })
             }
             else if (status === 2) {
               console.log("2")
+              localStorage.setItem('hostelAdmin', JSON.stringify(data))
+              this.setState({ redirectURL: '/hostel' })
+            }
+            else if (status === 3) {
+              console.log("2")
+              localStorage.setItem('hostelAdmin', JSON.stringify(data))
               this.setState({ redirectURL: '/hostel' })
             }
 
@@ -126,20 +132,14 @@ class LogIn extends Component {
                       Member Login
                 </span>
 
-                    <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                    <div className="wrap-input100 " >
+                      <span className="input-label"><p>Email: </p> </span>
                       <input className="input100" type="email" name="email" onChange={this.onChange} placeholder="Email" required />
-                      <span className="focus-input100"></span>
-                      <span className="symbol-input100">
-                        <i className="fa fa-envelope" aria-hidden="true"></i>
-                      </span>
                     </div>
 
-                    <div className="wrap-input100 validate-input" data-validate="Password is required">
+                    <div className="wrap-input100">
+                      <span className="input-label"><p>Password: </p> </span>
                       <input className="input100" type="password" name="password" onChange={this.onChange} placeholder="Password" required />
-                      <span className="focus-input100"></span>
-                      <span className="symbol-input100">
-                        <i className="fa fa-lock" aria-hidden="true"></i>
-                      </span>
                     </div>
 
                     <div>
@@ -149,7 +149,7 @@ class LogIn extends Component {
                     <div className="container-login100-form-btn">
                       <button className="login100-form-btn">
                         Login
-                  </button>
+                      </button>
                     </div>
                     <br />
 

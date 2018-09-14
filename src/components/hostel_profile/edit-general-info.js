@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../stylesheets/profile-setup.css'
+//import './profile-setup.css'
 import axios from 'axios';
 import $ from 'jquery'
 
@@ -29,10 +29,10 @@ class EditGeneralInfo extends Component {
     }
 
     componentDidMount() {
-        const userData = JSON.parse(localStorage.getItem('userData'));
+        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
         const data = {
-            block_id: userData.block_id,
-            hostel_id: userData.hostel_id,
+            block_id: hostelAdmin.block_id,
+            hostel_id: hostelAdmin.hostel_id,
         };
 
         axios.post('/getBlockGeneralInfo', data)
@@ -116,10 +116,10 @@ class EditGeneralInfo extends Component {
             return false
         }
         else {
-            const userData = JSON.parse(localStorage.getItem('userData'));
+            const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
             const data = {
-                block_id: userData.block_id,
-                hostel_id: userData.hostel_id,
+                block_id: hostelAdmin.block_id,
+                hostel_id: hostelAdmin.hostel_id,
                 block_about: this.state.hostelDescription,
                 block_lat: this.state.block_lat,
                 block_lang: this.state.block_lang,

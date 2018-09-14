@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../stylesheets/login-signup.css'
+import './login-signup.css'
 import { Redirect } from "react-router-dom";
 
 class Recovery extends Component {
@@ -12,10 +12,10 @@ class Recovery extends Component {
 	}
 
 	componentDidMount() {
-		const userData = JSON.parse(localStorage.getItem('userData'));
-		if (userData) {
+		const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+		if (hostelAdmin) {
 
-			var status = parseInt(userData.status)
+			var status = parseInt(hostelAdmin.status)
 			console.log(status)
 
 			if (status === 0) {
@@ -49,25 +49,19 @@ class Recovery extends Component {
 						<form className="login100-form validate-form">
 							<span className="login100-form-title">
 								Recover password
-					</span>
-
-
+							</span>
 
 							<div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
 								<input className="input100" type="text" name="email" placeholder="Email" />
-								<span className="focus-input100"></span>
-								<span className="symbol-input100">
-									<i className="fa fa-envelope" aria-hidden="true"></i>
-								</span>
 							</div>
 
 
 							<p id="demo"></p>
 
 							<div className="container-login100-form-btn">
-								<button className="login100-form-btn" onclick="getLocation()">
+								<button className="login100-form-btn">
 									Recover
-						</button>
+								</button>
 							</div>
 
 

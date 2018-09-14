@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
-import '../stylesheets/breadcrumb.css';
-import '../stylesheets/profile-setup.css'
+import './breadcrumb.css';
+import './profile-setup.css'
 import axios from 'axios';
 
 class SubmitProfile extends Component {
@@ -17,8 +17,8 @@ class SubmitProfile extends Component {
     }
 
     componentDidMount() {
-        const userData = JSON.parse(localStorage.getItem('userData'));
-        if (!userData) {
+        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+        if (!hostelAdmin) {
             this.setState({ redirect: true })
         }
     }
@@ -34,9 +34,9 @@ class SubmitProfile extends Component {
     submitProfile = (e) => {
         e.preventDefault();
 
-        const userData = JSON.parse(localStorage.getItem('userData'));
+        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
         const data = {
-            hostel_id: userData.hostel_id,
+            hostel_id: hostelAdmin.hostel_id,
         };
 
         axios.post('/submitHostelProfile', data)

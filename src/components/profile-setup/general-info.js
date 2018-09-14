@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import '../stylesheets/profile-setup.css'
-import axios from 'axios';
-
 import { Redirect, Link } from "react-router-dom";
+import axios from 'axios';
+import { loadProgressBar } from 'axios-progress-bar'
+import 'axios-progress-bar/dist/nprogress.css'
+import '../stylesheets/spinner.css'
 
 
 class GeneralInfo extends Component {
@@ -27,8 +28,10 @@ class GeneralInfo extends Component {
         this.onChange = this.onChange.bind(this);
     }
 
+  
+
     componentDidMount() {
-        const userData = JSON.parse(localStorage.getItem('userData'));
+        const userData = JSON.parse(localStorage.getItem('hostelAdmin'));
         if (!userData) {
             this.setState({ redirect: true })
         }
@@ -68,7 +71,7 @@ class GeneralInfo extends Component {
                                 document.getElementById("control_01").checked = true;
                             else if (this.state.selectedOption === "Girls")
                                 document.getElementById("control_02").checked = true;
-
+                            
                         }
                     })
         }
@@ -95,7 +98,7 @@ class GeneralInfo extends Component {
 
         return formValid;
     }
-    submitData = (e) => {
+    async submitData (e) {
 
         var Boys = document.getElementById("control_01").checked
         var Girls = document.getElementById("control_02").checked
@@ -121,10 +124,11 @@ class GeneralInfo extends Component {
             return false
         }
         else {
-            const userData = JSON.parse(localStorage.getItem('userData'));
+            var temp
+            const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
             const data = {
-                block_id: userData.block_id,
-                hostel_id: userData.hostel_id,
+                block_id: hostelAdmin.block_id,
+                hostel_id: hostelAdmin.hostel_id,
                 block_about: this.state.hostelDescription,
                 block_lat: this.state.block_lat,
                 block_lang: this.state.block_lang,
@@ -135,7 +139,7 @@ class GeneralInfo extends Component {
             };
             console.log(data);
 
-            axios.post('/updateBlockGeneralInfo', data)
+            await axios.post('/updateBlockGeneralInfo', data)
                 .then(
                     response => {
                         if (response.data.Error) {
@@ -145,17 +149,21 @@ class GeneralInfo extends Component {
                                 Error: true,
                                 errorMsg: response.data.Message
                             })
-                            return false
+                            console.log(1)
+                            temp= false
                         } else {
                             console.log(response.data);
                             console.log(response.data.Error);
-                            return true
+                            console.log(1)
+                            temp= true
+                           
                         }
                     })
-            
+                   return temp
+                   console.log("ok")
         }
 
-    }
+    };
 
 
     onChange(e) {
@@ -163,11 +171,14 @@ class GeneralInfo extends Component {
     }
 
 
-    render() {
+    render() {       
+        loadProgressBar()
+        
         if (this.state.redirect) {
             console.log("go")
             return <Redirect exact to="/" />
         }
+
 
         return (
             <div className="marginauto">
@@ -196,7 +207,7 @@ class GeneralInfo extends Component {
 
                         <div className="form-group text-paragraph">
                             <label >Hostel Mobile :</label>
-                            <input type="number" name="hostelMobile" id="hostelMobile" value={this.state.hostelMobile} onChange={this.onChange} placeholder="Hostel Mobile #" className="form-control text-paragraph" maxlength="11" required />
+                            <input type="tel" name="hostelMobile" id="hostelMobile" value={this.state.hostelMobile} onChange={this.onChange} placeholder="Hostel Mobile #" className="form-control text-paragraph" maxlength="11" required />
                             <br /> <b> <p className="error-message">{this.state.mobileNumberError} </p> </b>
                         </div>
                     </div>
@@ -204,7 +215,7 @@ class GeneralInfo extends Component {
 
                         <div className="form-group text-paragraph">
                             <label >Hostel Phone :</label>
-                            <input type="number" name="hostelPhone" value={this.state.hostelPhone} onChange={this.onChange} placeholder="Hostel Phone #" className="form-control text-paragraph" maxlength="11" />
+                            <input type="tel" name="hostelPhone" value={this.state.hostelPhone} onChange={this.onChange} placeholder="Hostel Phone #" className="form-control text-paragraph" maxlength="11" />
 
                         </div>
                     </div>

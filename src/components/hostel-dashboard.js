@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import SideNav from './Navigation/side-nav';
 import TopMenu from './Navigation/top-menu';
-import './stylesheets/side-nav.css';
-import './stylesheets/top-menu.css';
+//import './side-nav.css';
+//import './top-menu.css';
 import HostelProfile from './hostel_profile/hostel-profile'
 
 import { BrowserRouter as Router, HashRouter, Route, Link, IndexRoute, Switch } from "react-router-dom";

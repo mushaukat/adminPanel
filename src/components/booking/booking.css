@@ -1,0 +1,15 @@
+.booking-click{
+    display: inline-block;
+}
+
+.booking-btn{
+    display: inline-block;
+}
+
+.picture-box{
+    width: 100px;
+    height: 100px;
+    border: 2px solid black;
+    box-sizing: border-box;
+     float: right;
+}
