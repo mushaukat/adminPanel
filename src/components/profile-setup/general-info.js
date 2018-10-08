@@ -31,8 +31,9 @@ class GeneralInfo extends Component {
   
 
     componentDidMount() {
-        const userData = JSON.parse(localStorage.getItem('hostelAdmin'));
-        if (!userData) {
+        const token = JSON.parse(localStorage.getItem('hostelAdmin'));
+        console.log(token)
+        if (!token) {
             this.setState({ redirect: true })
         }
         else {
@@ -40,8 +41,7 @@ class GeneralInfo extends Component {
             document.getElementById("back-btn").style.display = "none";
 
             const data = {
-                block_id: userData.block_id,
-                hostel_id: userData.hostel_id,
+                token: token
             };
 
             axios.post('/getBlockGeneralInfo', data)
@@ -49,7 +49,6 @@ class GeneralInfo extends Component {
                     response => {
                         if (response.data.Error) {
                             console.log(response.data);
-
                             this.setState({
                                 Error: true,
                                 errorMsg: response.data.Message + " Try Again",
@@ -125,10 +124,9 @@ class GeneralInfo extends Component {
         }
         else {
             var temp
-            const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+            const token = JSON.parse(localStorage.getItem('hostelAdmin'));
             const data = {
-                block_id: hostelAdmin.block_id,
-                hostel_id: hostelAdmin.hostel_id,
+                token: token,
                 block_about: this.state.hostelDescription,
                 block_lat: this.state.block_lat,
                 block_lang: this.state.block_lang,

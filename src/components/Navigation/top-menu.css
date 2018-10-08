@@ -1,101 +1,62 @@
-@import url(http://fonts.googleapis.com/css?family=Raleway);
-#cssmenu,
-#cssmenu ul,
-#cssmenu ul li,
-#cssmenu ul li a {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  list-style: none;
-  line-height: 1;
-  display: block;
-  position: relative;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  font-family: Arial, Helvetica, sans-serif;
 }
-#cssmenu:after,
-#cssmenu > ul:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0;
-}
-#cssmenu {
-  width: auto;
-  float:right;
-  width:100%;
-  border-bottom: 3px solid #47c9af;
-  font-family: Raleway, sans-serif;
-  line-height: 1;
-  margin-right: 20px;
-  
-}
-#cssmenu ul {
-  
-}
-#cssmenu > ul > li {
-  float: right;
-}
-#cssmenu.align-center > ul {
-  font-size: 0;
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
   text-align: center;
-}
-#cssmenu.align-center > ul > li {
-  display: inline-block;
-  float: none;
-}
-#cssmenu.align-right > ul > li {
-  float: right;
-}
-#cssmenu.align-right > ul > li > a {
-  margin-right: 0;
-  margin-left: -4px;
-}
-#cssmenu > ul > li > a {
-  z-index: 2;
-  padding: 18px 25px 12px 25px;
-  font-size: 15px;
-  font-weight: 400;
+  padding: 14px 16px;
   text-decoration: none;
-  color: #444444;
-  -webkit-transition: all .2s ease;
-  -moz-transition: all .2s ease;
-  -ms-transition: all .2s ease;
-  -o-transition: all .2s ease;
-  transition: all .2s ease;
-  margin-right: -4px;
 }
-#cssmenu > ul > li.active > a,
-#cssmenu > ul > li:hover > a,
-#cssmenu > ul > li > a:hover {
-  color: #ffffff;
+
+.dropdown {
+  float: left;
+  overflow: hidden;
 }
-#cssmenu > ul > li > a:after {
+
+.dropdown .dropbtn {
+  cursor: pointer;
+  font-size: 16px;    
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
   position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: -1;
-  width: 100%;
-  height: 120%;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  content: "";
-  -webkit-transition: all .2s ease;
-  -o-transition: all .2s ease;
-  transition: all .2s ease;
-  -webkit-transform: perspective(5px) rotateX(2deg);
-  -webkit-transform-origin: bottom;
-  -moz-transform: perspective(5px) rotateX(2deg);
-  -moz-transform-origin: bottom;
-  transform: perspective(5px) rotateX(2deg);
-  transform-origin: bottom;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
 }
-#cssmenu > ul > li.active > a:after,
-#cssmenu > ul > li:hover > a:after,
-#cssmenu > ul > li > a:hover:after {
-  background: #47c9af;
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
 }

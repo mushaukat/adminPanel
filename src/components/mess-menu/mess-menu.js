@@ -18,11 +18,10 @@ class MessMenu extends Component {
 
     componentDidMount() {
         
-        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
-        console.log(hostelAdmin);
+        const token = JSON.parse(localStorage.getItem('hostelAdmin'));
+        console.log(token);
         const data = {
-            block_id: hostelAdmin.block_id,
-            hostel_id: hostelAdmin.hostel_id,
+            token: token,
         }
         console.log("ok")
         axios.post('/checkMessFacilityStatus', data)
@@ -30,9 +29,17 @@ class MessMenu extends Component {
                 response => {
                     if (response.data.Error) {
                         console.log(response.data);
-                        this.setState({ messFacility: false,
-                        messFacilityMsg: "You have not selected Mess Facility. If your Hostel Have Mess then Select Mess from Facilities." })
-
+                        if(response.data.expired){
+                            this.setState({ redirect: true })
+                        }
+                        else{
+                            this.setState({ 
+                                messFacility: false,
+                                messFacilityMsg: "You have not selected Mess Facility. If your Hostel Have Mess then Select Mess from Facilities."
+                            })
+        
+                        }
+                        
                     }
                     else {
                         console.log("okkkkk " + response.data)

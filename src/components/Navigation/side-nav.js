@@ -14,17 +14,16 @@ class SideNav extends Component {
     }
 
     componentDidMount() {
-        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
-        console.log(hostelAdmin);
+        const token = JSON.parse(localStorage.getItem('hostelAdmin'));
+        console.log(token);
         const data = {
-            block_id: hostelAdmin.block_id,
-            hostel_id: hostelAdmin.hostel_id,
+            token:token,
         }
 
-        var dp = 'http://www.hostinn.pk:3300/api/blockProfileImage/' + data.block_id + '/' + data.hostel_id
+        var dp = 'http://www.hostinn.pk:3300/api/blockProfileImage/' + data.token
         this.setState({
             profilePic: dp,
-            hostelName: hostelAdmin.hostel_name
+           // hostelName: hostelAdmin.hostel_name
         })
     };
 

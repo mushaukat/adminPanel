@@ -20,10 +20,10 @@ class EmailVerification extends Component {
     }
 
     componentDidMount() {
-        const userEmailData = JSON.parse(localStorage.getItem('hostelEmailVarification'));
-        console.log(userEmailData)
-        if(!userEmailData){
-            this.setState({redirect:true})
+        const token = JSON.parse(localStorage.getItem('hostelEmailVarification'));
+        console.log(token)
+        if (!token) {
+            this.setState({ redirect: true })
         }
     }
 
@@ -35,9 +35,9 @@ class EmailVerification extends Component {
     reSendEmail = (e) => {
         e.preventDefault();
 
-        const userEmailData = JSON.parse(localStorage.getItem('hostelEmailVarification'));
+        const token = JSON.parse(localStorage.getItem('hostelEmailVarification'));
         const data = {
-            hostel_id: userEmailData,
+            token: token,
         };
 
         axios.post('/sendHostelVerificationEmail', data)
@@ -53,7 +53,7 @@ class EmailVerification extends Component {
                     } else {
                         const data = response.data
                         console.log(data)
-                        document.getElementById("email").style.display = 'none';
+                        //  document.getElementById("email").style.display = 'none';
                         this.setState({
                             emailMsg: "Email with Link is Sent. Please Check!"
                         })
@@ -66,7 +66,7 @@ class EmailVerification extends Component {
             localStorage.clear();
             return <Redirect exact to="/" />
         }
-        if(this.state.redirect){
+        if (this.state.redirect) {
             return <Redirect exact to="/" />
         }
 
@@ -77,24 +77,23 @@ class EmailVerification extends Component {
                 </div>
                 <div className="limiter">
                     <div className="container-login100">
-                        <div className="wrap-setup">
+                        <div className="wrap-email-varification">
                             <div className="marginauto">
                                 <div className="wrap-div">
                                     <h2>Email Varification</h2>
                                     <br /><br />
-                                    <p>Please Check Email to Verify your Email Address to complete your Profile.</p>
-
-                                    <br />
-                                    <br />
-                                    <h3> {this.state.emailMsg}</h3>
-                                    <div id="email">
-
-                                        <p>Click on button bellow to resend email</p>
-                                        <div className="container-login100-form-btn" >
-                                            <input type="button" onClick={this.reSendEmail} value="Re-send Email" className="login100-form-btn " />
-
-                                        </div>
+                                    <div className="txt">
+                                        Please Check Email to Verify your Email Address to complete your Profile.
                                     </div>
+                                    <p></p>
+
+                                    <br />
+
+                                    <div id="email" className="txt">
+                                        <button onClick={this.reSendEmail} className="button-click-here" >Click here </button> to re-send email
+                                    </div>
+
+                                    <h3 className="msg"> {this.state.emailMsg}</h3>
 
                                 </div>
                             </div>

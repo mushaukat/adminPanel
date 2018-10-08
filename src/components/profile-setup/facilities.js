@@ -35,11 +35,15 @@ class Facilities extends Component {
 
 
   componentDidMount() {
-
     document.getElementById("b2").className += " active "
     document.getElementById("back-btn").style.display = "block";
 
-    axios.post('/getFacilities')
+    const token = JSON.parse(localStorage.getItem('hostelAdmin'));
+    const data = {
+      token: token,
+    };
+
+    axios.post('/getFacilities',data)
       .then(
         response => {
           if (response.data.Error) {
@@ -56,13 +60,21 @@ class Facilities extends Component {
             })
           }
           this.setState({spinner1:true})
+
+          this.getBlockFacilities();
+          console.log("1st")
         })
 
 
-    const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+    
+
+  }
+
+  getBlockFacilities(){
+
+    const token = JSON.parse(localStorage.getItem('hostelAdmin'));
     const data = {
-      block_id: hostelAdmin.block_id,
-      hostel_id: hostelAdmin.hostel_id,
+      token: token,
     };
 
     axios.post('/getBlockFacilities', data)
@@ -73,6 +85,7 @@ class Facilities extends Component {
 
           }
           else {
+            console.log("2nst")
             console.log(response.data)
             if(response.data.other_facilities==null){
               this.setState({ otherFacilities: '' })
@@ -92,8 +105,8 @@ class Facilities extends Component {
 
           }
           this.setState({spinner2:true})
+          console.log("3st")
         })
-
   }
 
 
@@ -104,10 +117,9 @@ class Facilities extends Component {
     }
     else {
       this.setState({ facilityError: "" })
-      const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+      const token = JSON.parse(localStorage.getItem('hostelAdmin'));
       const data = {
-        hostel_id: hostelAdmin.hostel_id,
-        block_id: hostelAdmin.block_id,
+        token: token,
         other_facilities: this.state.otherFacilities,
       };
       console.log(data)
@@ -142,11 +154,10 @@ class Facilities extends Component {
     const target = event.target;
     const name = parseInt(target.name);
 
-    const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+    const token = JSON.parse(localStorage.getItem('hostelAdmin'));
     const data = {
-      block_id: hostelAdmin.block_id,
-      hostel_id: hostelAdmin.hostel_id,
-      facility_id: name
+      token: token,
+      facility_id: name,
     };
 
     if (target.checked) {
@@ -226,7 +237,7 @@ class Facilities extends Component {
       <div>
 
         <h3 className="margint60">Tick Facilities which are available in Hostels</h3>
-        <p>Please Select atleast 3 facilities</p>
+        <div className="txt">(Please Select atleast 3 facilities)</div>
 
         {facilities}
 

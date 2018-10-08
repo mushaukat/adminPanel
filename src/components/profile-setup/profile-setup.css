@@ -1,15 +1,388 @@
-
-
 .heading {
     align-content: center;
     font-size: 28px;
     text-align: center;
     font-weight: bold;
 }
+
 .alignCenter{
     display: block;
     height: 40px;
 }
+
+.cselect {
+
+    height:35px;
+    width:inherit;
+}
+table{
+    table-layout:fixed;
+  }
+.one {
+    width: 40%
+  }
+  .two {
+    width: 30%
+  }
+  .three {
+    width: 100%; /* Not necessary, since only 70% width remains */
+  }
+  .four{
+       width: 40%; 
+  }
+
+.error-message {
+	color: #c80000;
+	font-weight: bold;
+	font-size: 1.3 em
+}
+
+.wrap-email-varification {
+	width: '100%';
+	background: #fff;
+	border-radius: 10px;
+	overflow: hidden;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: left;
+	padding: 50px;
+  }
+
+  .wrap-setup {
+	width: 100%;
+    height: inherit;
+    height: 100%;
+	background: #fff;
+	border-radius: 10px;
+	overflow: hidden;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+    margin-top: -10px;
+	padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .wrap-div {
+    display:table-cell;
+    vertical-align:middle;
+width: 1000px;
+    
+}
+
+.wrap-breadcrumb {
+	width: 100%;
+    height: inherit;
+    height: 100%;
+	background: #fff;
+	border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+	overflow: hidden;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	
+	
+  }
+
+  .marginauto{
+    width: 100%;
+}
+
+.margint60{
+    margin-top: 60px;
+}
+
+.margint20{
+    margin-top: 20px;
+}
+
+.text-paragraph{
+    font-size: 15px;
+}
+
+/*----------------------------------*/
+
+.label1 {
+    height: 70%;
+    display: block;
+    background: white;
+    border: 2px solid hsla(0, 0%, 0%, 0.25);
+    border-radius: 20px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    margin: 1rem;
+    text-align: center;
+    box-shadow: 0px 3px 10px -2px hsla(150, 5%, 65%, 0.5);
+    position: relative;
+  }
+  input[type="radio"]:checked + label {
+    background: hsla(150, 5%, 75%, 1);
+    color: hsla(215, 0%, 100%, 1);
+    box-shadow: 0px 0px 20px hsla(150, 5%, 75%, 1);;
+  
+  }
+  input[type="radio"]#control_05:checked + label {
+    background: red;
+    border-color: red;
+  }
+ 
+  /*---------------------------------------------*/
+  input {
+	  outline: none;
+	  border: none;
+  }
+  
+  textarea {
+	outline: none;
+	border: none;
+  }
+  
+  textarea:focus, input:focus {
+	border-color: transparent !important;
+  }
+  
+  /*---------------------------------------------*/
+  button {
+	  outline: none !important;
+	  border: none;
+	  background: transparent;
+  }
+  
+  button:hover {
+	  cursor: pointer;
+  }
+  
+  iframe {
+	  border: none !important;
+  }
+  
+  
+  /*//////////////////////////////////////////////////////////////////
+  [ Utility ]*/
+
+  .txt1 {
+	font-family: Poppins-Regular;
+	font-size: 13px;
+	line-height: 1.5;
+	color: #999999;
+  }
+  
+  .txt2 {
+	font-family: Poppins-Regular;
+	font-size: 13px;
+	line-height: 1.5;
+	color: #666666;
+  }
+
+  .div1{
+	  padding-top: 10px;
+	  padding-bottom: 10px;
+  }
+
+  .div2{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+  
+  
+  /*//////////////////////////////////////////////////////////////////
+  [ login ]*/
+  
+  .limiter {
+	width: 100%;
+	margin: 0 auto;
+  }
+
+  .container-login100 {
+	width: 100%;  
+	min-height: 100vh;
+    padding: 50px;
+      padding-left: 200px;
+      padding-right: 200px;
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(180deg,#448239 , #57b846);
+  }
+
+.container-login100>div { flex:1; }
+  
+  .wrap-login100 {
+	width: 400px;
+	background: #fff;
+	border-radius: 10px;
+	overflow: hidden;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: block;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 50px;
+  }
+.wrap-signup {
+	width: 800px;
+	background: #fff;
+	border-radius: 10px;
+	overflow: hidden;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 50px;
+  }
+
+  
+  /*------------------------------------------------------------------
+  [  ]*/
+  
+  .login100-form-title {
+	font-family: Poppins-Bold;
+	font-size: 24px;
+	color: #333333;
+	line-height: 1.2;
+	text-align: center;
+	width: 100%;
+	display: block;
+	padding-bottom: 54px;
+  }
+  
+  
+  /*---------------------------------------------*/
+
+  
+  .input100 {
+	font-family: Poppins-Medium;
+	font-size: 15px;
+	line-height: 1.5;
+	color: #666666;
+	width: 100%;
+	background: #e6e6e6;
+	height: 50px;
+	border-radius: 25px;
+	padding: 0 30px 0 68px;
+  }
+  
+  
+  /*------------------------------------------------------------------
+  [ Button ]*/
+  .container-login100-form-btn {
+	width: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: inline-block;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding-top: 10px;
+    padding-bottom: 10px;
+      
+  }
+  
+  .login100-form-btn-next {
+	font-family: Montserrat-Bold;
+	font-size: 15px;
+	line-height: 1.5;
+	color: #fff;
+	text-transform: uppercase;
+	width: 200px;
+	height: 50px;
+	border-radius: 25px;
+	background: #57b846;
+	float: right;
+	display: block;
+	justify-content: center;
+	align-items: center;
+	padding: 0 25px;  
+	
+  }
+
+.login100-form-btn-back {
+	font-family: Montserrat-Bold;
+	font-size: 15px;
+	line-height: 1.5;
+	color: #fff;
+	text-transform: uppercase;
+	width: 200px;
+	height: 50px;
+	border-radius: 25px;
+	background: #57b846;
+	float: left;
+	display: block;
+	justify-content: center;
+	align-items: center;
+	padding: 0 25px;  
+
+  }
+
+  .login100-form-btn-next:hover {
+	background: #333333;
+  }
+
+  .login100-form-btn-back:hover {
+	background: #333333;
+  }
+
+.input-label{
+	float: left;
+	padding-left: 60px;
+	padding-top: 10px;
+	font-size: 14px;
+	
+}
+
+/*------ Email Verification -----------------------------------*/
+
+.txt{
+    font-size: 13px;
+}
+
+.button-click-here {
+    display: inline-block;
+    padding: 10px 10px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+  }
+  
+  .button-click-here:hover {background-color: #3e8e41}
+  
+  .button-click-here:active {
+    background-color: #3e8e41;
+    transform: translateY(4px);
+  }
+
+  .msg{
+      padding-top: 15px
+  }
+
+  /*---------------------------------------------------------------*/
+
+
 
 
 

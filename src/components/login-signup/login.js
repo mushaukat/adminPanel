@@ -19,27 +19,32 @@ class LogIn extends Component {
   }
 
   componentDidMount() {
-    const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
-    if (hostelAdmin) {
+    // const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+    // const hostelEmailVarification = JSON.parse(localStorage.getItem('hostelEmailVarification'));
+    // console.log("okkk")
+    // if (hostelAdmin) {
 
-      var status = parseInt(hostelAdmin.status)
-      console.log(status)
+    //   var status = parseInt(hostelAdmin.status)
+    //   console.log(status)
 
-      if (status === 0) {
-        console.log("0")
-        this.setState({ redirectURL: '/emailVerification' })
-      }
-      else if (status === 1) {
-        console.log("1")
-        this.setState({ redirectURL: '/profileSetup' })
-      }
-      else if (status === 2) {
-        console.log("2")
-        this.setState({ redirectURL: '/hostel' })
-      }
+    //   if (status === 0) {
+    //     console.log("0")
+    //     this.setState({ redirectURL: '/emailVerification' })
+    //   }
+    //   else if (status === 1) {
+    //     console.log("1")
+    //     this.setState({ redirectURL: '/profileSetup' })
+    //   }
+    //   else if (status === 2) {
+    //     console.log("2")
+    //     this.setState({ redirectURL: '/hostel' })
+    //   }
 
-      this.setState({ redirect: true })
-    }
+    //   this.setState({ redirect: true })
+    // }
+    // else if(hostelEmailVarification){
+    //   localStorage.clear();
+    // }
 
   }
 
@@ -69,7 +74,7 @@ class LogIn extends Component {
           }
           else {
             console.log(response.data)
-            let data = response.data.Data[0]
+            let data = response.data
             console.log(data)
 
             var status = parseInt(data.status)
@@ -77,23 +82,23 @@ class LogIn extends Component {
 
             if (status === 0) {
               console.log("0")
-              localStorage.setItem('hostelEmailVarification', JSON.stringify(data.hostel_id))
+              localStorage.setItem('hostelEmailVarification', JSON.stringify(data.token))
               this.setState({ redirectURL: '/emailVerification' })
             }
             else if (status === 1) {
               console.log("1")
               localStorage.clear();
-              localStorage.setItem('hostelAdmin', JSON.stringify(data))
+              localStorage.setItem('hostelAdmin', JSON.stringify(data.token))
               this.setState({ redirectURL: '/profileSetup' })
             }
             else if (status === 2) {
               console.log("2")
-              localStorage.setItem('hostelAdmin', JSON.stringify(data))
+              localStorage.setItem('hostelAdmin', JSON.stringify(data.token))
               this.setState({ redirectURL: '/hostel' })
             }
             else if (status === 3) {
               console.log("2")
-              localStorage.setItem('hostelAdmin', JSON.stringify(data))
+              localStorage.setItem('hostelAdmin', JSON.stringify(data.token))
               this.setState({ redirectURL: '/hostel' })
             }
 
@@ -127,17 +132,17 @@ class LogIn extends Component {
             <center>
               <div className="wrap-login100">
                 <form onSubmit={this.submitData}>
-                  <div className="login100-form validate-form">
+                  <div >
                     <span className="login100-form-title">
                       Member Login
-                </span>
+                    </span>
 
-                    <div className="wrap-input100 " >
+                    <div className="" >
                       <span className="input-label"><p>Email: </p> </span>
                       <input className="input100" type="email" name="email" onChange={this.onChange} placeholder="Email" required />
                     </div>
 
-                    <div className="wrap-input100">
+                    <div>
                       <span className="input-label"><p>Password: </p> </span>
                       <input className="input100" type="password" name="password" onChange={this.onChange} placeholder="Password" required />
                     </div>
@@ -153,19 +158,15 @@ class LogIn extends Component {
                     </div>
                     <br />
 
-                    <div className="text-center p-t-12">
-                      <span className="txt1">
-                        Forgot
-                  </span>
+                    <div className="text-center div1">
                       <Link className="txt2" to="/recovery" >
-                        Email / Password?
-                  </Link>
+                        Forgot Email / Password?
+                      </Link>
                     </div>
 
-                    <div className="text-center p-t-136">
+                    <div className="text-center div2">
                       <Link className="txt2" to="/signup" style={style2}>
                         <b>Create your Hostel Account</b>
-                        <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                       </Link>
                     </div>
 

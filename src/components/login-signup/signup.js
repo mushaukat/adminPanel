@@ -124,14 +124,14 @@ class SignUp extends Component {
                   <div className="row">
 
                     <div className="col-md-6">
-                      <div className="wrap-input100">
+                      <div className="">
                         <span className="input-label"><p>Owner Name: </p> </span>
                         <input className="input100" type="text" onChange={this.onChange} name="ownerName" placeholder="Enter Hostel Name" required />
                       </div>
                     </div>
 
                     <div className="col-md-6">
-                      <div className="wrap-input100">
+                      <div className="">
                         <span className="input-label"><p>Hostel Name: </p> </span>
                         <input className="input100" type="text" onChange={this.onChange} name="hostelName" placeholder="Enter Hostel Name" required />
                       </div>
@@ -142,19 +142,18 @@ class SignUp extends Component {
                   <div className="row" >
 
                   <div className="col-md-6">
-                      <div className="wrap-input100">
+                      <div className="">
                         <span className="input-label"><p>Email: </p> </span>
                         <input className="input100" type="email" onChange={this.onChange} name="email" placeholder="Enter your Email" required />
                       </div>
                     </div>
 
                     <div className="col-md-6">
-                      <div className="wrap-input100">
+                      <div className="">
                         <span className="input-label"><p>Hostel Location: </p> </span>
                         <select className="input100" onChange={this.onChange} name="city">
                           <option value="">Select City</option>
                           <option value="Islamabad">Islamabad</option>
-                          <option value="Lahore">Lahore</option>
                         </select>
                       </div>
                     </div>
@@ -164,14 +163,14 @@ class SignUp extends Component {
                   <div className="row">
 
                     <div className="col-md-6">
-                      <div className="wrap-input100">
+                      <div className="">
                         <span className="input-label"><p>Password: </p> </span>
                         <input className="input100" type="password" onChange={this.onChange} name="password" placeholder=" Enter Password" required />
                       </div>
                     </div>
 
                     <div className="col-md-6">
-                      <div className="wrap-input100">
+                      <div className="">
                         <span className="input-label"><p>Confirm Password: </p> </span>
                         <input className="input100" type="password" onChange={this.onChange} name="rePassword" placeholder="Re-Enter Password" required />
                       </div>
@@ -182,14 +181,14 @@ class SignUp extends Component {
                   <div className="row">
 
                     <div className="col-md-6">
-                      <div className="wrap-input100 ">
+                      <div className="">
                         <span className="input-label"><p>Owner Mobile No: </p> </span>
                         <input className="input100" type="text" onChange={this.onChange} name="ownerMobile" placeholder="Hostel Owner Mobile Number" required />
                       </div>
                     </div>
 
                     <div className="col-md-6">
-                      <div className="wrap-input100">
+                      <div className="">
                         <span className="input-label"><p>Owner Phone No: </p> </span>
                         <input className="input100" type="text" onChange={this.onChange} name="ownerPhone" placeholder="Hostel Owner Phone Number" />
                       </div>

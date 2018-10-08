@@ -46,17 +46,15 @@ class Recovery extends Component {
 					<div className="wrap-login100">
 
 
-						<form className="login100-form validate-form">
+						<form className="">
 							<span className="login100-form-title">
 								Recover password
 							</span>
 
-							<div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+							<div className="wrap-input100" data-validate="Valid email is required: ex@abc.xyz">
 								<input className="input100" type="text" name="email" placeholder="Email" />
 							</div>
 
-
-							<p id="demo"></p>
 
 							<div className="container-login100-form-btn">
 								<button className="login100-form-btn">

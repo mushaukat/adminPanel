@@ -6,6 +6,7 @@ import GeneralInfo from './general-info'
 import Facilities from './facilities'
 import RoomTypeSetup from './room-type-setup'
 import HostelPicturesSetup from './pictures'
+import axios from 'axios';
 
 class ProfileSetup extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class ProfileSetup extends Component {
             pictures: false,
             screenNumber: 1,
             redirect: false,
+            loadData: false,
 
         };
         this.setNextScreen = this.setNextScreen.bind(this)
@@ -27,12 +29,43 @@ class ProfileSetup extends Component {
 
     componentDidMount() {
         console.log("profile")
-        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+        const token = JSON.parse(localStorage.getItem('hostelAdmin'));
         console.log(11)
-        console.log(hostelAdmin)
-        if (!hostelAdmin) {
+        console.log(token)
+        if (!token) {
             this.setState({ redirect: true })
         }
+
+        const data = {
+            token: token
+        };
+
+        axios.post('/getBlockGeneralInfo', data)
+            .then(
+                response => {
+                    if (response.data.Error) {
+                        console.log(response.data);
+
+                        if(response.data.expired){
+                            this.setState({ redirect: true })
+                        }
+
+                        
+                    } else {
+                       
+
+                        this.setState({
+                            loadData: true
+                            // block_lat: '33.63963',
+                            // block_lang: '73.08411',
+                        })
+                        
+                        
+                    }
+                })
+
+
+        
     }
 
 
@@ -91,6 +124,9 @@ class ProfileSetup extends Component {
         if (this.state.redirect) {
             return <Redirect exact to="/" />
         }
+        if(!this.state.loadData){
+            return null
+        }
 
         return (
             <div>
@@ -115,16 +151,12 @@ class ProfileSetup extends Component {
                         <div className="wrap-setup">
                             <div className="marginauto">
                                 <div className="wrap-div">
-                                    <form onSubmit={this.submitData} id="form1">
+                                    <form onSubmit={this.submitData} >
 
                                         {this.showSetupScreen()}
 
                                         <div className="container-login100-form-btn">
-
-                                        </div>
-
-                                        <div className="container-login100-form-btn">
-                                            <input type="button" onClick={this.onClick} value="Next Step" className="login100-form-btn " />
+                                            <input type="button" onClick={this.onClick} value="Next Step" className="login100-form-btn-next " />
                                             <input type="button" id="back-btn" onClick={this.setBackScreen} value="Back" className="login100-form-btn-back" />
                                         </div>
                                     </form>

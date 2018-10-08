@@ -37,16 +37,15 @@ class RoomTypeSetup extends Component {
 
 
     componentDidMount() {
+        console.log("rooms")
 
         document.getElementById("b3").className += " active "
         document.getElementById("back-btn").style.display = "block";
 
-        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
-
-        const data = {
-            block_id: hostelAdmin.block_id,
-            hostel_id: hostelAdmin.hostel_id,
-        };
+        const token = JSON.parse(localStorage.getItem('hostelAdmin'));
+    const data = {
+      token: token,
+    };
 
         axios.post('/checkMessFacilityStatus', data)
             .then(
@@ -94,7 +93,7 @@ class RoomTypeSetup extends Component {
                 })
 
 
-        axios.post('/getAllRoomTypes')
+        axios.post('/getAllRoomTypes',data)
             .then(
                 response => {
                     if (response.data.Error) {
@@ -170,13 +169,12 @@ class RoomTypeSetup extends Component {
 
     saveRoom(e) {
         e.preventDefault();
-        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+        const token = JSON.parse(localStorage.getItem('hostelAdmin'));
         console.log("p1 " + this.state.priceWithMess)
         var data = ''
         if (this.state.priceWithMess == "") {
             data = {
-                block_id: hostelAdmin.block_id,
-                hostel_id: hostelAdmin.hostel_id,
+                token: token,
                 seaters: this.state.seaters,
                 base_price: this.state.priceWithOutMess,
                 price_with_mess: 0
@@ -184,8 +182,7 @@ class RoomTypeSetup extends Component {
         }
         else {
             data = {
-                block_id: hostelAdmin.block_id,
-                hostel_id: hostelAdmin.hostel_id,
+                token: token,
                 seaters: this.state.seaters,
                 base_price: this.state.priceWithOutMess,
                 price_with_mess: this.state.priceWithMess
@@ -226,13 +223,12 @@ class RoomTypeSetup extends Component {
 
     deleteRow(r, seaters) {
         // e.preventDefault();
-        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+        const token = JSON.parse(localStorage.getItem('hostelAdmin'));
 
         document.getElementById(seaters).remove();
 
         const data = {
-            block_id: hostelAdmin.block_id,
-            hostel_id: hostelAdmin.hostel_id,
+            token: token,
             seaters: seaters
         }
 
@@ -310,7 +306,7 @@ class RoomTypeSetup extends Component {
             if (this.state.messFacility) {
                 return (
                     <div class="row">
-                        <div class="col-xs-5 col-md-5">
+                        <div class="col-xs-4 col-md-4">
                             <select name="seaters" className="text-paragraph cselect " onChange={this.onChangeRoomPrice} >
                                 {this.getOptions()}
                             </select>
@@ -319,7 +315,7 @@ class RoomTypeSetup extends Component {
                             <input type="number" name="priceWithMess" onChange={this.onChangeRoomPrice} placeholder="Charges With Mess" className="form-control text-paragraph" />
 
                         </div>
-                        <div class="col-xs-3 col-md-3">
+                        <div class="col-xs-4 col-md-4">
                             <input type="number" name="priceWithOutMess" onChange={this.onChangeRoomPrice} placeholder="Charges With Out Mess" className="form-control text-paragraph" />
                         </div>
 
@@ -366,10 +362,9 @@ class RoomTypeSetup extends Component {
         else {
             this.setState({ roomError: "" })
 
-            const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
+            const token = JSON.parse(localStorage.getItem('hostelAdmin'));
             const data = {
-                block_id: hostelAdmin.block_id,
-                hostel_id: hostelAdmin.hostel_id,
+                token: token,
                 admission_fee: this.state.addmissionFee,
                 security_fee: this.state.securityFee,
             };

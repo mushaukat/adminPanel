@@ -36,11 +36,10 @@ class ShowMessMenu extends Component {
         document.getElementById("show").style.display = "block";
         document.getElementById("update").style.display = "none";
 
-        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
-        console.log(hostelAdmin);
+        const token = JSON.parse(localStorage.getItem('hostelAdmin'));
+        console.log(token);
         const data = {
-            block_id: hostelAdmin.block_id,
-            hostel_id: hostelAdmin.hostel_id,
+            token: token,
         }
         console.log("ok")
         axios.post('/getMessSchedule', data)
@@ -48,19 +47,25 @@ class ShowMessMenu extends Component {
                 response => {
                     if (response.data.Error) {
                         console.log(response.data);
-                        this.setState({
-                            Error: true,
-                            errorMsg: response.data.Message + " Try Again",
-                        })
+                        if(response.data.expired){
+                            this.setState({ redirect: true })
+                        }
+                        else{
+                            this.setState({
+                                Error: true,
+                                errorMsg: response.data.Message + " Try Again",
+                            })
+                        }
+                        
                     } else {
                         const data = response.data.Data
                         console.log(response.data)
-                        // var split1=response.data.weekdays_breakfast_time.split(" - ");
-                        // var split2=response.data.weekdays_lunch_time.split(" - ");
-                        // var split3=response.data.weekdays_dinner_time.split(" - ");
-                        // var split4=response.data.weekend_breakfast_time.split(" - ");
-                        // var split5=response.data.weekend_lunch_time.split(" - ");
-                        // var split6=response.data.weekend_dinner_time.split(" - ");
+                        var split1=response.data.weekdays_breakfast_time.split(" - ");
+                        var split2=response.data.weekdays_lunch_time.split(" - ");
+                        var split3=response.data.weekdays_dinner_time.split(" - ");
+                        var split4=response.data.weekend_breakfast_time.split(" - ");
+                        var split5=response.data.weekend_lunch_time.split(" - ");
+                        var split6=response.data.weekend_dinner_time.split(" - ");
 
                         this.setState({
                             scheduleId: response.data.schedule_id,
@@ -70,18 +75,18 @@ class ShowMessMenu extends Component {
                             fridayLunchTime: response.data.weekend_lunch_time,
                             sundayBrunchTime: response.data.weekend_breakfast_time,
                             sundayDinnerTime: response.data.weekend_dinner_time,
-                            // breakfastTime1: split1[0],
-                            // breakfastTime2: split1[1],
-                            // lunchTime1: split2[0],
-                            // lunchTime2: split2[1],
-                            // dinnerTime1: split3[0],
-                            // dinnerTime2: split3[1],
-                            // fridayLunchTime1: split4[0],
-                            // fridayLunchTime2: split4[1],
-                            // sundayBrunchTime1: split5[0],
-                            // sundayBrunchTime2: split5[1],
-                            // sundayDinnerTime1: split6[0],
-                            // sundayDinnerTime2: split6[1],
+                            breakfastTime1: split1[0],
+                            breakfastTime2: split1[1],
+                            lunchTime1: split2[0],
+                            lunchTime2: split2[1],
+                            dinnerTime1: split3[0],
+                            dinnerTime2: split3[1],
+                            fridayLunchTime1: split4[0],
+                            fridayLunchTime2: split4[1],
+                            sundayBrunchTime1: split5[0],
+                            sundayBrunchTime2: split5[1],
+                            sundayDinnerTime1: split6[0],
+                            sundayDinnerTime2: split6[1],
                             messData: response.data.Data,
                             mondayB: data[0].breakfast, mondayL: data[0].lunch, mondayD: data[0].dinner,
                             tuesdayB: data[1].breakfast, tuesdayL: data[1].lunch, tuesdayD: data[1].dinner,
@@ -99,8 +104,8 @@ class ShowMessMenu extends Component {
 
     submitData = (e) => {
         e.preventDefault();
-        const hostelAdmin = JSON.parse(localStorage.getItem('hostelAdmin'));
-        console.log(hostelAdmin);
+        const token = JSON.parse(localStorage.getItem('hostelAdmin'));
+        console.log(token);
 
         var breakfastTime = this.state.breakfastTime1 + " - " + this.state.breakfastTime2
         var lunchTime = this.state.lunchTime1 + " - " + this.state.lunchTime2
@@ -145,8 +150,7 @@ class ShowMessMenu extends Component {
         console.log(array)
 
         const data = {
-            block_id: hostelAdmin.block_id,
-            hostel_id: hostelAdmin.hostel_id,
+            token: token,
             schedule_id: this.state.scheduleId,
             weekdays_breakfast_time: breakfastTime,
             weekdays_lunch_time: lunchTime,
@@ -164,12 +168,18 @@ class ShowMessMenu extends Component {
                 response => {
                     if (response.data.Error) {
                         console.log(response.data);
+                        if(response.data.expired){
+                            this.setState({ redirect: true })
+                        }
+                        else {
+                            this.setState({
+                                Error: true,
+                                errorMsg: response.data.Message + " Try Again",
+                            })
+                            return false
+                        }
 
-                        this.setState({
-                            Error: true,
-                            errorMsg: response.data.Message + " Try Again",
-                        })
-                        return false
+                        
                     } else {
                         const data = response.data
                         console.log(data)
